@@ -3,3 +3,5 @@ jdk: oraclejdk8
 install: true
 script:
   - mvn clean verify
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
