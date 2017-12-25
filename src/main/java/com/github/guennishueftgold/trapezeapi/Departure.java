@@ -1,7 +1,6 @@
 package com.github.guennishueftgold.trapezeapi;
 
 
-
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -12,6 +11,7 @@ import org.joda.time.LocalTime;
 
 import java.io.IOException;
 import java.lang.annotation.Retention;
+import java.util.Objects;
 
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
@@ -67,6 +67,30 @@ public class Departure {
                 ", tripId='" + mTripId + '\'' +
                 ", vehicleId='" + mVehicleId + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Departure departure = (Departure) o;
+        return mActualRelativeTime == departure.mActualRelativeTime &&
+                mStatus == departure.mStatus &&
+                Objects.equals(mDirection, departure.mDirection) &&
+                Objects.equals(mMixedTime, departure.mMixedTime) &&
+                Objects.equals(mPassageId, departure.mPassageId) &&
+                Objects.equals(mPatternText, departure.mPatternText) &&
+                Objects.equals(mPlannedTime, departure.mPlannedTime) &&
+                Objects.equals(mActualTime, departure.mActualTime) &&
+                Objects.equals(mRouteId, departure.mRouteId) &&
+                Objects.equals(mTripId, departure.mTripId) &&
+                Objects.equals(mVehicleId, departure.mVehicleId);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(mActualRelativeTime, mDirection, mMixedTime, mPassageId, mPatternText, mPlannedTime, mActualTime, mRouteId, mStatus, mTripId, mVehicleId);
     }
 
     public int getActualRelativeTime() {
@@ -127,88 +151,99 @@ public class Departure {
             return mActualRelativeTime;
         }
 
-        public void setActualRelativeTime(int actualRelativeTime) {
+        public Builder setActualRelativeTime(int actualRelativeTime) {
             mActualRelativeTime = actualRelativeTime;
+            return this;
         }
 
         public LocalTime getActualTime() {
             return mActualTime;
         }
 
-        public void setActualTime(LocalTime actualTime) {
+        public Builder setActualTime(LocalTime actualTime) {
             mActualTime = actualTime;
+            return this;
         }
 
         public String getDirection() {
             return mDirection;
         }
 
-        public void setDirection(String direction) {
+        public Builder setDirection(String direction) {
             mDirection = direction;
+            return this;
         }
 
         public String getMixedTime() {
             return mMixedTime;
         }
 
-        public void setMixedTime(String mixedTime) {
+        public Builder setMixedTime(String mixedTime) {
             mMixedTime = mixedTime;
+            return this;
         }
 
         public String getPassageId() {
             return mPassageId;
         }
 
-        public void setPassageId(String passageId) {
+        public Builder setPassageId(String passageId) {
             mPassageId = passageId;
+            return this;
         }
 
         public String getPatternText() {
             return mPatternText;
         }
 
-        public void setPatternText(String patternText) {
+        public Builder setPatternText(String patternText) {
             mPatternText = patternText;
+            return this;
         }
 
         public LocalTime getPlannedTime() {
             return mPlannedTime;
         }
 
-        public void setPlannedTime(LocalTime plannedTime) {
+        public Builder setPlannedTime(LocalTime plannedTime) {
             mPlannedTime = plannedTime;
+            return this;
         }
 
         public String getRouteId() {
             return mRouteId;
         }
 
-        public void setRouteId(String routeId) {
+        public Builder setRouteId(String routeId) {
             mRouteId = routeId;
+            return this;
         }
 
         public int getStatus() {
             return mStatus;
         }
 
-        public void setStatus(int status) {
+        public Builder setStatus(int status) {
             mStatus = status;
+            return this;
         }
 
         public String getTripId() {
             return mTripId;
         }
 
-        public void setTripId(String tripId) {
+        public Builder setTripId(String tripId) {
             mTripId = tripId;
+            return this;
         }
 
         public String getVehicleId() {
             return mVehicleId;
         }
 
-        public void setVehicleId(String vehicleId) {
+        public Builder setVehicleId(String vehicleId) {
             mVehicleId = vehicleId;
+            return this;
         }
 
         public Departure build() {
@@ -231,12 +266,23 @@ public class Departure {
         private final TypeAdapter<LocalTime> mLocalTimeTypeAdapter;
 
         public Converter(Gson gson) {
-            this.mLocalTimeTypeAdapter = gson.getAdapter(GeneralTypes.LOCAL_TIME_TYPE_TOKEN);
+            this(gson.getAdapter(GeneralTypes.LOCAL_TIME_TYPE_TOKEN));
+        }
+
+        public Converter(TypeAdapter<LocalTime> localTimeTypeAdapter) {
+            this.mLocalTimeTypeAdapter = localTimeTypeAdapter;
         }
 
         @Override
         public void write(JsonWriter out, Departure value) throws IOException {
-
+            if (value == null) {
+                out.nullValue();
+                return;
+            }
+            out.beginObject();
+            out.name(STATUS).value(value.getStatus());
+            //TODO
+            out.endObject();
         }
 
         @Override
