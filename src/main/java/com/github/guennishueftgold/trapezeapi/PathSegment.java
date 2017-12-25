@@ -7,6 +7,7 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class PathSegment {
     private final double mLength;
@@ -49,6 +50,24 @@ public class PathSegment {
         return mAngle;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PathSegment that = (PathSegment) o;
+        return Double.compare(that.mLength, mLength) == 0 &&
+                mFromLongitude == that.mFromLongitude &&
+                mToLongitude == that.mToLongitude &&
+                mFromLatitude == that.mFromLatitude &&
+                mToLatitude == that.mToLatitude &&
+                mAngle == that.mAngle;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mLength, mFromLongitude, mToLongitude, mFromLatitude, mToLatitude, mAngle);
+    }
+
     public static final class Builder {
         private double mLength;
         private long mFromLongitude;
@@ -61,48 +80,54 @@ public class PathSegment {
             return mLength;
         }
 
-        public void setLength(double length) {
+        public Builder setLength(double length) {
             mLength = length;
+            return this;
         }
 
         public long getFromLongitude() {
             return mFromLongitude;
         }
 
-        public void setFromLongitude(long fromLongitude) {
+        public Builder setFromLongitude(long fromLongitude) {
             mFromLongitude = fromLongitude;
+            return this;
         }
 
         public long getToLongitude() {
             return mToLongitude;
         }
 
-        public void setToLongitude(long toLongitude) {
+        public Builder setToLongitude(long toLongitude) {
             mToLongitude = toLongitude;
+            return this;
         }
 
         public long getFromLatitude() {
             return mFromLatitude;
         }
 
-        public void setFromLatitude(long fromLatitude) {
+        public Builder setFromLatitude(long fromLatitude) {
             mFromLatitude = fromLatitude;
+            return this;
         }
 
         public long getToLatitude() {
             return mToLatitude;
         }
 
-        public void setToLatitude(long toLatitude) {
+        public Builder setToLatitude(long toLatitude) {
             mToLatitude = toLatitude;
+            return this;
         }
 
         public int getAngle() {
             return mAngle;
         }
 
-        public void setAngle(int angle) {
+        public Builder setAngle(int angle) {
             mAngle = angle;
+            return this;
         }
 
         public PathSegment build() {
