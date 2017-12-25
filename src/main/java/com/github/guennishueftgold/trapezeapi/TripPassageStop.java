@@ -206,7 +206,7 @@ public class TripPassageStop {
                 return;
             }
             out.beginObject();
-            out.name(STOP_SEQ_NUM).value(Long.toString(value.getStopSeqNum()));
+            out.name(STOP_SEQ_NUM).value(value.getStopSeqNum());
             out.name(ACTUAL_TIME);
             if (value.mActualTime == null)
                 out.nullValue();
