@@ -8,11 +8,7 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
-import java.lang.annotation.Retention;
 import java.util.List;
-
-
-import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public class Route {
     public final static int ROUTE_TYPE_BUS = 1;
@@ -27,7 +23,7 @@ public class Route {
         "name": "11",
         "routeType": "bus",
         "shortName": "11"*/
-    public final static int ROUTE_TYPE_UNKNOWN = 0;
+    public final static int ROUTE_TYPE_UNKNOWN = -1;
     private final List<String> mAlerts;
     private final String mAuthority;
     private final List<String> mDirections;
@@ -127,56 +123,63 @@ public class Route {
             return mAlerts;
         }
 
-        public void setAlerts(List<String> alerts) {
+        public Builder setAlerts(List<String> alerts) {
             mAlerts = alerts;
+            return this;
         }
 
         public String getAuthority() {
             return mAuthority;
         }
 
-        public void setAuthority(String authority) {
+        public Builder setAuthority(String authority) {
             mAuthority = authority;
+            return this;
         }
 
         public List<String> getDirections() {
             return mDirections;
         }
 
-        public void setDirections(List<String> directions) {
+        public Builder setDirections(List<String> directions) {
             mDirections = directions;
+            return this;
         }
 
         public String getId() {
             return mId;
         }
 
-        public void setId(String id) {
+        public Builder setId(String id) {
             mId = id;
+            return this;
         }
 
         public String getName() {
             return mName;
         }
 
-        public void setName(String name) {
+        public Builder setName(String name) {
             mName = name;
+            return this;
         }
 
         public int getRouteType() {
             return mRouteType;
         }
 
-        public void setRouteType(int routeType) {
+        public Builder setRouteType(int routeType) {
             mRouteType = routeType;
+            return this;
         }
 
         public String getShortName() {
             return mShortName;
         }
 
-        public void setShortName(String shortName) {
+        public Builder setShortName(String shortName) {
             mShortName = shortName;
+            return this;
         }
 
         public Route build() {
@@ -184,14 +187,15 @@ public class Route {
         }
     }
 
-    public static final class Converter extends TypeAdapter<Route> {
+    static final class Converter extends TypeAdapter<Route> {
         private final static String NAME_ALERTS = "alerts",
                 NAME_AUTHORITY = "authority",
                 NAME_DIRECTIONS = "directions",
                 NAME_ID = "id",
                 NAME_NAME = "name",
                 NAME_ROUTE_TYPE = "routeType",
-                NAME_SHORT_NAME = "shortName";
+                NAME_SHORT_NAME = "shortName",
+                NAME_ROUTE_TYPE_BUS = "bus";
         private final TypeToken<List<String>> STRING_LIST_TYPE_TOKEN = new TypeToken<List<String>>() {
         };
         private final TypeAdapter<List<String>> mStringListTypeAdapter;
@@ -202,7 +206,33 @@ public class Route {
 
         @Override
         public void write(JsonWriter out, Route value) throws IOException {
-
+            if (value == null) {
+                out.nullValue();
+                return;
+            }
+            out.beginObject();
+            out.name(NAME_ALERTS);
+            this.mStringListTypeAdapter.write(out, value.mAlerts);
+            out.name(NAME_DIRECTIONS);
+            this.mStringListTypeAdapter.write(out, value.mDirections);
+            out.name(NAME_AUTHORITY)
+                    .value(value.mAuthority);
+            out.name(NAME_ID)
+                    .value(value.mId);
+            out.name(NAME_NAME)
+                    .value(value.mName);
+            out.name(NAME_SHORT_NAME)
+                    .value(value.mShortName);
+            out.name(NAME_ROUTE_TYPE);
+            switch (value.mRouteType) {
+                case ROUTE_TYPE_BUS:
+                    out.value(NAME_ROUTE_TYPE_BUS);
+                    break;
+                default:
+                    out.nullValue();
+                    break;
+            }
+            out.endObject();
         }
 
         @Override
@@ -229,10 +259,11 @@ public class Route {
                 } else if (name.equals(NAME_ROUTE_TYPE) && in.peek() == JsonToken.STRING) {
                     final String routeType = in.nextString().toLowerCase();
                     switch (routeType) {
-                        case "bus":
+                        case NAME_ROUTE_TYPE_BUS:
                             builder.setRouteType(ROUTE_TYPE_BUS);
                             break;
                         default:
+                            builder.setRouteType(ROUTE_TYPE_UNKNOWN);
                             in.skipValue();
                             Timber.d("Unknown Route Type: " + routeType);
                             break;
