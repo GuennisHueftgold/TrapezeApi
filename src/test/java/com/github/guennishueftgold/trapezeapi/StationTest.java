@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
 import org.junit.Test;
 
+import java.util.Collections;
+
 import static org.junit.Assert.*;
 
 public class StationTest {
@@ -17,6 +19,11 @@ public class StationTest {
     @Test
     public void typeadapter_read_full_information() throws Exception {
         Station input = new Station.Builder()
+                .setStopName("stop_name")
+                .setStopShortName("stop_short_name")
+                .setActual(Collections.emptyList())
+                .setOld(Collections.emptyList())
+                .setGeneralAlerts(Collections.emptyList())
                 .build();
         Station output = adapter.fromJson(adapter.toJson(input));
         assertTrue(output.equals(input));
@@ -41,9 +48,17 @@ public class StationTest {
     public void PathSegment_equals_should_be_true() {
         final Station station1 = new Station.Builder()
                 .setStopName("stop_name")
+                .setStopShortName("stop_short_name")
+                .setActual(Collections.emptyList())
+                .setOld(Collections.emptyList())
+                .setGeneralAlerts(Collections.emptyList())
                 .build();
         final Station station2 = new Station.Builder()
                 .setStopName("stop_name")
+                .setStopShortName("stop_short_name")
+                .setActual(Collections.emptyList())
+                .setOld(Collections.emptyList())
+                .setGeneralAlerts(Collections.emptyList())
                 .build();
         assertEquals(station1, station2);
     }
@@ -52,9 +67,17 @@ public class StationTest {
     public void PathSegment_equals_should_be_false() {
         final Station station1 = new Station.Builder()
                 .setStopName("stop_name")
+                .setStopShortName("stop_short_name")
+                .setActual(Collections.emptyList())
+                .setOld(Collections.emptyList())
+                .setGeneralAlerts(Collections.emptyList())
                 .build();
         final Station station2 = new Station.Builder()
-                .setStopName("other_stop_name")
+                .setStopName("ooother_stop_name")
+                .setStopShortName("stop_short_name")
+                .setActual(Collections.emptyList())
+                .setOld(Collections.emptyList())
+                .setGeneralAlerts(Collections.emptyList())
                 .build();
         assertNotEquals(station1, station2);
         assertNotEquals(station1, null);
