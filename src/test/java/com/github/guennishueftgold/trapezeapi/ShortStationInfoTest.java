@@ -45,4 +45,18 @@ public class ShortStationInfoTest {
         assertNotEquals(shortStationInfo1, null);
         assertNotEquals(shortStationInfo1, new Object());
     }
+
+    @Test
+    public void ShortStationInfo_hashCode_should_be_equal() {
+        final ShortStationInfo shortStationInfo1 = new ShortStationInfo.Builder().setId("id1").build();
+        final ShortStationInfo shortStationInfo2 = new ShortStationInfo.Builder().setId("id1").build();
+        assertEquals(shortStationInfo1.hashCode(), shortStationInfo2.hashCode());
+    }
+
+    @Test
+    public void ShortStationInfo_hashCode_should_not_be_equal() {
+        final ShortStationInfo shortStationInfo1 = new ShortStationInfo.Builder().setId("id1").build();
+        final ShortStationInfo shortStationInfo2 = new ShortStationInfo.Builder().setId("id2").build();
+        assertNotEquals(shortStationInfo1.hashCode(), shortStationInfo2.hashCode());
+    }
 }

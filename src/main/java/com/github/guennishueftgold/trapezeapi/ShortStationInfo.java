@@ -44,7 +44,6 @@ public final class ShortStationInfo {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(mId, mStopName, mStopShortName);
     }
 
