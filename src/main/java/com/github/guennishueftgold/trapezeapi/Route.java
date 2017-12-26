@@ -123,56 +123,63 @@ public class Route {
             return mAlerts;
         }
 
-        public void setAlerts(List<String> alerts) {
+        public Builder setAlerts(List<String> alerts) {
             mAlerts = alerts;
+            return this;
         }
 
         public String getAuthority() {
             return mAuthority;
         }
 
-        public void setAuthority(String authority) {
+        public Builder setAuthority(String authority) {
             mAuthority = authority;
+            return this;
         }
 
         public List<String> getDirections() {
             return mDirections;
         }
 
-        public void setDirections(List<String> directions) {
+        public Builder setDirections(List<String> directions) {
             mDirections = directions;
+            return this;
         }
 
         public String getId() {
             return mId;
         }
 
-        public void setId(String id) {
+        public Builder setId(String id) {
             mId = id;
+            return this;
         }
 
         public String getName() {
             return mName;
         }
 
-        public void setName(String name) {
+        public Builder setName(String name) {
             mName = name;
+            return this;
         }
 
         public int getRouteType() {
             return mRouteType;
         }
 
-        public void setRouteType(int routeType) {
+        public Builder setRouteType(int routeType) {
             mRouteType = routeType;
+            return this;
         }
 
         public String getShortName() {
             return mShortName;
         }
 
-        public void setShortName(String shortName) {
+        public Builder setShortName(String shortName) {
             mShortName = shortName;
+            return this;
         }
 
         public Route build() {
@@ -180,7 +187,7 @@ public class Route {
         }
     }
 
-    public static final class Converter extends TypeAdapter<Route> {
+    static final class Converter extends TypeAdapter<Route> {
         private final static String NAME_ALERTS = "alerts",
                 NAME_AUTHORITY = "authority",
                 NAME_DIRECTIONS = "directions",

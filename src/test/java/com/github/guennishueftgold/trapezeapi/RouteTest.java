@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import org.junit.Test;
 
+import java.util.Collections;
+
 import static org.junit.Assert.*;
 
 public class RouteTest {
@@ -13,6 +15,12 @@ public class RouteTest {
     @Test
     public void typeadapter_read_full_information() throws Exception {
         Route input = new Route.Builder()
+                .setRouteType(Route.ROUTE_TYPE_BUS)
+                .setDirections(Collections.emptyList())
+                .setId("random_id")
+                .setName("name")
+                .setShortName("shortName")
+                .setAuthority("authority")
                 .build();
         Route output = adapter.fromJson(adapter.toJson(input));
         assertTrue(output.equals(input));
