@@ -6,14 +6,9 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-
 import org.joda.time.LocalTime;
 
 import java.io.IOException;
-import java.lang.annotation.Retention;
-
-
-import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public class TripPassageStop {
 
@@ -145,24 +140,27 @@ public class TripPassageStop {
             return mStatus;
         }
 
-        public void setStatus( int status) {
+        public Builder setStatus(int status) {
             mStatus = status;
+            return this;
         }
 
         public String getId() {
             return mId;
         }
 
-        public void setId(String id) {
+        public Builder setId(String id) {
             mId = id;
+            return this;
         }
 
         public String getShortName() {
             return mShortName;
         }
 
-        public void setShortName(String shortName) {
+        public Builder setShortName(String shortName) {
             mShortName = shortName;
+            return this;
         }
 
         public String getName() {
@@ -195,7 +193,13 @@ public class TripPassageStop {
                 STOP = "stop",
                 STATUS = "status",
                 ACTUAL_TIME = "actualTime",
-                PLANNED_TIME = "plannedTime";
+                PLANNED_TIME = "plannedTime",
+                NAME_STATUS_DEPARTED = "departed",
+                NAME_STATUS_PLANNED = "planned",
+                NAME_STATUS_PREDICTED = "predicted",
+                NAME_STATUS_STOPPING = "stopping";
+
+        private final DepartureStatus.Converter statusTypeAdapter = new DepartureStatus.Converter();
 
         @Override
         public void write(JsonWriter out, TripPassageStop value) throws IOException {
@@ -204,10 +208,19 @@ public class TripPassageStop {
                 return;
             }
             out.beginObject();
-            out.name(STOP_SEQ_NUM).value(Long.toString(value.getStopSeqNum()));
-            out.name(ACTUAL_TIME).value(value.mActualTime.toString());
-            out.name(PLANNED_TIME).value(value.mPlannedTime.toString());
-            out.name(STATUS).value(value.mStatus);
+            out.name(STOP_SEQ_NUM).value(value.getStopSeqNum());
+            out.name(ACTUAL_TIME);
+            if (value.mActualTime == null)
+                out.nullValue();
+            else
+                out.value(value.mActualTime.toString());
+            out.name(PLANNED_TIME);
+            if (value.mPlannedTime == null)
+                out.nullValue();
+            else
+                out.value(value.mPlannedTime.toString());
+            out.name(STATUS);
+            statusTypeAdapter.write(out, value.mStatus);
             out.name(STOP).beginObject();
             out.name(ID).value(value.mId);
             out.name(NAME).value(value.mName);
@@ -237,25 +250,7 @@ public class TripPassageStop {
                 } else if (name.equals(PLANNED_TIME) && in.peek() == JsonToken.STRING) {
                     tripPassageStop.setPlannedTime(LocalTime.parse(in.nextString()));
                 } else if (name.equals(STATUS) && in.peek() == JsonToken.STRING) {
-                    final String status = in.nextString().toLowerCase();
-                    switch (status) {
-                        case "departed":
-                            tripPassageStop.setStatus(STATUS_DEPARTED);
-                            break;
-                        case "predicted":
-                            tripPassageStop.setStatus(STATUS_PREDICTED);
-                            break;
-                        case "stopping":
-                            tripPassageStop.setStatus(STATUS_STOPPING);
-                            break;
-                        case "planned":
-                            tripPassageStop.setStatus(STATUS_PLANNED);
-                            break;
-                        default:
-                            Timber.d("Parsed Unknown status: " + status);
-                            tripPassageStop.setStatus(STATUS_UNKNOWN);
-                            break;
-                    }
+                    tripPassageStop.setStatus(statusTypeAdapter.read(in));
                 } else if (name.equals(STOP) && in.peek() == JsonToken.BEGIN_OBJECT) {
                     this.readStop(tripPassageStop, in);
                 } else {
