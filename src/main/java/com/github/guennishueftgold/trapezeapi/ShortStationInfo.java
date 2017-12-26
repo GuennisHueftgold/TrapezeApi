@@ -1,12 +1,12 @@
 package com.github.guennishueftgold.trapezeapi;
 
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public final class ShortStationInfo {
@@ -32,6 +32,22 @@ public final class ShortStationInfo {
         return mStopShortName;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShortStationInfo that = (ShortStationInfo) o;
+        return Objects.equals(mId, that.mId) &&
+                Objects.equals(mStopName, that.mStopName) &&
+                Objects.equals(mStopShortName, that.mStopShortName);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(mId, mStopName, mStopShortName);
+    }
+
     public static class Builder {
         private String mId;
         private String mStopName;
@@ -41,24 +57,27 @@ public final class ShortStationInfo {
             return mId;
         }
 
-        public void setId(String id) {
+        public Builder setId(String id) {
             mId = id;
+            return this;
         }
 
         public String getStopName() {
             return mStopName;
         }
 
-        public void setStopName(String stopName) {
+        public Builder setStopName(String stopName) {
             mStopName = stopName;
+            return this;
         }
 
         public String getStopShortName() {
             return mStopShortName;
         }
 
-        public void setStopShortName(String stopShortName) {
+        public Builder setStopShortName(String stopShortName) {
             mStopShortName = stopShortName;
+            return this;
         }
 
         public ShortStationInfo build() {
@@ -71,8 +90,18 @@ public final class ShortStationInfo {
 
         @Override
         public void write(JsonWriter out, ShortStationInfo value) throws IOException {
-            //TODO:
-            throw new JsonSyntaxException("Not yet implemented");
+            if (value == null) {
+                out.nullValue();
+                return;
+            }
+            out.beginObject();
+            out.name(NAME_NAME)
+                    .value(value.getStopName());
+            out.name(NAME_ID)
+                    .value(value.getId());
+            out.name(NAME_NUMBER)
+                    .value(value.getStopShortName());
+            out.endObject();
         }
 
         @Override
