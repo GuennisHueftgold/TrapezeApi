@@ -8,13 +8,8 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 import org.joda.time.LocalTime;
 
-
 import java.io.IOException;
-import java.lang.annotation.Retention;
 import java.util.Objects;
-
-
-import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public class Departure {
     public final static int STATUS_DEPARTED = 1;
@@ -264,6 +259,7 @@ public class Departure {
         private final static String VEHICLE_ID = "vehicleId";
         private final static String ACTUAL_TIME = "actualTime";
         private final TypeAdapter<LocalTime> mLocalTimeTypeAdapter;
+        private final DepartureStatus.Converter mDepartureStatusConverter = new DepartureStatus.Converter();
 
         public Converter(Gson gson) {
             this(gson.getAdapter(GeneralTypes.LOCAL_TIME_TYPE_TOKEN));
@@ -280,7 +276,8 @@ public class Departure {
                 return;
             }
             out.beginObject();
-            out.name(STATUS).value(value.getStatus());
+            out.name(STATUS);
+            this.mDepartureStatusConverter.write(out, value.mStatus);
             //TODO
             out.endObject();
         }
@@ -317,25 +314,7 @@ public class Departure {
                 } else if (name.equals(VEHICLE_ID) && in.peek() == JsonToken.STRING) {
                     builder.setVehicleId(in.nextString());
                 } else if (name.equals(STATUS) && in.peek() == JsonToken.STRING) {
-                    final String status = in.nextString();
-                    switch (status.toLowerCase()) {
-                        case "departed":
-                            builder.setStatus(STATUS_DEPARTED);
-                            break;
-                        case "predicted":
-                            builder.setStatus(STATUS_PREDICTED);
-                            break;
-                        case "planned":
-                            builder.setStatus(STATUS_PLANNED);
-                            break;
-                        case "stopping":
-                            builder.setStatus(STATUS_STOPPING);
-                            break;
-                        default:
-                            builder.setStatus(STATUS_UNKNOWN);
-                            Timber.d("Unknown status: %s", status);
-                            break;
-                    }
+                    builder.setStatus(this.mDepartureStatusConverter.read(in));
                 } else {
                     in.skipValue();
                     Timber.d("Skipped value for: " + name);

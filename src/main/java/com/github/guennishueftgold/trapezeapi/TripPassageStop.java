@@ -199,6 +199,8 @@ public class TripPassageStop {
                 NAME_STATUS_PREDICTED = "predicted",
                 NAME_STATUS_STOPPING = "stopping";
 
+        private final DepartureStatus.Converter statusTypeAdapter = new DepartureStatus.Converter();
+
         @Override
         public void write(JsonWriter out, TripPassageStop value) throws IOException {
             if (value == null) {
@@ -218,24 +220,7 @@ public class TripPassageStop {
             else
                 out.value(value.mPlannedTime.toString());
             out.name(STATUS);
-            switch (value.mStatus) {
-                case STATUS_DEPARTED:
-                    out.value(NAME_STATUS_DEPARTED);
-                    break;
-                case STATUS_PLANNED:
-                    out.value(NAME_STATUS_PLANNED);
-                    break;
-                case STATUS_PREDICTED:
-                    out.value(NAME_STATUS_PREDICTED);
-                    break;
-                case STATUS_STOPPING:
-                    out.value(NAME_STATUS_STOPPING);
-                    break;
-                case STATUS_UNKNOWN:
-                default:
-                    out.nullValue();
-                    break;
-            }
+            statusTypeAdapter.write(out, value.mStatus);
             out.name(STOP).beginObject();
             out.name(ID).value(value.mId);
             out.name(NAME).value(value.mName);
@@ -265,25 +250,7 @@ public class TripPassageStop {
                 } else if (name.equals(PLANNED_TIME) && in.peek() == JsonToken.STRING) {
                     tripPassageStop.setPlannedTime(LocalTime.parse(in.nextString()));
                 } else if (name.equals(STATUS) && in.peek() == JsonToken.STRING) {
-                    final String status = in.nextString().toLowerCase();
-                    switch (status) {
-                        case "departed":
-                            tripPassageStop.setStatus(STATUS_DEPARTED);
-                            break;
-                        case "predicted":
-                            tripPassageStop.setStatus(STATUS_PREDICTED);
-                            break;
-                        case "stopping":
-                            tripPassageStop.setStatus(STATUS_STOPPING);
-                            break;
-                        case "planned":
-                            tripPassageStop.setStatus(STATUS_PLANNED);
-                            break;
-                        default:
-                            Timber.d("Parsed Unknown status: " + status);
-                            tripPassageStop.setStatus(STATUS_UNKNOWN);
-                            break;
-                    }
+                    tripPassageStop.setStatus(statusTypeAdapter.read(in));
                 } else if (name.equals(STOP) && in.peek() == JsonToken.BEGIN_OBJECT) {
                     this.readStop(tripPassageStop, in);
                 } else {
