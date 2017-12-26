@@ -24,6 +24,8 @@ public class StationTest {
                 .setActual(Collections.emptyList())
                 .setOld(Collections.emptyList())
                 .setGeneralAlerts(Collections.emptyList())
+                .setRoutes(Collections.emptyList())
+                .setDirections(Collections.emptyList())
                 .build();
         Station output = adapter.fromJson(adapter.toJson(input));
         assertTrue(output.equals(input));
@@ -52,6 +54,8 @@ public class StationTest {
                 .setActual(Collections.emptyList())
                 .setOld(Collections.emptyList())
                 .setGeneralAlerts(Collections.emptyList())
+                .setRoutes(Collections.emptyList())
+                .setDirections(Collections.emptyList())
                 .build();
         final Station station2 = new Station.Builder()
                 .setStopName("stop_name")
@@ -59,6 +63,8 @@ public class StationTest {
                 .setActual(Collections.emptyList())
                 .setOld(Collections.emptyList())
                 .setGeneralAlerts(Collections.emptyList())
+                .setRoutes(Collections.emptyList())
+                .setDirections(Collections.emptyList())
                 .build();
         assertEquals(station1, station2);
     }
@@ -71,6 +77,8 @@ public class StationTest {
                 .setActual(Collections.emptyList())
                 .setOld(Collections.emptyList())
                 .setGeneralAlerts(Collections.emptyList())
+                .setRoutes(Collections.emptyList())
+                .setDirections(Collections.emptyList())
                 .build();
         final Station station2 = new Station.Builder()
                 .setStopName("ooother_stop_name")
@@ -78,6 +86,8 @@ public class StationTest {
                 .setActual(Collections.emptyList())
                 .setOld(Collections.emptyList())
                 .setGeneralAlerts(Collections.emptyList())
+                .setRoutes(Collections.emptyList())
+                .setDirections(Collections.emptyList())
                 .build();
         assertNotEquals(station1, station2);
         assertNotEquals(station1, null);
