@@ -14,6 +14,10 @@ public class DepartureTest {
     @Test
     public void typeadapter_read_full_information() throws Exception {
         Departure input = new Departure.Builder()
+                .setStatus(DepartureStatus.STATUS_PLANNED)
+                .setDirection("random_direction")
+                .setActualRelativeTime(29)
+                .setMixedTime("mixed_time")
                 .build();
         Departure output = adapter.fromJson(adapter.toJson(input));
         assertTrue(output.equals(input));
@@ -35,14 +39,14 @@ public class DepartureTest {
     }
 
     @Test
-    public void Departure_equals_should_be_true() throws Exception{
+    public void Departure_equals_should_be_true() {
         final Departure departure1=new Departure.Builder().setStatus(29).build();
         final Departure departure2=new Departure.Builder().setStatus(29).build();
         assertEquals(departure1,departure2);
     }
 
     @Test
-    public void Departure_equals_should_be_false() throws Exception{
+    public void Departure_equals_should_be_false() {
         final Departure departure1=new Departure.Builder().setStatus(29).build();
         final Departure departure2=new Departure.Builder().setStatus(2).build();
         assertNotEquals(departure1,departure2);

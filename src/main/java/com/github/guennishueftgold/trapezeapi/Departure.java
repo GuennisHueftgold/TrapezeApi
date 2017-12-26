@@ -278,7 +278,19 @@ public class Departure {
             out.beginObject();
             out.name(STATUS);
             this.mDepartureStatusConverter.write(out, value.mStatus);
-            //TODO
+            out.name(ACTUAL_RELATIVE_TIME)
+                    .value(value.mActualRelativeTime);
+            out.name(ACTUAL_TIME);
+            this.mLocalTimeTypeAdapter.write(out, value.mActualTime);
+            out.name(PLANNED_TIME);
+            this.mLocalTimeTypeAdapter.write(out, value.mPlannedTime);
+            out.name(MIXED_TIME).value(value.mMixedTime);
+            out.name(DIRECTION).value(value.mDirection);
+            out.name(PASSAGE_ID).value(value.mPassageId);
+            out.name(PATTERN_TEXT).value(value.mPatternText);
+            out.name(ROUTE_ID).value(value.mRouteId);
+            out.name(TRIP_ID).value(value.mTripId);
+            out.name(VEHICLE_ID).value(value.mVehicleId);
             out.endObject();
         }
 
