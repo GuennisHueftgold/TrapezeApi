@@ -29,4 +29,20 @@ public class ShortStationInfoTest {
     public void typeAdapter_check_write_null() {
         assertEquals(adapter.toJson(null), "null");
     }
+
+    @Test
+    public void ShortStationInfo_equals_should_be_true() {
+        final ShortStationInfo shortStationInfo1 = new ShortStationInfo.Builder().setId("id1").build();
+        final ShortStationInfo shortStationInfo2 = new ShortStationInfo.Builder().setId("id1").build();
+        assertEquals(shortStationInfo1, shortStationInfo2);
+    }
+
+    @Test
+    public void ShortStationInfo_equals_should_be_false() {
+        final ShortStationInfo shortStationInfo1 = new ShortStationInfo.Builder().setId("id1").build();
+        final ShortStationInfo shortStationInfo2 = new ShortStationInfo.Builder().setId("id2").build();
+        assertNotEquals(shortStationInfo1, shortStationInfo2);
+        assertNotEquals(shortStationInfo1, null);
+        assertNotEquals(shortStationInfo1, new Object());
+    }
 }
