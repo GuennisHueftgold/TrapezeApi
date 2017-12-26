@@ -18,6 +18,13 @@ public class DepartureTest {
                 .setDirection("random_direction")
                 .setActualRelativeTime(29)
                 .setMixedTime("mixed_time")
+                .setPassageId("passage_id")
+                .setPatternText("pattern_text")
+                .setPlannedTime(LocalTime.now())
+                .setActualTime(LocalTime.now())
+                .setTripId("trip_id")
+                .setVehicleId("vehicle_id")
+                .setRouteId("route_id")
                 .build();
         Departure output = adapter.fromJson(adapter.toJson(input));
         assertTrue(output.equals(input));
@@ -52,6 +59,20 @@ public class DepartureTest {
         assertNotEquals(departure1,departure2);
         assertNotEquals(departure1,null);
         assertNotEquals(departure1,new Object());
+    }
+
+    @Test
+    public void Departure_hashCode_should_be_equal() {
+        final Departure departure1 = new Departure.Builder().setStatus(29).build();
+        final Departure departure2 = new Departure.Builder().setStatus(29).build();
+        assertEquals(departure1.hashCode(), departure2.hashCode());
+    }
+
+    @Test
+    public void Departure_hashCode_should_not_be_equal() {
+        final Departure departure1 = new Departure.Builder().setStatus(29).build();
+        final Departure departure2 = new Departure.Builder().setStatus(42).build();
+        assertNotEquals(departure1.hashCode(), departure2.hashCode());
     }
 
 }
