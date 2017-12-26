@@ -230,6 +230,7 @@ public class Route {
                     break;
                 default:
                     out.nullValue();
+                    break;
             }
             out.endObject();
         }
