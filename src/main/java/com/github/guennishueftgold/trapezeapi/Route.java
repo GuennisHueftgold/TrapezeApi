@@ -42,12 +42,17 @@ public class Route {
         this.mShortName = builder.mShortName;
     }
 
-    public static int getRouteTypeBus() {
-        return ROUTE_TYPE_BUS;
-    }
-
-    public static int getRouteTypeUnknown() {
-        return ROUTE_TYPE_UNKNOWN;
+    @Override
+    public String toString() {
+        return "Route{" +
+                "mAlerts=" + mAlerts +
+                ", mAuthority='" + mAuthority + '\'' +
+                ", mDirections=" + mDirections +
+                ", mId='" + mId + '\'' +
+                ", mName='" + mName + '\'' +
+                ", mRouteType=" + mRouteType +
+                ", mShortName='" + mShortName + '\'' +
+                '}';
     }
 
     @Override

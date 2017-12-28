@@ -9,6 +9,7 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 public final class Station {
     private final String mStopName;
@@ -21,7 +22,7 @@ public final class Station {
     private final List<Departure> mOld;
     private final List<Route> mRoutes;
 
-    public Station(Builder builder) {
+    private Station(Builder builder) {
         this.mStopName = builder.mStopName;
         this.mStopShortName = builder.mStopShortName;
         this.mDirections = builder.mDirections;
@@ -31,7 +32,6 @@ public final class Station {
         this.mActual = builder.mActual;
         this.mOld = builder.mOld;
         this.mRoutes = builder.mRoutes;
-
     }
 
     public List<Route> getRoutes() {
@@ -71,6 +71,28 @@ public final class Station {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Station station = (Station) o;
+        return mFirstPassageTime == station.mFirstPassageTime &&
+                mLastPassageTime == station.mLastPassageTime &&
+                Objects.equals(mStopName, station.mStopName) &&
+                Objects.equals(mStopShortName, station.mStopShortName) &&
+                Objects.equals(mDirections, station.mDirections) &&
+                Objects.equals(mGeneralAlerts, station.mGeneralAlerts) &&
+                Objects.equals(mActual, station.mActual) &&
+                Objects.equals(mOld, station.mOld) &&
+                Objects.equals(mRoutes, station.mRoutes);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(mStopName, mStopShortName, mDirections, mFirstPassageTime, mGeneralAlerts, mLastPassageTime, mActual, mOld, mRoutes);
+    }
+
+    @Override
     public String toString() {
         return "Station{" +
                 "stopName='" + mStopName + '\'' +
@@ -101,72 +123,81 @@ public final class Station {
             return mStopName;
         }
 
-        public void setStopName(String stopName) {
+        public Builder setStopName(String stopName) {
             mStopName = stopName;
+            return this;
         }
 
         public List<Route> getRoutes() {
             return mRoutes;
         }
 
-        public void setRoutes(List<Route> routes) {
+        public Builder setRoutes(List<Route> routes) {
             mRoutes = routes;
+            return this;
         }
 
         public String getStopShortName() {
             return mStopShortName;
         }
 
-        public void setStopShortName(String stopShortName) {
+        public Builder setStopShortName(String stopShortName) {
             mStopShortName = stopShortName;
+            return this;
         }
 
         public List<String> getDirections() {
             return mDirections;
         }
 
-        public void setDirections(List<String> directions) {
+        public Builder setDirections(List<String> directions) {
             this.mDirections = directions;
+            return this;
         }
 
         public long getFirstPassageTime() {
             return mFirstPassageTime;
         }
 
-        public void setFirstPassageTime(long firstPassageTime) {
+        public Builder setFirstPassageTime(long firstPassageTime) {
             mFirstPassageTime = firstPassageTime;
+            return this;
         }
 
         public List<String> getGeneralAlerts() {
             return mGeneralAlerts;
         }
 
-        public void setGeneralAlerts(List<String> generalAlerts) {
+        public Builder setGeneralAlerts(List<String> generalAlerts) {
             mGeneralAlerts = generalAlerts;
+            return this;
         }
 
         public long getLastPassageTime() {
             return mLastPassageTime;
         }
 
-        public void setLastPassageTime(long lastPassageTime) {
+        public Builder setLastPassageTime(long lastPassageTime) {
             mLastPassageTime = lastPassageTime;
+            return this;
         }
 
         public List<Departure> getActual() {
             return mActual;
         }
 
-        public void setActual(List<Departure> actual) {
+        public Builder setActual(List<Departure> actual) {
             mActual = actual;
+            return this;
         }
 
         public List<Departure> getOld() {
             return mOld;
         }
 
-        public void setOld(List<Departure> old) {
+        public Builder setOld(List<Departure> old) {
             mOld = old;
+            return this;
         }
 
         public Station build() {
@@ -174,7 +205,7 @@ public final class Station {
         }
     }
 
-    public final static class Converter extends TypeAdapter<Station> {
+    final static class Converter extends TypeAdapter<Station> {
 
         private final static String NAME_ACTUAL = "actual";
         private final static String NAME_OLD = "old";
@@ -190,14 +221,45 @@ public final class Station {
         private final TypeAdapter<List<Route>> mRouteListTypeAdapter;
 
         public Converter(Gson gson) {
-            this.mDepartueListTypeAdapter = gson.getAdapter(GeneralTypes.DEPARTURE_LIST_TYPE_TOKEN);
-            this.mStringListTypeAdapter = gson.getAdapter(GeneralTypes.STRING_LIST_TYPE_TOKEN);
-            this.mRouteListTypeAdapter = gson.getAdapter(GeneralTypes.ROUTE_LIST_TYPE_TOKEN);
+            this(gson.getAdapter(GeneralTypes.DEPARTURE_LIST_TYPE_TOKEN),
+                    gson.getAdapter(GeneralTypes.STRING_LIST_TYPE_TOKEN),
+                    gson.getAdapter(GeneralTypes.ROUTE_LIST_TYPE_TOKEN));
+        }
+
+        public Converter(TypeAdapter<List<Departure>> departueListTypeAdapter,
+                         TypeAdapter<List<String>> stringListTypeAdapter,
+                         TypeAdapter<List<Route>> routeListTypeAdapter) {
+            this.mDepartueListTypeAdapter = departueListTypeAdapter;
+            this.mStringListTypeAdapter = stringListTypeAdapter;
+            this.mRouteListTypeAdapter = routeListTypeAdapter;
         }
 
         @Override
         public void write(JsonWriter out, Station value) throws IOException {
-
+            if (value == null) {
+                out.nullValue();
+                return;
+            }
+            out.beginObject();
+            out.name(NAME_STOP_NAME)
+                    .value(value.getStopName());
+            out.name(NAME_STOP_SHORT_NAME)
+                    .value(value.getStopShortName());
+            out.name(NAME_ROUTES);
+            this.mRouteListTypeAdapter.write(out, value.getRoutes());
+            out.name(NAME_ACTUAL);
+            this.mDepartueListTypeAdapter.write(out, value.getActual());
+            out.name(NAME_OLD);
+            this.mDepartueListTypeAdapter.write(out, value.getOld());
+            out.name(NAME_FIRST_PASSAGE_TIME)
+                    .value(value.getFirstPassageTime());
+            out.name(NAME_LAST_PASSAGE_TIME)
+                    .value(value.getLastPassageTime());
+            out.name(NAME_GENERAL_ALERTS);
+            this.mStringListTypeAdapter.write(out, value.getGeneralAlerts());
+            out.name(NAME_DIRECTIONS);
+            this.mStringListTypeAdapter.write(out, value.getDirections());
+            out.endObject();
         }
 
         @Override
