@@ -8,7 +8,10 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 
 public final class VehiclePath {
@@ -17,7 +20,7 @@ public final class VehiclePath {
 
     private VehiclePath(Builder builder) {
         this.mColor = builder.mColor;
-        this.mPathPoints = builder.mPathPoints;
+        this.mPathPoints = Collections.unmodifiableList(builder.mPathPoints);
     }
 
     public String getColor() {
@@ -28,24 +31,56 @@ public final class VehiclePath {
         return mPathPoints;
     }
 
+    @Override
+    public String toString() {
+        return "VehiclePath{" +
+                "mColor='" + mColor + '\'' +
+                ", mPathPoints=" + mPathPoints +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VehiclePath that = (VehiclePath) o;
+        return Objects.equals(mColor, that.mColor) &&
+                Objects.equals(mPathPoints, that.mPathPoints);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(mColor, mPathPoints);
+    }
+
     public static final class Builder {
         private String mColor;
-        private List<VehiclePathPoint> mPathPoints;
+        private List<VehiclePathPoint> mPathPoints = new ArrayList<>();
 
         public String getColor() {
             return mColor;
         }
 
-        public void setColor(String color) {
+        public Builder setColor(String color) {
             mColor = color;
+            return this;
         }
 
         public List<VehiclePathPoint> getPathPoints() {
             return mPathPoints;
         }
 
-        public void setPathPoints(List<VehiclePathPoint> pathPoints) {
-            mPathPoints = pathPoints;
+        public Builder setPathPoints(List<VehiclePathPoint> pathPoints) {
+            this.mPathPoints.clear();
+            if (pathPoints != null)
+                this.mPathPoints = pathPoints;
+            return this;
+        }
+
+        public Builder addPathPoint(VehiclePathPoint vehiclePathPoint) {
+            this.mPathPoints.add(vehiclePathPoint);
+            return this;
         }
 
         public VehiclePath build() {
@@ -58,7 +93,11 @@ public final class VehiclePath {
         private final TypeAdapter<List<VehiclePathPoint>> mTypeAdapter;
 
         Converter(Gson gson) {
-            this.mTypeAdapter = gson.getAdapter(GeneralTypes.VEHICLE_PATH_POINT_LIST_TYPE_TOKEN);
+            this(gson.getAdapter(GeneralTypes.VEHICLE_PATH_POINT_LIST_TYPE_TOKEN));
+        }
+
+        Converter(TypeAdapter<List<VehiclePathPoint>> typeAdapter) {
+            this.mTypeAdapter = typeAdapter;
         }
 
         @Override
