@@ -24,6 +24,7 @@ public class TripPassagesTest {
     static TripPassages.Builder createSample(int idx) {
         return new TripPassages.Builder()
                 .setDirectionText("direction_" + idx)
+                .setRouteName("route_name_" + idx)
                 .addActual(createTripPassagesStop(0))
                 .addActual(createTripPassagesStop(1))
                 .addOld(createTripPassagesStop(2))

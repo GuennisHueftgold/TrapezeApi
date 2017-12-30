@@ -1,7 +1,6 @@
 package com.github.guennishueftgold.trapezeapi;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -169,8 +168,6 @@ public class TripPassages {
         public TripPassages read(JsonReader in) throws IOException {
             if (in.peek() == JsonToken.NULL) {
                 return null;
-            } else if (in.peek() != JsonToken.BEGIN_OBJECT) {
-                throw new JsonParseException("Expected begin object");
             }
             in.beginObject();
             TripPassages.Builder tripPassages = new TripPassages.Builder();
