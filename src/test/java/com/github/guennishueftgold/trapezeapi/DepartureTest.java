@@ -92,6 +92,26 @@ public class DepartureTest {
                 .setTripId("other_trip_id")
                 .build();
         assertNotEquals(departure1, departure2);
+        departure2 = createSample(1)
+                .setPatternText("other_pattern")
+                .build();
+        assertNotEquals(departure1, departure2);
+        departure2 = createSample(1)
+                .setPlannedTime(null)
+                .build();
+        assertNotEquals(departure1, departure2);
+        departure2 = createSample(1)
+                .setPassageId("other_passage_id")
+                .build();
+        assertNotEquals(departure1, departure2);
+        departure2 = createSample(1)
+                .setDirection("other_direction")
+                .build();
+        assertNotEquals(departure1, departure2);
+        departure2 = createSample(1)
+                .setMixedTime("other_mixed_time")
+                .build();
+        assertNotEquals(departure1, departure2);
     }
 
     @Test
