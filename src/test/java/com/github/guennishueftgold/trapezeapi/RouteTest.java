@@ -2,13 +2,16 @@ package com.github.guennishueftgold.trapezeapi;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonToken;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class RouteTest {
 
@@ -126,8 +129,12 @@ public class RouteTest {
     }
 
     @Test
-    public void typeaadapter_skip_unknown_tag() throws Exception {
-        assertNotNull(adapter.fromJson("{\"unknown_tag\":2}"));
+    public void TypeAdapter_skip_unknown_name() throws IOException {
+        Logger logger = mock(Logger.class);
+        Logger.setInstance(logger);
+        Route path = adapter.fromJson("{\"unknown_tag\":null}");
+        assertNotNull(path);
+        verify(logger, times(1)).unknownName(adapter, "unknown_tag", JsonToken.NULL);
     }
 
 }

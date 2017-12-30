@@ -329,7 +329,7 @@ public class Departure {
                     builder.setStatus(this.mDepartureStatusConverter.read(in));
                 } else {
                     in.skipValue();
-                    Timber.d("Skipped value for: " + name);
+                    Logger.d("Skipped value for: " + name);
                 }
             }
             in.endObject();

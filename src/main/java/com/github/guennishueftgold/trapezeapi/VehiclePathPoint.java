@@ -6,7 +6,7 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
-
+import java.util.Objects;
 
 
 public final class VehiclePathPoint implements LatLngInterface {
@@ -32,6 +32,31 @@ public final class VehiclePathPoint implements LatLngInterface {
         return mSequence;
     }
 
+    @Override
+    public String toString() {
+        return "VehiclePathPoint{" +
+                "mLatitude=" + mLatitude +
+                ", mLongitude=" + mLongitude +
+                ", mSequence=" + mSequence +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VehiclePathPoint that = (VehiclePathPoint) o;
+        return mLatitude == that.mLatitude &&
+                mLongitude == that.mLongitude &&
+                mSequence == that.mSequence;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(mLatitude, mLongitude, mSequence);
+    }
+
     public static final class Builder {
         private long mLatitude;
         private long mLongitude;
@@ -41,24 +66,27 @@ public final class VehiclePathPoint implements LatLngInterface {
             return mLatitude;
         }
 
-        public void setLatitude(long latitude) {
+        public Builder setLatitude(long latitude) {
             mLatitude = latitude;
+            return this;
         }
 
         public long getLongitude() {
             return mLongitude;
         }
 
-        public void setLongitude(long longitude) {
+        public Builder setLongitude(long longitude) {
             mLongitude = longitude;
+            return this;
         }
 
         public int getSequence() {
             return mSequence;
         }
 
-        public void setSequence(int sequence) {
+        public Builder setSequence(int sequence) {
             mSequence = sequence;
+            return this;
         }
 
         public VehiclePathPoint build() {
@@ -107,7 +135,7 @@ public final class VehiclePathPoint implements LatLngInterface {
                         builder.setSequence(Integer.parseInt(in.nextString()));
                         break;
                     default:
-                        Timber.d("Unknown tag %s", name);
+                        Logger.d("Unknown tag %s", name);
                         in.skipValue();
                         break;
                 }

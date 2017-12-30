@@ -33,6 +33,15 @@ public final class ShortStationInfo {
     }
 
     @Override
+    public String toString() {
+        return "ShortStationInfo{" +
+                "mId='" + mId + '\'' +
+                ", mStopName='" + mStopName + '\'' +
+                ", mStopShortName='" + mStopShortName + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -121,7 +130,7 @@ public final class ShortStationInfo {
                 } else if (NAME_NUMBER.equalsIgnoreCase(name) && in.peek() == JsonToken.STRING) {
                     builder.setStopShortName(in.nextString());
                 } else {
-                    Timber.d("Unknown Name: %s", name);
+                    Logger.d("Unknown Name: %s", name);
                     in.skipValue();
                 }
             }

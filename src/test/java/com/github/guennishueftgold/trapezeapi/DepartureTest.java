@@ -50,6 +50,7 @@ public class DepartureTest {
         final Departure departure1=new Departure.Builder().setStatus(29).build();
         final Departure departure2=new Departure.Builder().setStatus(29).build();
         assertEquals(departure1,departure2);
+        assertEquals(departure1, departure1);
     }
 
     @Test

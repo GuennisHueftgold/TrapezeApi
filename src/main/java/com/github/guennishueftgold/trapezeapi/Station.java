@@ -291,7 +291,7 @@ public final class Station {
                 } else if (name.equals(NAME_STOP_NAME) && in.peek() == JsonToken.STRING) {
                     builder.setStopName(in.nextString());
                 } else {
-                    Timber.d("Not handled Name: " + name);
+                    Logger.d("Not handled Name: " + name);
                     in.skipValue();
                 }
             }

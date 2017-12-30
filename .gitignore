@@ -9,3 +9,5 @@
 .externalNativeBuild
 /.idea
 /target
+settings.xml
+/out

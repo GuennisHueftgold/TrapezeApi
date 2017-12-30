@@ -101,12 +101,12 @@ public class AutocompleteSearchResult {
                                 builder.setType(TYPE_DIVIDER);
                                 break;
                             default:
-                                Timber.d("Unknown type %s",typeString);
+                                Logger.d("Unknown type %s",typeString);
                                 break;
                         }
                         break;
                     default:
-                        Timber.d("Unknown key %s with type: %s",name,in.peek().toString());
+                        Logger.d("Unknown key %s with type: %s",name,in.peek().toString());
                         in.skipValue();
                         break;
                 }
