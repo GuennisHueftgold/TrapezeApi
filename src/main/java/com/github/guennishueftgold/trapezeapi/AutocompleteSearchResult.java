@@ -148,6 +148,10 @@ public final class AutocompleteSearchResult {
         }
 
         public int convertTypeFromJson(JsonReader jsonReader) throws IOException {
+            if (jsonReader.peek() == JsonToken.NULL) {
+                jsonReader.skipValue();
+                return TYPE_UNKNOWN;
+            }
             final String typeString = jsonReader.nextString();
             switch (typeString) {
                 case NAME_TYPE_STOP:
@@ -168,9 +172,9 @@ public final class AutocompleteSearchResult {
                 case TYPE_STOP:
                     jsonWriter.value(NAME_TYPE_STOP);
                     break;
-                    default:
-                        jsonWriter.nullValue();
-                        break;
+                default:
+                    jsonWriter.nullValue();
+                    break;
             }
         }
     }

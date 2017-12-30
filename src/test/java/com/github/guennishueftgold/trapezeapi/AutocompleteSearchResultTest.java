@@ -102,6 +102,10 @@ public class AutocompleteSearchResultTest {
     @Test
     public void TypeAdapter_convertTypeFromJson() throws IOException {
         JsonReader jsonReader = mock(JsonReader.class);
+        when(jsonReader.peek()).thenReturn(JsonToken.NULL);
+        assertEquals(adapter.convertTypeFromJson(jsonReader), AutocompleteSearchResult.TYPE_UNKNOWN);
+        reset(jsonReader);
+        when(jsonReader.peek()).thenReturn(JsonToken.STRING);
         when(jsonReader.nextString()).thenReturn(AutocompleteSearchResult.Converter.NAME_TYPE_DIVIDER);
         assertEquals(adapter.convertTypeFromJson(jsonReader), AutocompleteSearchResult.TYPE_DIVIDER);
         when(jsonReader.nextString()).thenReturn(AutocompleteSearchResult.Converter.NAME_TYPE_STOP);

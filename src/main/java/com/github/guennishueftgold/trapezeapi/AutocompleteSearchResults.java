@@ -8,13 +8,35 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
-public class AutocompleteSearchResults {
+public final class AutocompleteSearchResults {
     private final List<AutocompleteSearchResult> mSearchResults;
 
     private AutocompleteSearchResults(Builder builder) {
-        this.mSearchResults=builder.mSearchResults;
+        this.mSearchResults = Collections.unmodifiableList(builder.getSearchResults());
+    }
+
+    @Override
+    public String toString() {
+        return "AutocompleteSearchResults{" +
+                "mSearchResults=" + mSearchResults +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AutocompleteSearchResults that = (AutocompleteSearchResults) o;
+        return Objects.equals(mSearchResults, that.mSearchResults);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mSearchResults);
     }
 
     public List<AutocompleteSearchResult> getSearchResults() {
@@ -28,8 +50,20 @@ public class AutocompleteSearchResults {
             return new AutocompleteSearchResults(this);
         }
 
-        public void add(AutocompleteSearchResult result) {
+        public List<AutocompleteSearchResult> getSearchResults() {
+            return mSearchResults;
+        }
+
+        public Builder setSearchResults(List<AutocompleteSearchResult> searchResults) {
+            this.mSearchResults.clear();
+            if (searchResults != null)
+                this.mSearchResults.addAll(searchResults);
+            return this;
+        }
+
+        public Builder add(AutocompleteSearchResult result) {
             this.mSearchResults.add(result);
+            return this;
         }
     }
 
@@ -38,11 +72,24 @@ public class AutocompleteSearchResults {
         private final TypeAdapter<AutocompleteSearchResult> mTypeAdapter;
 
         public Converter(Gson gson){
-            this.mTypeAdapter=gson.getAdapter(AutocompleteSearchResult.class);
+            this(gson.getAdapter(AutocompleteSearchResult.class));
         }
+
+        public Converter(TypeAdapter<AutocompleteSearchResult> typeAdapter) {
+            this.mTypeAdapter = typeAdapter;
+        }
+
         @Override
         public void write(JsonWriter out, AutocompleteSearchResults value) throws IOException {
-
+            if (value == null) {
+                out.nullValue();
+                return;
+            }
+            out.beginArray();
+            for (AutocompleteSearchResult autocompleteSearchResult : value.getSearchResults()) {
+                this.mTypeAdapter.write(out, autocompleteSearchResult);
+            }
+            out.endArray();
         }
 
         @Override
