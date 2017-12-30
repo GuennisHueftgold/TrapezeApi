@@ -9,8 +9,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
-public class Route {
+public final class Route {
     public final static int ROUTE_TYPE_BUS = 1;
 
     /*"alerts": [],
@@ -32,14 +33,14 @@ public class Route {
     private final int mRouteType;
     private final String mShortName;
 
-    public Route(Builder builder) {
-        this.mAlerts = builder.mAlerts;
-        this.mAuthority = builder.mAuthority;
-        this.mDirections = builder.mDirections;
-        this.mId = builder.mId;
-        this.mName = builder.mName;
-        this.mRouteType = builder.mRouteType;
-        this.mShortName = builder.mShortName;
+    private Route(Builder builder) {
+        this.mAlerts = builder.getAlerts();
+        this.mAuthority = builder.getAuthority();
+        this.mDirections = builder.getDirections();
+        this.mId = builder.getId();
+        this.mName = builder.getName();
+        this.mRouteType = builder.getRouteType();
+        this.mShortName = builder.getShortName();
     }
 
     @Override
@@ -59,30 +60,20 @@ public class Route {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Route route = (Route) o;
-
-        if (mRouteType != route.mRouteType) return false;
-        if (mAlerts != null ? !mAlerts.equals(route.mAlerts) : route.mAlerts != null) return false;
-        if (mAuthority != null ? !mAuthority.equals(route.mAuthority) : route.mAuthority != null)
-            return false;
-        if (mDirections != null ? !mDirections.equals(route.mDirections) : route.mDirections != null)
-            return false;
-        if (mId != null ? !mId.equals(route.mId) : route.mId != null) return false;
-        if (mName != null ? !mName.equals(route.mName) : route.mName != null) return false;
-        return mShortName != null ? mShortName.equals(route.mShortName) : route.mShortName == null;
+        return mRouteType == route.mRouteType &&
+                Objects.equals(mAlerts, route.mAlerts) &&
+                Objects.equals(mAuthority, route.mAuthority) &&
+                Objects.equals(mDirections, route.mDirections) &&
+                Objects.equals(mId, route.mId) &&
+                Objects.equals(mName, route.mName) &&
+                Objects.equals(mShortName, route.mShortName);
     }
 
     @Override
     public int hashCode() {
-        int result = mAlerts != null ? mAlerts.hashCode() : 0;
-        result = 31 * result + (mAuthority != null ? mAuthority.hashCode() : 0);
-        result = 31 * result + (mDirections != null ? mDirections.hashCode() : 0);
-        result = 31 * result + (mId != null ? mId.hashCode() : 0);
-        result = 31 * result + (mName != null ? mName.hashCode() : 0);
-        result = 31 * result + mRouteType;
-        result = 31 * result + (mShortName != null ? mShortName.hashCode() : 0);
-        return result;
+
+        return Objects.hash(mAlerts, mAuthority, mDirections, mId, mName, mRouteType, mShortName);
     }
 
     public List<String> getAlerts() {
@@ -217,17 +208,17 @@ public class Route {
             }
             out.beginObject();
             out.name(NAME_ALERTS);
-            this.mStringListTypeAdapter.write(out, value.mAlerts);
+            this.mStringListTypeAdapter.write(out, value.getAlerts());
             out.name(NAME_DIRECTIONS);
-            this.mStringListTypeAdapter.write(out, value.mDirections);
+            this.mStringListTypeAdapter.write(out, value.getDirections());
             out.name(NAME_AUTHORITY)
-                    .value(value.mAuthority);
+                    .value(value.getAuthority());
             out.name(NAME_ID)
-                    .value(value.mId);
+                    .value(value.getId());
             out.name(NAME_NAME)
-                    .value(value.mName);
+                    .value(value.getName());
             out.name(NAME_SHORT_NAME)
-                    .value(value.mShortName);
+                    .value(value.getShortName());
             out.name(NAME_ROUTE_TYPE);
             switch (value.mRouteType) {
                 case ROUTE_TYPE_BUS:
