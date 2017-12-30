@@ -277,20 +277,20 @@ public class Departure {
             }
             out.beginObject();
             out.name(STATUS);
-            this.mDepartureStatusConverter.write(out, value.mStatus);
+            this.mDepartureStatusConverter.write(out, value.getStatus());
             out.name(ACTUAL_RELATIVE_TIME)
-                    .value(value.mActualRelativeTime);
+                    .value(value.getActualRelativeTime());
             out.name(ACTUAL_TIME);
-            this.mLocalTimeTypeAdapter.write(out, value.mActualTime);
+            this.mLocalTimeTypeAdapter.write(out, value.getActualTime());
             out.name(PLANNED_TIME);
-            this.mLocalTimeTypeAdapter.write(out, value.mPlannedTime);
-            out.name(MIXED_TIME).value(value.mMixedTime);
-            out.name(DIRECTION).value(value.mDirection);
-            out.name(PASSAGE_ID).value(value.mPassageId);
-            out.name(PATTERN_TEXT).value(value.mPatternText);
-            out.name(ROUTE_ID).value(value.mRouteId);
-            out.name(TRIP_ID).value(value.mTripId);
-            out.name(VEHICLE_ID).value(value.mVehicleId);
+            this.mLocalTimeTypeAdapter.write(out, value.getPlannedTime());
+            out.name(MIXED_TIME).value(value.getMixedTime());
+            out.name(DIRECTION).value(value.getDirection());
+            out.name(PASSAGE_ID).value(value.getPassageId());
+            out.name(PATTERN_TEXT).value(value.getPatternText());
+            out.name(ROUTE_ID).value(value.getRouteId());
+            out.name(TRIP_ID).value(value.getTripId());
+            out.name(VEHICLE_ID).value(value.getVehicleId());
             out.endObject();
         }
 
