@@ -276,6 +276,7 @@ public class Route {
                 } else if (name.equals(NAME_SHORT_NAME) && in.peek() == JsonToken.STRING) {
                     builder.setShortName(in.nextString());
                 } else {
+                    Logger.reportUnknownName(this, name, in.peek());
                     in.skipValue();
                 }
             }
