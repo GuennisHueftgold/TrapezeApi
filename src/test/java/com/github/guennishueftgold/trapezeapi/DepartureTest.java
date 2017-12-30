@@ -112,6 +112,10 @@ public class DepartureTest {
                 .setMixedTime("other_mixed_time")
                 .build();
         assertNotEquals(departure1, departure2);
+        departure2 = createSample(1)
+                .setStatus(29)
+                .build();
+        assertNotEquals(departure1, departure2);
     }
 
     @Test
