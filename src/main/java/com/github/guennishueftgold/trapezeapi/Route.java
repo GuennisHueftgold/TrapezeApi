@@ -220,7 +220,7 @@ public final class Route {
             out.name(NAME_SHORT_NAME)
                     .value(value.getShortName());
             out.name(NAME_ROUTE_TYPE);
-            switch (value.mRouteType) {
+            switch (value.getRouteType()) {
                 case ROUTE_TYPE_BUS:
                     out.value(NAME_ROUTE_TYPE_BUS);
                     break;
