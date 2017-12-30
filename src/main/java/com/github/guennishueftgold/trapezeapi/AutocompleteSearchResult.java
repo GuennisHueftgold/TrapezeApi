@@ -8,7 +8,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Objects;
 
-public class AutocompleteSearchResult {
+public final class AutocompleteSearchResult {
     public final static int TYPE_DIVIDER = 1, TYPE_STOP = 2, TYPE_UNKNOWN = -1;
     private final String mShortName;
     private final String mName;
@@ -96,8 +96,8 @@ public class AutocompleteSearchResult {
 
     static final class Converter extends TypeAdapter<AutocompleteSearchResult> {
 
-        private final static String NAME_NAME = "name", NAME_ID = "id", NAME_TYPE = "type";
-        private final static String NAME_TYPE_STOP = "stop",
+        final static String NAME_NAME = "name", NAME_ID = "id", NAME_TYPE = "type";
+        final static String NAME_TYPE_STOP = "stop",
                 NAME_TYPE_DIVIDER = "divider";
 
         @Override
@@ -135,7 +135,7 @@ public class AutocompleteSearchResult {
                         builder.setShortName(in.nextString());
                         break;
                     case NAME_TYPE:
-                        convertTypeFromJson(in, builder);
+                        builder.setType(convertTypeFromJson(in));
                         break;
                     default:
                         Logger.reportUnknownName(this, name, in.peek());
@@ -147,18 +147,16 @@ public class AutocompleteSearchResult {
             return builder.build();
         }
 
-        public void convertTypeFromJson(JsonReader jsonReader, Builder builder) throws IOException {
+        public int convertTypeFromJson(JsonReader jsonReader) throws IOException {
             final String typeString = jsonReader.nextString();
             switch (typeString) {
                 case NAME_TYPE_STOP:
-                    builder.setType(TYPE_STOP);
-                    break;
+                    return TYPE_STOP;
                 case NAME_TYPE_DIVIDER:
-                    builder.setType(TYPE_DIVIDER);
-                    break;
+                    return TYPE_DIVIDER;
                 default:
                     Logger.reportUnknownValue(this, typeString);
-                    break;
+                    return TYPE_UNKNOWN;
             }
         }
 

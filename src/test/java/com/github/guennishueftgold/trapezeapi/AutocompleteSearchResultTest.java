@@ -1,6 +1,8 @@
 package com.github.guennishueftgold.trapezeapi;
 
+import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
+import com.google.gson.stream.JsonWriter;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -56,4 +58,25 @@ public class AutocompleteSearchResultTest {
         verify(logger, times(1)).unknownName(adapter, "unknown_tag", JsonToken.NULL);
     }
 
+    @Test
+    public void TypeAdapter_convertTypeFromJson() throws IOException {
+        JsonReader jsonReader = mock(JsonReader.class);
+        when(jsonReader.nextString()).thenReturn(AutocompleteSearchResult.Converter.NAME_TYPE_DIVIDER);
+        assertEquals(adapter.convertTypeFromJson(jsonReader), AutocompleteSearchResult.TYPE_DIVIDER);
+        when(jsonReader.nextString()).thenReturn(AutocompleteSearchResult.Converter.NAME_TYPE_STOP);
+        assertEquals(adapter.convertTypeFromJson(jsonReader), AutocompleteSearchResult.TYPE_STOP);
+        when(jsonReader.nextString()).thenReturn("UNKNOWN");
+        assertEquals(adapter.convertTypeFromJson(jsonReader), AutocompleteSearchResult.TYPE_UNKNOWN);
+    }
+
+    @Test
+    public void TypeAdapter_convertTypeToJson() throws IOException {
+        JsonWriter jsonWriter = mock(JsonWriter.class);
+        adapter.convertTypeToJson(jsonWriter, AutocompleteSearchResult.TYPE_UNKNOWN);
+        adapter.convertTypeToJson(jsonWriter, AutocompleteSearchResult.TYPE_STOP);
+        adapter.convertTypeToJson(jsonWriter, AutocompleteSearchResult.TYPE_DIVIDER);
+        verify(jsonWriter, times(1)).nullValue();
+        verify(jsonWriter, times(1)).value(AutocompleteSearchResult.Converter.NAME_TYPE_STOP);
+        verify(jsonWriter, times(1)).value(AutocompleteSearchResult.Converter.NAME_TYPE_DIVIDER);
+    }
 }
