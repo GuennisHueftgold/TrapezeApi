@@ -8,8 +8,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class VehiclePathInfoTest {
@@ -57,4 +56,36 @@ public class VehiclePathInfoTest {
     public void TypeAdapter_write_null_should_work() {
         assertEquals(adapter.toJson(null), "null");
     }
+
+    @Test
+    public void VehiclePathInfo_equals_should_be_true() {
+        final VehiclePathInfo vehiclePathInfo1 = createSample(4).build();
+        final VehiclePathInfo vehiclePathInfo2 = createSample(4).build();
+        assertEquals(vehiclePathInfo1, vehiclePathInfo2);
+        assertEquals(vehiclePathInfo1, vehiclePathInfo1);
+    }
+
+    @Test
+    public void VehiclePath_equals_should_be_false() {
+        final VehiclePathInfo vehiclePathInfo1 = createSample(4).build();
+        final VehiclePathInfo vehiclePathInfo2 = createSample(3).build();
+        assertNotEquals(vehiclePathInfo1, vehiclePathInfo2);
+        assertNotEquals(vehiclePathInfo1, null);
+        assertNotEquals(vehiclePathInfo1, new Object());
+    }
+
+    @Test
+    public void VehiclePath_hashCode_should_be_equal() {
+        final VehiclePathInfo vehiclePathInfo1 = createSample(4).build();
+        final VehiclePathInfo vehiclePathInfo2 = createSample(4).build();
+        assertEquals(vehiclePathInfo1.hashCode(), vehiclePathInfo2.hashCode());
+    }
+
+    @Test
+    public void VehiclePath_hashCode_should_not_be_equal() {
+        final VehiclePathInfo vehiclePathInfo1 = createSample(5).build();
+        final VehiclePathInfo vehiclePathInfo2 = createSample(4).build();
+        assertNotEquals(vehiclePathInfo1.hashCode(), vehiclePathInfo2.hashCode());
+    }
+
 }
