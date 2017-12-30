@@ -51,7 +51,9 @@ public class VehiclePathTest {
 
     @Test
     public void VehiclePath_equals_should_be_false() {
-        final VehiclePath path1 = createSample().build();
+        final VehiclePath path1 = createSample()
+                .setColor("#00FF00")
+                .build();
         final VehiclePath path2 = createSample()
                 .addPathPoint(createSamplePathPoint(4))
                 .build();
