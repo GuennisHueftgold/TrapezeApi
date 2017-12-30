@@ -133,7 +133,7 @@ public final class VehiclePath {
                         builder.setPathPoints(this.mTypeAdapter.read(in));
                         break;
                     default:
-                        Logger.d("Unkown name: %s", name);
+                        Logger.reportUnknownName(this, name, in.peek());
                         in.skipValue();
                         break;
                 }

@@ -3,11 +3,13 @@ package com.github.guennishueftgold.trapezeapi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonToken;
 import org.junit.Test;
 
 import java.io.IOException;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class VehiclePathTest {
 
@@ -60,8 +62,8 @@ public class VehiclePathTest {
                 .addPathPoint(createSamplePathPoint(4))
                 .build();
         final VehiclePath path3 = createSample().build();
-        assertNotEquals(path1, path2);
         assertNotEquals(path1, path3);
+        assertNotEquals(path2, path3);
         assertNotEquals(path1, null);
         assertNotEquals(path1, new Object());
     }
@@ -84,7 +86,10 @@ public class VehiclePathTest {
 
     @Test
     public void TypeAdapter_skip_unknown_name() throws IOException {
+        Logger logger = mock(Logger.class);
+        Logger.setInstance(logger);
         VehiclePath path=this.adapter.fromJson("{\"unknown_tag\":null}");
         assertNotNull(path);
+        verify(logger, times(1)).unknownName(adapter, "unknown_tag", JsonToken.NULL);
     }
 }
