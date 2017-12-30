@@ -10,7 +10,9 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 
 public class TripPassages {
@@ -21,10 +23,27 @@ public class TripPassages {
     private final String mRouteName;
 
     private TripPassages(TripPassages.Builder builder) {
-        this.mActual = builder.mActual;
-        this.mDirectionText = builder.mDirectionText;
-        this.mOld = builder.mOld;
-        this.mRouteName = builder.mRouteName;
+        this.mActual = Collections.unmodifiableList(builder.getActual());
+        this.mDirectionText = builder.getDirectionText();
+        this.mOld = Collections.unmodifiableList(builder.getOld());
+        this.mRouteName = builder.getRouteName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TripPassages that = (TripPassages) o;
+        return Objects.equals(mActual, that.mActual) &&
+                Objects.equals(mDirectionText, that.mDirectionText) &&
+                Objects.equals(mOld, that.mOld) &&
+                Objects.equals(mRouteName, that.mRouteName);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(mActual, mDirectionText, mOld, mRouteName);
     }
 
     public List<TripPassageStop> getActual() {
@@ -54,55 +73,59 @@ public class TripPassages {
     }
 
     public static class Builder {
-        private List<TripPassageStop> mActual;
+        private List<TripPassageStop> mActual = new ArrayList<>();
         private String mDirectionText;
-        private List<TripPassageStop> mOld;
+        private List<TripPassageStop> mOld = new ArrayList<>();
         private String mRouteName;
 
         public List<TripPassageStop> getActual() {
             return mActual;
         }
 
-        public void setActual(List<TripPassageStop> actual) {
-            mActual = actual;
+        public Builder setActual(List<TripPassageStop> actual) {
+            this.mActual.clear();
+            if (actual != null)
+                this.mActual.addAll(actual);
+            return this;
         }
 
-        public void addActual(TripPassageStop actual) {
-            if (this.mActual == null) {
-                this.mActual = new ArrayList<>();
-            }
+        public Builder addActual(TripPassageStop actual) {
             this.mActual.add(actual);
+            return this;
         }
 
         public String getDirectionText() {
             return mDirectionText;
         }
 
-        public void setDirectionText(String directionText) {
+        public Builder setDirectionText(String directionText) {
             mDirectionText = directionText;
+            return this;
         }
 
         public List<TripPassageStop> getOld() {
             return mOld;
         }
 
-        public void setOld(List<TripPassageStop> old) {
-            mOld = old;
+        public Builder setOld(List<TripPassageStop> old) {
+            this.mOld.clear();
+            if (old != null)
+                this.mOld.addAll(old);
+            return this;
         }
 
-        public void addOld(TripPassageStop old) {
-            if (this.mOld == null) {
-                this.mOld = new ArrayList<>();
-            }
+        public Builder addOld(TripPassageStop old) {
             this.mOld.add(old);
+            return this;
         }
 
         public String getRouteName() {
             return mRouteName;
         }
 
-        public void setRouteName(String routeName) {
+        public Builder setRouteName(String routeName) {
             mRouteName = routeName;
+            return this;
         }
 
         public TripPassages build() {
@@ -163,7 +186,7 @@ public class TripPassages {
                 } else if (name.equals(DIRECTION_TEXT) && in.peek() == JsonToken.STRING) {
                     tripPassages.setDirectionText(in.nextString());
                 } else {
-                    Logger.d("Not handled Name: " + name);
+                    Logger.reportUnknownName(this, name, in.peek());
                     in.skipValue();
                 }
             }

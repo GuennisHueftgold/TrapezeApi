@@ -124,16 +124,18 @@ public class TripPassageStop {
             return mPlannedTime;
         }
 
-        public void setPlannedTime(LocalTime plannedTime) {
+        public Builder setPlannedTime(LocalTime plannedTime) {
             mPlannedTime = plannedTime;
+            return this;
         }
 
         public LocalTime getActualTime() {
             return mActualTime;
         }
 
-        public void setActualTime(LocalTime actualTime) {
+        public Builder setActualTime(LocalTime actualTime) {
             mActualTime = actualTime;
+            return this;
         }
 
         public int getStatus() {
@@ -167,16 +169,18 @@ public class TripPassageStop {
             return mName;
         }
 
-        public void setName(String name) {
+        public Builder setName(String name) {
             mName = name;
+            return this;
         }
 
         public int getStopSeqNum() {
             return mStopSeqNum;
         }
 
-        public void setStopSeqNum(int stopSeqNum) {
+        public Builder setStopSeqNum(int stopSeqNum) {
             mStopSeqNum = stopSeqNum;
+            return this;
         }
 
         public TripPassageStop build() {
