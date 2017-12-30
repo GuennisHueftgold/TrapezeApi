@@ -57,7 +57,9 @@ public class VehiclePathTest {
         final VehiclePath path2 = createSample()
                 .addPathPoint(createSamplePathPoint(4))
                 .build();
+        final VehiclePath path3 = createSample().build();
         assertNotEquals(path1, path2);
+        assertNotEquals(path1, path3);
         assertNotEquals(path1, null);
         assertNotEquals(path1, new Object());
     }
