@@ -15,23 +15,33 @@ public class DepartureTest {
     private final static TypeAdapter<LocalTime> localTimeAdapter=new LocalTimeTypeAdapter();
     private final static TypeAdapter<Departure> adapter = new Departure.Converter(localTimeAdapter);
 
+    private final static Departure.Builder createSample(int idx) {
+        final int[] testValues = {DepartureStatus.STATUS_DEPARTED,
+                DepartureStatus.STATUS_PLANNED,
+                DepartureStatus.STATUS_PREDICTED,
+                DepartureStatus.STATUS_STOPPING,
+                DepartureStatus.STATUS_UNKNOWN};
+        final LocalTime localTime1 = LocalTime.fromMillisOfDay(1000);
+        final LocalTime localTime2 = LocalTime.fromMillisOfDay(10000);
+        return new Departure.Builder()
+                .setStatus(testValues[idx % testValues.length])
+                .setMixedTime("mixed_time_" + idx)
+                .setDirection("direction_" + idx)
+                .setPassageId("passage_id_" + idx)
+                .setPatternText("pattern_text_" + idx)
+                .setRouteId("route_" + idx)
+                .setTripId("trip_" + idx)
+                .setVehicleId("vehicle_" + idx)
+                .setActualRelativeTime(idx)
+                .setActualTime(localTime1.plusMillis(idx))
+                .setPlannedTime(localTime2.plusMillis(idx));
+    }
+
     @Test
     public void typeadapter_read_full_information() throws Exception {
-        Departure input = new Departure.Builder()
-                .setStatus(DepartureStatus.STATUS_PLANNED)
-                .setDirection("random_direction")
-                .setActualRelativeTime(29)
-                .setMixedTime("mixed_time")
-                .setPassageId("passage_id")
-                .setPatternText("pattern_text")
-                .setPlannedTime(LocalTime.now())
-                .setActualTime(LocalTime.now())
-                .setTripId("trip_id")
-                .setVehicleId("vehicle_id")
-                .setRouteId("route_id")
-                .build();
-        Departure output = adapter.fromJson(adapter.toJson(input));
-        assertTrue(output.equals(input));
+        final Departure input = createSample(0).build();
+        final Departure output = adapter.fromJson(adapter.toJson(input));
+        assertEquals(input, output);
     }
 
     @Test
@@ -51,16 +61,16 @@ public class DepartureTest {
 
     @Test
     public void Departure_equals_should_be_true() {
-        final Departure departure1=new Departure.Builder().setStatus(29).build();
-        final Departure departure2=new Departure.Builder().setStatus(29).build();
+        final Departure departure1 = createSample(1).build();
+        final Departure departure2 = createSample(1).build();
         assertEquals(departure1,departure2);
         assertEquals(departure1, departure1);
     }
 
     @Test
     public void Departure_equals_should_be_false() {
-        final Departure departure1=new Departure.Builder().setStatus(29).build();
-        final Departure departure2=new Departure.Builder().setStatus(2).build();
+        final Departure departure1 = createSample(1).build();
+        final Departure departure2 = createSample(2).build();
         assertNotEquals(departure1,departure2);
         assertNotEquals(departure1,null);
         assertNotEquals(departure1,new Object());
@@ -68,15 +78,15 @@ public class DepartureTest {
 
     @Test
     public void Departure_hashCode_should_be_equal() {
-        final Departure departure1 = new Departure.Builder().setStatus(29).build();
-        final Departure departure2 = new Departure.Builder().setStatus(29).build();
+        final Departure departure1 = createSample(1).build();
+        final Departure departure2 = createSample(1).build();
         assertEquals(departure1.hashCode(), departure2.hashCode());
     }
 
     @Test
     public void Departure_hashCode_should_not_be_equal() {
-        final Departure departure1 = new Departure.Builder().setStatus(29).build();
-        final Departure departure2 = new Departure.Builder().setStatus(42).build();
+        final Departure departure1 = createSample(1).build();
+        final Departure departure2 = createSample(2).build();
         assertNotEquals(departure1.hashCode(), departure2.hashCode());
     }
 

@@ -11,7 +11,7 @@ import org.joda.time.LocalTime;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Departure {
+public final class Departure {
     public final static int STATUS_DEPARTED = 1;
     public final static int STATUS_PREDICTED = 2;
     public final static int STATUS_PLANNED = 3;
@@ -29,7 +29,7 @@ public class Departure {
     private final String mTripId;
     private final String mVehicleId;
 
-    public Departure(Builder builder) {
+    private Departure(Builder builder) {
         this.mActualRelativeTime = builder.getActualRelativeTime();
         this.mDirection = builder.getDirection();
         this.mMixedTime = builder.getMixedTime();
