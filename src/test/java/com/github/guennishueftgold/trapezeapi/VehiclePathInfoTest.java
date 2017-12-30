@@ -47,4 +47,14 @@ public class VehiclePathInfoTest {
         final VehiclePathInfo vehiclePathInfo = createSample(2).build();
         vehiclePathInfo.getVehiclePaths().remove(0);
     }
+
+    @Test
+    public void TypeAdapter_read_null_should_work() throws IOException {
+        assertEquals(adapter.fromJson("null"), null);
+    }
+
+    @Test
+    public void TypeAdapter_write_null_should_work() {
+        assertEquals(adapter.toJson(null), "null");
+    }
 }
