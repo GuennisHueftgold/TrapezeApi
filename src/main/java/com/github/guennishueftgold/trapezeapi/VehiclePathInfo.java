@@ -74,7 +74,7 @@ public final class VehiclePathInfo {
                         builder.setVehiclePaths(this.mTypeAdapter.read(in));
                         break;
                     default:
-                        Timber.d("Unknown name: %s", name);
+                        Logger.d("Unknown name: %s", name);
                         in.skipValue();
                         break;
                 }

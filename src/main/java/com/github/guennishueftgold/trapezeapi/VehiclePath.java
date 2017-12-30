@@ -133,7 +133,7 @@ public final class VehiclePath {
                         builder.setPathPoints(this.mTypeAdapter.read(in));
                         break;
                     default:
-                        Timber.d("Unkown name: %s", name);
+                        Logger.d("Unkown name: %s", name);
                         in.skipValue();
                         break;
                 }

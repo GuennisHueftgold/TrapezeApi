@@ -270,7 +270,7 @@ public class Route {
                         default:
                             builder.setRouteType(ROUTE_TYPE_UNKNOWN);
                             in.skipValue();
-                            Timber.d("Unknown Route Type: " + routeType);
+                            Logger.d("Unknown Route Type: " + routeType);
                             break;
                     }
                 } else if (name.equals(NAME_SHORT_NAME) && in.peek() == JsonToken.STRING) {

@@ -135,7 +135,7 @@ public final class VehiclePathPoint implements LatLngInterface {
                         builder.setSequence(Integer.parseInt(in.nextString()));
                         break;
                     default:
-                        Timber.d("Unknown tag %s", name);
+                        Logger.d("Unknown tag %s", name);
                         in.skipValue();
                         break;
                 }

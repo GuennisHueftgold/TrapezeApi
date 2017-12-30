@@ -254,7 +254,7 @@ public class TripPassageStop {
                 } else if (name.equals(STOP) && in.peek() == JsonToken.BEGIN_OBJECT) {
                     this.readStop(tripPassageStop, in);
                 } else {
-                    Timber.d("Not handled Name: " + name);
+                    Logger.d("Not handled Name: " + name);
                     in.skipValue();
                 }
             }
@@ -275,7 +275,7 @@ public class TripPassageStop {
                     tripPassageStop.setName(in.nextString());
                 } else {
                     in.skipValue();
-                    Timber.d("Not handled Name :" + name);
+                    Logger.d("Not handled Name :" + name);
                 }
             }
             in.endObject();

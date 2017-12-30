@@ -196,7 +196,7 @@ public class PathSegment {
                         builder.setToLatitude(in.nextLong());
                         break;
                     default:
-                        Timber.d("Unknown name: %s", name);
+                        Logger.d("Unknown name: %s", name);
                         in.skipValue();
                         break;
                 }

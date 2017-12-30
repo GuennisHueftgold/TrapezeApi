@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class VehiclePathTest {
@@ -78,5 +80,11 @@ public class VehiclePathTest {
                 .addPathPoint(createSamplePathPoint(4))
                 .build();
         assertNotEquals(path1.hashCode(), path2.hashCode());
+    }
+
+    @Test
+    public void TypeAdapter_skip_unknown_name() throws IOException {
+        VehiclePath path=this.adapter.fromJson("{\"unknown_tag\":null}");
+        assertNotNull(path);
     }
 }

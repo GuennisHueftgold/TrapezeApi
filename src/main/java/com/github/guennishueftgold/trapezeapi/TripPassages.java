@@ -163,7 +163,7 @@ public class TripPassages {
                 } else if (name.equals(DIRECTION_TEXT) && in.peek() == JsonToken.STRING) {
                     tripPassages.setDirectionText(in.nextString());
                 } else {
-                    Timber.d("Not handled Name: " + name);
+                    Logger.d("Not handled Name: " + name);
                     in.skipValue();
                 }
             }

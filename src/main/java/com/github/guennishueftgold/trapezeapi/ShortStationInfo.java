@@ -130,7 +130,7 @@ public final class ShortStationInfo {
                 } else if (NAME_NUMBER.equalsIgnoreCase(name) && in.peek() == JsonToken.STRING) {
                     builder.setStopShortName(in.nextString());
                 } else {
-                    Timber.d("Unknown Name: %s", name);
+                    Logger.d("Unknown Name: %s", name);
                     in.skipValue();
                 }
             }
