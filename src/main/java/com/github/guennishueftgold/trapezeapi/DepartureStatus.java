@@ -7,14 +7,14 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
-public final class DepartureStatus {
-    public final static int STATUS_PREDICTED = 1,
+public interface DepartureStatus {
+    int STATUS_PREDICTED = 1,
             STATUS_DEPARTED = 2,
             STATUS_STOPPING = 3,
             STATUS_PLANNED = 4,
             STATUS_UNKNOWN = -1;
 
-    final static class Converter extends TypeAdapter<Integer> {
+    final class Converter extends TypeAdapter<Integer> {
         private final static String
                 NAME_STATUS_DEPARTED = "departed",
                 NAME_STATUS_PLANNED = "planned",
