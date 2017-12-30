@@ -2,7 +2,6 @@ package com.github.guennishueftgold.trapezeapi;
 
 
 import com.google.gson.TypeAdapter;
-
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -53,7 +52,7 @@ public class VehiclePathPointTest {
     }
 
     @Test
-    public void builder_setter_test() throws Exception {
+    public void builder_setter_test() {
         final int seqValue = 29, lonValue = 83, latValue = 392;
         VehiclePathPoint.Builder builder = new VehiclePathPoint.Builder();
         builder.setSequence(seqValue);

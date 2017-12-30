@@ -6,17 +6,43 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
+import java.util.Objects;
 
-public class AutocompleteSearchResult {
-    public final static int TYPE_DIVIDER = 1, TYPE_STOP = 2, TYPE_UNKNOWN = 0;
+public final class AutocompleteSearchResult {
+    public final static int TYPE_DIVIDER = 1, TYPE_STOP = 2, TYPE_UNKNOWN = -1;
     private final String mShortName;
     private final String mName;
     private final int mType;
 
     private AutocompleteSearchResult(Builder builder) {
-        this.mShortName=builder.mShortName;
-        this.mName=builder.mName;
-        this.mType=builder.mType;
+        this.mShortName = builder.getShortName();
+        this.mName = builder.getName();
+        this.mType = builder.getType();
+    }
+
+    @Override
+    public String toString() {
+        return "AutocompleteSearchResult{" +
+                "mShortName='" + mShortName + '\'' +
+                ", mName='" + mName + '\'' +
+                ", mType=" + mType +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AutocompleteSearchResult that = (AutocompleteSearchResult) o;
+        return mType == that.mType &&
+                Objects.equals(mShortName, that.mShortName) &&
+                Objects.equals(mName, that.mName);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(mShortName, mName, mType);
     }
 
     public int getType() {
@@ -31,60 +57,77 @@ public class AutocompleteSearchResult {
         return mName;
     }
 
-    public static final class Builder{
+    public static final class Builder {
         private String mShortName;
         private String mName;
-        private int mType=TYPE_UNKNOWN;
+        private int mType = TYPE_UNKNOWN;
 
         public String getShortName() {
             return mShortName;
         }
 
-        public void setShortName(String shortName) {
+        public Builder setShortName(String shortName) {
             mShortName = shortName;
+            return this;
         }
 
         public String getName() {
             return mName;
         }
 
-        public void setName(String name) {
+        public Builder setName(String name) {
             mName = name;
+            return this;
         }
 
         public int getType() {
             return mType;
         }
 
-        public void setType(int type) {
+        public Builder setType(int type) {
             mType = type;
+            return this;
         }
 
-        public AutocompleteSearchResult build(){
+        public AutocompleteSearchResult build() {
             return new AutocompleteSearchResult(this);
         }
     }
 
     static final class Converter extends TypeAdapter<AutocompleteSearchResult> {
 
-        private final static String NAME_NAME="name",NAME_ID="id",NAME_TYPE="type";
+        final static String NAME_NAME = "name", NAME_ID = "id", NAME_TYPE = "type";
+        final static String NAME_TYPE_STOP = "stop",
+                NAME_TYPE_DIVIDER = "divider";
+
         @Override
         public void write(JsonWriter out, AutocompleteSearchResult value) throws IOException {
-
+            if (value == null) {
+                out.nullValue();
+                return;
+            }
+            out.beginObject();
+            out.name(NAME_NAME)
+                    .value(value.getName());
+            out.name(NAME_ID)
+                    .value(value.getShortName());
+            out.name(NAME_TYPE);
+            convertTypeToJson(out, value.getType());
+            out.endObject();
         }
 
         @Override
         public AutocompleteSearchResult read(JsonReader in) throws IOException {
-            if(in.peek()== JsonToken.NULL){
+            if (in.peek() == JsonToken.NULL) {
                 in.skipValue();
                 return null;
             }
-            Builder builder=new Builder();
+            Builder builder = new Builder();
             in.beginObject();
             String name;
-            while(in.hasNext()) {
-                name=in.nextName().toLowerCase();
-                switch (name){
+            while (in.hasNext()) {
+                name = in.nextName();
+                switch (name) {
                     case NAME_NAME:
                         builder.setName(in.nextString());
                         break;
@@ -92,27 +135,47 @@ public class AutocompleteSearchResult {
                         builder.setShortName(in.nextString());
                         break;
                     case NAME_TYPE:
-                        final String typeString=in.nextString().toLowerCase();
-                        switch (typeString){
-                            case "stop":
-                                builder.setType(TYPE_STOP);
-                                break;
-                            case "divider":
-                                builder.setType(TYPE_DIVIDER);
-                                break;
-                            default:
-                                Logger.d("Unknown type %s",typeString);
-                                break;
-                        }
+                        builder.setType(convertTypeFromJson(in));
                         break;
                     default:
-                        Logger.d("Unknown key %s with type: %s",name,in.peek().toString());
+                        Logger.reportUnknownName(this, name, in.peek());
                         in.skipValue();
                         break;
                 }
             }
             in.endObject();
             return builder.build();
+        }
+
+        public int convertTypeFromJson(JsonReader jsonReader) throws IOException {
+            if (jsonReader.peek() == JsonToken.NULL) {
+                jsonReader.skipValue();
+                return TYPE_UNKNOWN;
+            }
+            final String typeString = jsonReader.nextString();
+            switch (typeString) {
+                case NAME_TYPE_STOP:
+                    return TYPE_STOP;
+                case NAME_TYPE_DIVIDER:
+                    return TYPE_DIVIDER;
+                default:
+                    Logger.reportUnknownValue(this, typeString);
+                    return TYPE_UNKNOWN;
+            }
+        }
+
+        public void convertTypeToJson(JsonWriter jsonWriter, int type) throws IOException {
+            switch (type) {
+                case TYPE_DIVIDER:
+                    jsonWriter.value(NAME_TYPE_DIVIDER);
+                    break;
+                case TYPE_STOP:
+                    jsonWriter.value(NAME_TYPE_STOP);
+                    break;
+                default:
+                    jsonWriter.nullValue();
+                    break;
+            }
         }
     }
 }

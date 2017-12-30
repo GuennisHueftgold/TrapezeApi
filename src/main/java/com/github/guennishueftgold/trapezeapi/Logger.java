@@ -20,9 +20,16 @@ public abstract class Logger {
             sLogger.unknownName(typeAdapter, name, jsonToken);
     }
 
-    public abstract void unknownName(TypeAdapter typeAdapter, String name, JsonToken jsonToken);
-
-    public static void d(String tag, Object... args){
+    public static void d(String tag, Object... args) {
 
     }
+
+    public static void reportUnknownValue(TypeAdapter typeAdapter, String value) {
+        if (sLogger != null)
+            sLogger.unknownValue(typeAdapter, value);
+    }
+
+    public abstract void unknownName(TypeAdapter typeAdapter, String name, JsonToken jsonToken);
+
+    public abstract void unknownValue(TypeAdapter typeAdapter, String value);
 }

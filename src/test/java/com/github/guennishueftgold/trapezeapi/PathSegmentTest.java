@@ -33,19 +33,19 @@ public class PathSegmentTest {
     }
 
     @Test
-    public void PathSegment_equals_should_be_true() throws Exception{
-        final PathSegment pathSegment1=new PathSegment.Builder().setAngle(29).build();
-        final PathSegment pathSegment2=new PathSegment.Builder().setAngle(29).build();
-        assertEquals(pathSegment1,pathSegment2);
+    public void PathSegment_equals_should_be_true() {
+        final PathSegment pathSegment1 = new PathSegment.Builder().setAngle(29).build();
+        final PathSegment pathSegment2 = new PathSegment.Builder().setAngle(29).build();
+        assertEquals(pathSegment1, pathSegment2);
     }
 
     @Test
-    public void PathSegment_equals_should_be_false() throws Exception{
-        final PathSegment pathSegment1=new PathSegment.Builder().setAngle(29).build();
-        final PathSegment pathSegment2=new PathSegment.Builder().setAngle(2).build();
-        assertNotEquals(pathSegment1,pathSegment2);
-        assertNotEquals(pathSegment1,null);
-        assertNotEquals(pathSegment1,new Object());
+    public void PathSegment_equals_should_be_false() {
+        final PathSegment pathSegment1 = new PathSegment.Builder().setAngle(29).build();
+        final PathSegment pathSegment2 = new PathSegment.Builder().setAngle(2).build();
+        assertNotEquals(pathSegment1, pathSegment2);
+        assertNotEquals(pathSegment1, null);
+        assertNotEquals(pathSegment1, new Object());
     }
 
 }

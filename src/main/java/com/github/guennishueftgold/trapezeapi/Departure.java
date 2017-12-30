@@ -11,12 +11,7 @@ import org.joda.time.LocalTime;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Departure {
-    public final static int STATUS_DEPARTED = 1;
-    public final static int STATUS_PREDICTED = 2;
-    public final static int STATUS_PLANNED = 3;
-    public final static int STATUS_STOPPING = 4;
-    public final static int STATUS_UNKNOWN = 0;
+public final class Departure {
     private final int mActualRelativeTime;
     private final String mDirection;
     private final String mMixedTime;
@@ -29,18 +24,18 @@ public class Departure {
     private final String mTripId;
     private final String mVehicleId;
 
-    public Departure(Builder builder) {
-        this.mActualRelativeTime = builder.mActualRelativeTime;
-        this.mDirection = builder.mDirection;
-        this.mMixedTime = builder.mMixedTime;
-        this.mPassageId = builder.mPassageId;
-        this.mPatternText = builder.mPatternText;
-        this.mPlannedTime = builder.mPlannedTime;
-        this.mActualTime = builder.mActualTime;
-        this.mRouteId = builder.mRouteId;
-        this.mStatus = builder.mStatus;
-        this.mTripId = builder.mTripId;
-        this.mVehicleId = builder.mVehicleId;
+    private Departure(Builder builder) {
+        this.mActualRelativeTime = builder.getActualRelativeTime();
+        this.mDirection = builder.getDirection();
+        this.mMixedTime = builder.getMixedTime();
+        this.mPassageId = builder.getPassageId();
+        this.mPatternText = builder.getPatternText();
+        this.mPlannedTime = builder.getPlannedTime();
+        this.mActualTime = builder.getActualTime();
+        this.mRouteId = builder.getRouteId();
+        this.mStatus = builder.getStatus();
+        this.mTripId = builder.getTripId();
+        this.mVehicleId = builder.getVehicleId();
     }
 
     public LocalTime getActualTime() {
@@ -138,7 +133,7 @@ public class Departure {
         private LocalTime mPlannedTime;
         private String mRouteId;
         private LocalTime mActualTime;
-        private int mStatus = STATUS_UNKNOWN;
+        private int mStatus = DepartureStatus.STATUS_UNKNOWN;
         private String mTripId;
         private String mVehicleId;
 
@@ -277,20 +272,20 @@ public class Departure {
             }
             out.beginObject();
             out.name(STATUS);
-            this.mDepartureStatusConverter.write(out, value.mStatus);
+            this.mDepartureStatusConverter.write(out, value.getStatus());
             out.name(ACTUAL_RELATIVE_TIME)
-                    .value(value.mActualRelativeTime);
+                    .value(value.getActualRelativeTime());
             out.name(ACTUAL_TIME);
-            this.mLocalTimeTypeAdapter.write(out, value.mActualTime);
+            this.mLocalTimeTypeAdapter.write(out, value.getActualTime());
             out.name(PLANNED_TIME);
-            this.mLocalTimeTypeAdapter.write(out, value.mPlannedTime);
-            out.name(MIXED_TIME).value(value.mMixedTime);
-            out.name(DIRECTION).value(value.mDirection);
-            out.name(PASSAGE_ID).value(value.mPassageId);
-            out.name(PATTERN_TEXT).value(value.mPatternText);
-            out.name(ROUTE_ID).value(value.mRouteId);
-            out.name(TRIP_ID).value(value.mTripId);
-            out.name(VEHICLE_ID).value(value.mVehicleId);
+            this.mLocalTimeTypeAdapter.write(out, value.getPlannedTime());
+            out.name(MIXED_TIME).value(value.getMixedTime());
+            out.name(DIRECTION).value(value.getDirection());
+            out.name(PASSAGE_ID).value(value.getPassageId());
+            out.name(PATTERN_TEXT).value(value.getPatternText());
+            out.name(ROUTE_ID).value(value.getRouteId());
+            out.name(TRIP_ID).value(value.getTripId());
+            out.name(VEHICLE_ID).value(value.getVehicleId());
             out.endObject();
         }
 
@@ -328,8 +323,8 @@ public class Departure {
                 } else if (name.equals(STATUS) && in.peek() == JsonToken.STRING) {
                     builder.setStatus(this.mDepartureStatusConverter.read(in));
                 } else {
+                    Logger.reportUnknownName(this, name, in.peek());
                     in.skipValue();
-                    Logger.d("Skipped value for: " + name);
                 }
             }
             in.endObject();

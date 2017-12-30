@@ -24,6 +24,7 @@ public class TripPassageStop {
     private final String mShortName;
     private final String mName;
     private final int mStopSeqNum;
+
     private TripPassageStop(Builder builder) {
         this.mActualTime = builder.mActualTime;
         this.mStopSeqNum = builder.mStopSeqNum;

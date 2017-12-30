@@ -1,12 +1,12 @@
 package com.github.guennishueftgold.trapezeapi;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 
 final class CacheManipulatorInterceptor implements Interceptor {

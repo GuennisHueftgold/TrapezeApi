@@ -94,7 +94,7 @@ public class VehiclePathTest {
     public void TypeAdapter_skip_unknown_name() throws IOException {
         Logger logger = mock(Logger.class);
         Logger.setInstance(logger);
-        VehiclePath path=this.adapter.fromJson("{\"unknown_tag\":null}");
+        VehiclePath path = this.adapter.fromJson("{\"unknown_tag\":null}");
         assertNotNull(path);
         verify(logger, times(1)).unknownName(adapter, "unknown_tag", JsonToken.NULL);
     }

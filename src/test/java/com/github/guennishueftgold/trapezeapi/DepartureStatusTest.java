@@ -2,8 +2,10 @@ package com.github.guennishueftgold.trapezeapi;
 
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.*;
 
 public class DepartureStatusTest {
 
@@ -32,9 +34,13 @@ public class DepartureStatusTest {
         assertEquals(adapter.toJson(null), "null");
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void typeaadapter_skip_unknown_tag() throws Exception {
-        assertNotNull(adapter.fromJson("{\"unknown_tag\":2}"));
+    @Test
+    public void TypeAdapter_skip_unknown_name() throws IOException {
+        Logger logger = mock(Logger.class);
+        Logger.setInstance(logger);
+        final int departureStatus = adapter.fromJson("\"unknown_value\"");
+        assertEquals(departureStatus, DepartureStatus.STATUS_UNKNOWN);
+        verify(logger, times(1)).unknownValue(adapter, "unknown_value");
     }
 
 }
