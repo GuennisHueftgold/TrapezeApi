@@ -22,14 +22,20 @@ public class TripPassagesTest {
     private final TypeAdapter<TripPassages> adapter = new TripPassages.Converter(gson);
 
     static TripPassages.Builder createSample(int idx) {
-        return new TripPassages.Builder()
+        return createSample(idx, 5, 9);
+    }
+
+    static TripPassages.Builder createSample(int idx, int actual, int old) {
+        final TripPassages.Builder builder = new TripPassages.Builder()
                 .setDirectionText("direction_" + idx)
-                .setRouteName("route_name_" + idx)
-                .addActual(createTripPassagesStop(0))
-                .addActual(createTripPassagesStop(1))
-                .addOld(createTripPassagesStop(2))
-                .addOld(createTripPassagesStop(3))
-                .addOld(createTripPassagesStop(4));
+                .setRouteName("route_name_" + idx);
+        for (int i = 0; i < actual; i++) {
+            builder.addActual(createTripPassagesStop(i));
+        }
+        for (int i = 0; i < old; i++) {
+            builder.addOld(createTripPassagesStop(-i));
+        }
+        return builder;
     }
 
     private static TripPassageStop createTripPassagesStop(int idx) {
@@ -103,5 +109,21 @@ public class TripPassagesTest {
     public void TripPassages_getOld_should_be_immutable() {
         final TripPassages tripPassages = createSample(0).build();
         tripPassages.getActual().remove(0);
+    }
+
+    @Test
+    public void Builder_setActual_null_should_clear_list() {
+        final TripPassages.Builder builder = createSample(0, 2, 3);
+        assertEquals(builder.getActual().size(), 2);
+        builder.setActual(null);
+        assertEquals(builder.getActual().size(), 0);
+    }
+
+    @Test
+    public void Builder_setOld_null_should_clear_list() {
+        final TripPassages.Builder builder = createSample(0, 2, 3);
+        assertEquals(builder.getOld().size(), 3);
+        builder.setOld(null);
+        assertEquals(builder.getOld().size(), 0);
     }
 }
