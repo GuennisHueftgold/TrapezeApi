@@ -7,34 +7,65 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 
 public final class VehiclePathInfo {
     private final List<VehiclePath> mVehiclePaths;
 
     private VehiclePathInfo(Builder builder) {
-        this.mVehiclePaths = builder.mVehiclePaths;
+        this.mVehiclePaths = Collections.unmodifiableList(builder.getVehiclePaths());
     }
 
     public List<VehiclePath> getVehiclePaths() {
         return mVehiclePaths;
     }
 
+    @Override
+    public String toString() {
+        return "VehiclePathInfo{" +
+                "mVehiclePaths=" + mVehiclePaths +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VehiclePathInfo that = (VehiclePathInfo) o;
+        return Objects.equals(mVehiclePaths, that.mVehiclePaths);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mVehiclePaths);
+    }
+
     public static final class Builder {
 
-        private List<VehiclePath> mVehiclePaths;
+        private List<VehiclePath> mVehiclePaths = new ArrayList<>();
 
         public List<VehiclePath> getVehiclePaths() {
             return mVehiclePaths;
         }
 
-        public void setVehiclePaths(List<VehiclePath> vehiclePaths) {
-            mVehiclePaths = vehiclePaths;
+        public Builder setVehiclePaths(List<VehiclePath> vehiclePaths) {
+            this.mVehiclePaths.clear();
+            if (vehiclePaths != null)
+                this.mVehiclePaths.addAll(vehiclePaths);
+            return this;
         }
 
         public VehiclePathInfo build() {
             return new VehiclePathInfo(this);
+        }
+
+        public Builder addVehiclePath(VehiclePath vehiclePath) {
+            this.mVehiclePaths.add(vehiclePath);
+            return this;
         }
     }
 
@@ -74,7 +105,7 @@ public final class VehiclePathInfo {
                         builder.setVehiclePaths(this.mTypeAdapter.read(in));
                         break;
                     default:
-                        Logger.d("Unknown name: %s", name);
+                        Logger.reportUnknownName(this, name, in.peek());
                         in.skipValue();
                         break;
                 }

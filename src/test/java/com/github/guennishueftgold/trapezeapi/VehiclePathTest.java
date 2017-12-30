@@ -19,10 +19,16 @@ public class VehiclePathTest {
     private final TypeAdapter<VehiclePath> adapter = new VehiclePath.Converter(gson);
 
     static VehiclePath.Builder createSample() {
-        return new VehiclePath.Builder()
-                .setColor("#FF00FF")
-                .addPathPoint(createSamplePathPoint(0))
-                .addPathPoint(createSamplePathPoint(1));
+        return createSample(5);
+    }
+
+    static VehiclePath.Builder createSample(int pathPoints) {
+        final VehiclePath.Builder builder = new VehiclePath.Builder()
+                .setColor("#FF00FF");
+        for (int i = 0; i < pathPoints; i++) {
+            builder.addPathPoint(createSamplePathPoint(i));
+        }
+        return builder;
     }
 
     private static VehiclePathPoint createSamplePathPoint(int idx) {
