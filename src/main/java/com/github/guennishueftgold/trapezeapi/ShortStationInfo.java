@@ -33,6 +33,15 @@ public final class ShortStationInfo {
     }
 
     @Override
+    public String toString() {
+        return "ShortStationInfo{" +
+                "mId='" + mId + '\'' +
+                ", mStopName='" + mStopName + '\'' +
+                ", mStopShortName='" + mStopShortName + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
