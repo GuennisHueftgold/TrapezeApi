@@ -51,20 +51,28 @@ public class StopsByCharacterResultTest {
     }
 
     @Test
-    public void Departure_equals_should_be_true() {
+    public void StopsByCharacterResult_equals_should_be_true() {
         final StopsByCharacterResult stopsByCharacterResult1 = createSample().build();
         final StopsByCharacterResult stopsByCharacterResult2 = createSample().build();
+        assertEquals(stopsByCharacterResult1, stopsByCharacterResult1);
         assertEquals(stopsByCharacterResult1, stopsByCharacterResult2);
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void Departure_list_should_be_unmutable() {
+    public void StopsByCharacterResult_list_should_be_unmutable() {
         final StopsByCharacterResult stopsByCharacterResult1 = createSample().build();
         stopsByCharacterResult1.getResults().remove(0);
     }
 
     @Test
-    public void Departure_equals_should_be_false() {
+    public void StopsByCharacterResult_Builder_setList_with_null_should_clear_list() {
+        final StopsByCharacterResult.Builder builder = createSample()
+                .setResults(null);
+        assertEquals(builder.getResults().size(), 0);
+    }
+
+    @Test
+    public void StopsByCharacterResult_equals_should_be_false() {
         final StopsByCharacterResult stopsByCharacterResult1 = createSample().build();
         final StopsByCharacterResult stopsByCharacterResult2 = createSample()
                 .addResult(createShortStationInfo(3))
@@ -75,14 +83,14 @@ public class StopsByCharacterResultTest {
     }
 
     @Test
-    public void Departure_hashCode_should_be_equal() {
+    public void StopsByCharacterResult_hashCode_should_be_equal() {
         final StopsByCharacterResult stopsByCharacterResult1 = createSample().build();
         final StopsByCharacterResult stopsByCharacterResult2 = createSample().build();
         assertEquals(stopsByCharacterResult1.hashCode(), stopsByCharacterResult2.hashCode());
     }
 
     @Test
-    public void Departure_hashCode_should_not_be_equal() {
+    public void StopsByCharacterResult_hashCode_should_not_be_equal() {
         final StopsByCharacterResult stopsByCharacterResult1 = createSample().build();
         final StopsByCharacterResult stopsByCharacterResult2 = createSample()
                 .addResult(createShortStationInfo(3))
