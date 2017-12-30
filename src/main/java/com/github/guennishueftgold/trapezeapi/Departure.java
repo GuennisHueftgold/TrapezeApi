@@ -12,11 +12,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 public final class Departure {
-    public final static int STATUS_DEPARTED = 1;
-    public final static int STATUS_PREDICTED = 2;
-    public final static int STATUS_PLANNED = 3;
-    public final static int STATUS_STOPPING = 4;
-    public final static int STATUS_UNKNOWN = 0;
     private final int mActualRelativeTime;
     private final String mDirection;
     private final String mMixedTime;
@@ -138,7 +133,7 @@ public final class Departure {
         private LocalTime mPlannedTime;
         private String mRouteId;
         private LocalTime mActualTime;
-        private int mStatus = STATUS_UNKNOWN;
+        private int mStatus = DepartureStatus.STATUS_UNKNOWN;
         private String mTripId;
         private String mVehicleId;
 

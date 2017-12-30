@@ -25,4 +25,11 @@ public abstract class Logger {
     public static void d(String tag, Object... args){
 
     }
+
+    public static void reportUnknownValue(TypeAdapter typeAdapter, String value) {
+        if (sLogger != null)
+            sLogger.unknownValue(typeAdapter, value);
+    }
+
+    public abstract void unknownValue(TypeAdapter typeAdapter, String value);
 }

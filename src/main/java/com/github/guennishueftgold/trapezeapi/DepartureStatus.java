@@ -51,7 +51,8 @@ public final class DepartureStatus {
             if (jsonReader.peek() == JsonToken.NULL) {
                 return STATUS_UNKNOWN;
             }
-            switch (jsonReader.nextString()) {
+            final String value = jsonReader.nextString();
+            switch (value) {
                 case "departed":
                     return STATUS_DEPARTED;
                 case "predicted":
@@ -61,6 +62,7 @@ public final class DepartureStatus {
                 case "planned":
                     return STATUS_PLANNED;
                 default:
+                    Logger.reportUnknownValue(this, value);
                     return STATUS_UNKNOWN;
             }
         }
