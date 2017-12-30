@@ -25,6 +25,7 @@ public class VehiclePathInfoTest {
         }
         return builder;
     }
+
     @Test
     public void typeadapter_read_full_information() throws Exception {
         final VehiclePathInfo input = createSample(10).build();

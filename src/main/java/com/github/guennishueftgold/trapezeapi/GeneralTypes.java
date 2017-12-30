@@ -3,7 +3,6 @@ package com.github.guennishueftgold.trapezeapi;
 import com.google.gson.reflect.TypeToken;
 import org.joda.time.LocalTime;
 
-
 import java.util.List;
 
 @SuppressWarnings("unchecked")

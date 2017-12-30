@@ -12,7 +12,7 @@ import static org.mockito.Mockito.*;
 
 public class DepartureTest {
 
-    private final static TypeAdapter<LocalTime> localTimeAdapter=new LocalTimeTypeAdapter();
+    private final static TypeAdapter<LocalTime> localTimeAdapter = new LocalTimeTypeAdapter();
     private final static TypeAdapter<Departure> adapter = new Departure.Converter(localTimeAdapter);
 
     private final static Departure.Builder createSample(int idx) {
@@ -63,7 +63,7 @@ public class DepartureTest {
     public void Departure_equals_should_be_true() {
         final Departure departure1 = createSample(1).build();
         final Departure departure2 = createSample(1).build();
-        assertEquals(departure1,departure2);
+        assertEquals(departure1, departure2);
         assertEquals(departure1, departure1);
     }
 
@@ -75,7 +75,7 @@ public class DepartureTest {
         Departure departure2 = createSample(1)
                 .setActualRelativeTime(-10)
                 .build();
-        assertNotEquals(departure1,departure2);
+        assertNotEquals(departure1, departure2);
         departure2 = createSample(1)
                 .setActualTime(null)
                 .build();

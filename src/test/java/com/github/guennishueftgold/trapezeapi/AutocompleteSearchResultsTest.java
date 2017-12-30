@@ -2,6 +2,8 @@ package com.github.guennishueftgold.trapezeapi;
 
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class AutocompleteSearchResultsTest {
@@ -47,6 +49,15 @@ public class AutocompleteSearchResultsTest {
                 .build();
         final AutocompleteSearchResults output = adapter.fromJson(adapter.toJson(autocompleteSearchResults));
         assertEquals(autocompleteSearchResults, output);
+    }
+
+    @Test
+    public void TypeAdapter_skip_divider() throws IOException {
+        final AutocompleteSearchResults autocompleteSearchResults1 = createSample(3).build();
+        final AutocompleteSearchResults.Builder builder = createSample(3);
+        builder.getSearchResults().remove(0);
+        final AutocompleteSearchResults output = adapter.fromJson(adapter.toJson(autocompleteSearchResults1));
+        assertEquals(output, builder.build());
     }
 
     @Test

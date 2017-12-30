@@ -3,9 +3,7 @@ package com.github.guennishueftgold.trapezeapi;
 import com.google.gson.TypeAdapter;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class TripPassagesStopTest {
 
@@ -22,12 +20,12 @@ public class TripPassagesStopTest {
     }
 
     @Test
-    public void typeadapter_check_read_null() throws Exception{
+    public void typeadapter_check_read_null() throws Exception {
         assertNull(adapter.fromJson("null"));
     }
 
     @Test
-    public void typeAdapter_check_write_null() throws Exception{
-        assertEquals(adapter.toJson(null),"null");
+    public void typeAdapter_check_write_null() {
+        assertEquals(adapter.toJson(null), "null");
     }
 }

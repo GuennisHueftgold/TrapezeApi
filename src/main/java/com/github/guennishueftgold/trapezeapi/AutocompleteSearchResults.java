@@ -43,10 +43,11 @@ public final class AutocompleteSearchResults {
         return mSearchResults;
     }
 
-    public static final class Builder{
+    public static final class Builder {
 
-        private List<AutocompleteSearchResult> mSearchResults=new ArrayList<>();
-        public AutocompleteSearchResults build(){
+        private List<AutocompleteSearchResult> mSearchResults = new ArrayList<>();
+
+        public AutocompleteSearchResults build() {
             return new AutocompleteSearchResults(this);
         }
 
@@ -71,7 +72,7 @@ public final class AutocompleteSearchResults {
 
         private final TypeAdapter<AutocompleteSearchResult> mTypeAdapter;
 
-        public Converter(Gson gson){
+        public Converter(Gson gson) {
             this(gson.getAdapter(AutocompleteSearchResult.class));
         }
 
@@ -94,15 +95,15 @@ public final class AutocompleteSearchResults {
 
         @Override
         public AutocompleteSearchResults read(JsonReader in) throws IOException {
-            if(in.peek()== JsonToken.NULL){
+            if (in.peek() == JsonToken.NULL) {
                 in.skipValue();
                 return null;
             }
-            Builder builder=new Builder();
+            Builder builder = new Builder();
             in.beginArray();
-            while(in.hasNext()){
-                final AutocompleteSearchResult result= this.mTypeAdapter.read(in);
-                if(result==null||result.getType()==AutocompleteSearchResult.TYPE_DIVIDER)
+            while (in.hasNext()) {
+                final AutocompleteSearchResult result = this.mTypeAdapter.read(in);
+                if (result == null || result.getType() == AutocompleteSearchResult.TYPE_DIVIDER)
                     continue;
                 builder.add(result);
             }

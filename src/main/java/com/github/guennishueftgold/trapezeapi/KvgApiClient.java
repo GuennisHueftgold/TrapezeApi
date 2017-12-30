@@ -21,10 +21,11 @@ public final class KvgApiClient {
     private final Gson mGson;
     private final Cache mCache;
 
-    public KvgApiClient(){
-        this(null,false);
+    public KvgApiClient() {
+        this(null, false);
     }
-    public KvgApiClient(File cacheDir,boolean debug) {
+
+    public KvgApiClient(File cacheDir, boolean debug) {
         this.mCache = new Cache(cacheDir, KvgApiClient.CACHE_SIZE);
         final OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder()
                 .cache(this.mCache)
@@ -54,7 +55,7 @@ public final class KvgApiClient {
         if (KvgApiClient.mInstance != null) {
             return;
         }
-        KvgApiClient.mInstance = new KvgApiClient(cacheDir,debug);
+        KvgApiClient.mInstance = new KvgApiClient(cacheDir, debug);
     }
 
     public KvgApiService getService() {
