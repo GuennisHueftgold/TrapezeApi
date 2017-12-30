@@ -36,6 +36,7 @@ public class AutocompleteSearchResultTest {
     public void AutoCompleteSearchResult_should_be_equal() {
         final AutocompleteSearchResult autocompleteSearchResult1 = createSample(0).build();
         final AutocompleteSearchResult autocompleteSearchResult2 = createSample(0).build();
+        assertEquals(autocompleteSearchResult1, autocompleteSearchResult1);
         assertEquals(autocompleteSearchResult1, autocompleteSearchResult2);
     }
 
