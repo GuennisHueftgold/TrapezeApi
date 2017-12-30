@@ -155,12 +155,12 @@ public class TripPassages {
                 return;
             }
             out.beginObject();
-            out.name(DIRECTION_TEXT).value(value.mDirectionText);
-            out.name(ROUTE_NAME).value(value.mRouteName);
+            out.name(DIRECTION_TEXT).value(value.getDirectionText());
+            out.name(ROUTE_NAME).value(value.getRouteName());
             out.name(OLD);
-            this.mTripPassageStopConverter.write(out, value.mOld);
+            this.mTripPassageStopConverter.write(out, value.getOld());
             out.name(ACTUAL);
-            this.mTripPassageStopConverter.write(out, value.mActual);
+            this.mTripPassageStopConverter.write(out, value.getActual());
             out.endObject();
         }
 
