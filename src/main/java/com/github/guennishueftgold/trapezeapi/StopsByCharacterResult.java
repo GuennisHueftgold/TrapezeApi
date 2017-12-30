@@ -8,6 +8,8 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +17,7 @@ public final class StopsByCharacterResult {
     private final List<ShortStationInfo> mResults;
 
     private StopsByCharacterResult(Builder builder) {
-        this.mResults = builder.mResults;
+        this.mResults = Collections.unmodifiableList(builder.getResults() == null ? Collections.EMPTY_LIST : builder.getResults());
     }
 
     public List<ShortStationInfo> getResults() {
@@ -25,7 +27,7 @@ public final class StopsByCharacterResult {
     @Override
     public String toString() {
         return "StopsByCharacterResult{" +
-                "mResults=" + mResults +
+                "results=" + mResults +
                 '}';
     }
 
@@ -44,24 +46,30 @@ public final class StopsByCharacterResult {
     }
 
     public static class Builder {
-        private List<ShortStationInfo> mResults;
+        private List<ShortStationInfo> mResults = new ArrayList<>();
 
         public List<ShortStationInfo> getResults() {
             return mResults;
         }
 
         public Builder setResults(List<ShortStationInfo> results) {
-            mResults = results;
+            this.mResults.clear();
+            if (results != null)
+                this.mResults.addAll(results);
             return this;
         }
 
         public StopsByCharacterResult build() {
             return new StopsByCharacterResult(this);
         }
+
+        public Builder addResult(ShortStationInfo shortStationInfo) {
+            this.mResults.add(shortStationInfo);
+            return this;
+        }
     }
 
     public static class Converter extends TypeAdapter<StopsByCharacterResult> {
-
 
         private final static String NAME_STOPS = "stops";
         private final TypeAdapter<List<ShortStationInfo>> mListConverter;
