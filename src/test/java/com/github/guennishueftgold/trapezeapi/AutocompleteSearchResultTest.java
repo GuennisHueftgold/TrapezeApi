@@ -33,6 +33,32 @@ public class AutocompleteSearchResultTest {
     }
 
     @Test
+    public void AutoCompleteSearchResult_should_be_equal() {
+        final AutocompleteSearchResult autocompleteSearchResult1 = createSample(0).build();
+        final AutocompleteSearchResult autocompleteSearchResult2 = createSample(0).build();
+        assertEquals(autocompleteSearchResult1, autocompleteSearchResult2);
+    }
+
+    @Test
+    public void AutoCompleteSearchResult_should_not_be_equal() {
+        final AutocompleteSearchResult autocompleteSearchResult1 = createSample(0).build();
+        assertNotEquals(autocompleteSearchResult1, null);
+        assertNotEquals(autocompleteSearchResult1, new Object());
+        AutocompleteSearchResult autocompleteSearchResult2 = createSample(0)
+                .setName("other_name")
+                .build();
+        assertNotEquals(autocompleteSearchResult1, autocompleteSearchResult2);
+        autocompleteSearchResult2 = createSample(0)
+                .setShortName("other_short_name")
+                .build();
+        assertNotEquals(autocompleteSearchResult1, autocompleteSearchResult2);
+        autocompleteSearchResult2 = createSample(0)
+                .setType(-20)
+                .build();
+        assertNotEquals(autocompleteSearchResult1, autocompleteSearchResult2);
+    }
+
+    @Test
     public void typeadapter_read_full_information() throws Exception {
         final AutocompleteSearchResult autocompleteSearchResult = createSample(0).build();
         final AutocompleteSearchResult output = adapter.fromJson(adapter.toJson(autocompleteSearchResult));
@@ -42,6 +68,20 @@ public class AutocompleteSearchResultTest {
     @Test
     public void typeadapter_check_read_null() throws Exception {
         assertNull(adapter.fromJson("null"));
+    }
+
+    @Test
+    public void AutoCompleteSearchResult_hashCode_should_be_equal() {
+        final AutocompleteSearchResult autocompleteSearchResult1 = createSample(1).build();
+        final AutocompleteSearchResult autocompleteSearchResult2 = createSample(1).build();
+        assertEquals(autocompleteSearchResult1.hashCode(), autocompleteSearchResult2.hashCode());
+    }
+
+    @Test
+    public void AutoCompleteSearchResult_hashCode_should_not_be_equal() {
+        final AutocompleteSearchResult autocompleteSearchResult1 = createSample(1).build();
+        final AutocompleteSearchResult autocompleteSearchResult2 = createSample(2).build();
+        assertNotEquals(autocompleteSearchResult1.hashCode(), autocompleteSearchResult2.hashCode());
     }
 
     @Test
