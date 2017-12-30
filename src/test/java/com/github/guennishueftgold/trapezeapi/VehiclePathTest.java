@@ -5,8 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class VehiclePathTest {
 
@@ -36,5 +35,44 @@ public class VehiclePathTest {
         final VehiclePath output = adapter.fromJson(adapter.toJson(vehiclePath));
         assertEquals(vehiclePath, output);
         assertNull(adapter.fromJson(adapter.toJson(null)));
+    }
+
+    @Test
+    public void VehiclePath_equals_should_be_true() {
+        final VehiclePath path1 = createSample()
+                .addPathPoint(createSamplePathPoint(4))
+                .build();
+        final VehiclePath path2 = createSample()
+                .addPathPoint(createSamplePathPoint(4))
+                .build();
+        assertEquals(path1, path2);
+        assertEquals(path1, path1);
+    }
+
+    @Test
+    public void VehiclePath_equals_should_be_false() {
+        final VehiclePath path1 = createSample().build();
+        final VehiclePath path2 = createSample()
+                .addPathPoint(createSamplePathPoint(4))
+                .build();
+        assertNotEquals(path1, path2);
+        assertNotEquals(path1, null);
+        assertNotEquals(path1, new Object());
+    }
+
+    @Test
+    public void VehiclePath_hashCode_should_be_equal() {
+        final VehiclePath path1 = createSample().build();
+        final VehiclePath path2 = createSample().build();
+        assertEquals(path1.hashCode(), path2.hashCode());
+    }
+
+    @Test
+    public void VehiclePath_hashCode_should_not_be_equal() {
+        final VehiclePath path1 = createSample().build();
+        final VehiclePath path2 = createSample()
+                .addPathPoint(createSamplePathPoint(4))
+                .build();
+        assertNotEquals(path1.hashCode(), path2.hashCode());
     }
 }
