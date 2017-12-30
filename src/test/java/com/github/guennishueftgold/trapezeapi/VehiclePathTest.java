@@ -6,6 +6,7 @@ import com.google.gson.TypeAdapter;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class VehiclePathTest {
 
@@ -34,5 +35,6 @@ public class VehiclePathTest {
         final VehiclePath vehiclePath = createSample().build();
         final VehiclePath output = adapter.fromJson(adapter.toJson(vehiclePath));
         assertEquals(vehiclePath, output);
+        assertNull(adapter.fromJson(adapter.toJson(null)));
     }
 }

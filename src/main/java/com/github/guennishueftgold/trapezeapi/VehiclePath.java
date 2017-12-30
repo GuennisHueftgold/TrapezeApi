@@ -19,8 +19,8 @@ public final class VehiclePath {
     private final List<VehiclePathPoint> mPathPoints;
 
     private VehiclePath(Builder builder) {
-        this.mColor = builder.mColor;
-        this.mPathPoints = Collections.unmodifiableList(builder.mPathPoints);
+        this.mColor = builder.getColor();
+        this.mPathPoints = Collections.unmodifiableList(builder.getPathPoints());
     }
 
     public String getColor() {
