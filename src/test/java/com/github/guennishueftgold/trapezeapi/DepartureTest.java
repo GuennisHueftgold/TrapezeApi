@@ -70,10 +70,28 @@ public class DepartureTest {
     @Test
     public void Departure_equals_should_be_false() {
         final Departure departure1 = createSample(1).build();
-        final Departure departure2 = createSample(2).build();
+        assertNotEquals(departure1, null);
+        assertNotEquals(departure1, new Object());
+        Departure departure2 = createSample(1)
+                .setActualRelativeTime(-10)
+                .build();
         assertNotEquals(departure1,departure2);
-        assertNotEquals(departure1,null);
-        assertNotEquals(departure1,new Object());
+        departure2 = createSample(1)
+                .setActualTime(null)
+                .build();
+        assertNotEquals(departure1, departure2);
+        departure2 = createSample(1)
+                .setRouteId("other_route_id")
+                .build();
+        assertNotEquals(departure1, departure2);
+        departure2 = createSample(1)
+                .setVehicleId("other_vehicle_id")
+                .build();
+        assertNotEquals(departure1, departure2);
+        departure2 = createSample(1)
+                .setTripId("other_trip_id")
+                .build();
+        assertNotEquals(departure1, departure2);
     }
 
     @Test
