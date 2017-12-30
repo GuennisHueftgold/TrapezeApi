@@ -1,10 +1,14 @@
 package com.github.guennishueftgold.trapezeapi;
 
 import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonToken;
 import org.joda.time.LocalTime;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class DepartureTest {
 
@@ -76,4 +80,12 @@ public class DepartureTest {
         assertNotEquals(departure1.hashCode(), departure2.hashCode());
     }
 
+    @Test
+    public void TypeAdapter_skip_unknown_name() throws IOException {
+        Logger logger = mock(Logger.class);
+        Logger.setInstance(logger);
+        Departure departure = adapter.fromJson("{\"unknown_tag\":null}");
+        assertNotNull(departure);
+        verify(logger, times(1)).unknownName(adapter, "unknown_tag", JsonToken.NULL);
+    }
 }

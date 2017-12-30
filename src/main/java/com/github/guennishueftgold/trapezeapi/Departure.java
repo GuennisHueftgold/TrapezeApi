@@ -30,17 +30,17 @@ public class Departure {
     private final String mVehicleId;
 
     public Departure(Builder builder) {
-        this.mActualRelativeTime = builder.mActualRelativeTime;
-        this.mDirection = builder.mDirection;
-        this.mMixedTime = builder.mMixedTime;
-        this.mPassageId = builder.mPassageId;
-        this.mPatternText = builder.mPatternText;
-        this.mPlannedTime = builder.mPlannedTime;
-        this.mActualTime = builder.mActualTime;
-        this.mRouteId = builder.mRouteId;
-        this.mStatus = builder.mStatus;
-        this.mTripId = builder.mTripId;
-        this.mVehicleId = builder.mVehicleId;
+        this.mActualRelativeTime = builder.getActualRelativeTime();
+        this.mDirection = builder.getDirection();
+        this.mMixedTime = builder.getMixedTime();
+        this.mPassageId = builder.getPassageId();
+        this.mPatternText = builder.getPatternText();
+        this.mPlannedTime = builder.getPlannedTime();
+        this.mActualTime = builder.getActualTime();
+        this.mRouteId = builder.getRouteId();
+        this.mStatus = builder.getStatus();
+        this.mTripId = builder.getTripId();
+        this.mVehicleId = builder.getVehicleId();
     }
 
     public LocalTime getActualTime() {
@@ -328,8 +328,8 @@ public class Departure {
                 } else if (name.equals(STATUS) && in.peek() == JsonToken.STRING) {
                     builder.setStatus(this.mDepartureStatusConverter.read(in));
                 } else {
+                    Logger.reportUnknownName(this, name, in.peek());
                     in.skipValue();
-                    Logger.d("Skipped value for: " + name);
                 }
             }
             in.endObject();
