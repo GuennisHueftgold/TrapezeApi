@@ -15,7 +15,7 @@ public class DepartureTest {
     private final static TypeAdapter<LocalTime> localTimeAdapter = new LocalTimeTypeAdapter();
     private final static TypeAdapter<Departure> adapter = new Departure.Converter(localTimeAdapter);
 
-    private final static Departure.Builder createSample(int idx) {
+    public final static Departure.Builder createSample(int idx) {
         final int[] testValues = {DepartureStatus.STATUS_DEPARTED,
                 DepartureStatus.STATUS_PLANNED,
                 DepartureStatus.STATUS_PREDICTED,
