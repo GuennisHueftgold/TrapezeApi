@@ -46,4 +46,21 @@ public class TripPassagesStopTest {
         TripPassageStop tripPassageStop = adapter.fromJson("{\"" + TripPassageStop.Converter.STOP_SEQ_NUM + "\":\"2\"}");
         assertEquals(tripPassageStop.getStopSeqNum(), 2);
     }
+
+    @Test
+    public void TripPassageStop_equal_should_be_true() {
+        TripPassageStop tripPassageStop1 = createSample(1).build();
+        TripPassageStop tripPassageStop2 = createSample(1).build();
+        assertEquals(tripPassageStop1, tripPassageStop1);
+        assertEquals(tripPassageStop1, tripPassageStop2);
+    }
+
+    @Test
+    public void TripPassageStop_equal_should_not_be_true() {
+        TripPassageStop tripPassageStop1 = createSample(1).build();
+        TripPassageStop tripPassageStop2 = createSample(2).build();
+        assertNotEquals(tripPassageStop1, null);
+        assertNotEquals(tripPassageStop1, new Object());
+        assertNotEquals(tripPassageStop1, tripPassageStop2);
+    }
 }
