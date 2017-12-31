@@ -8,6 +8,8 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,15 +25,15 @@ public final class Station {
     private final List<Route> mRoutes;
 
     private Station(Builder builder) {
-        this.mStopName = builder.mStopName;
-        this.mStopShortName = builder.mStopShortName;
-        this.mDirections = builder.mDirections;
-        this.mFirstPassageTime = builder.mFirstPassageTime;
-        this.mGeneralAlerts = builder.mGeneralAlerts;
-        this.mLastPassageTime = builder.mLastPassageTime;
-        this.mActual = builder.mActual;
-        this.mOld = builder.mOld;
-        this.mRoutes = builder.mRoutes;
+        this.mStopName = builder.getStopName();
+        this.mStopShortName = builder.getStopShortName();
+        this.mDirections = Collections.unmodifiableList(builder.getDirections());
+        this.mFirstPassageTime = builder.getFirstPassageTime();
+        this.mGeneralAlerts = Collections.unmodifiableList(builder.getGeneralAlerts());
+        this.mLastPassageTime = builder.getLastPassageTime();
+        this.mActual = Collections.unmodifiableList(builder.getActual());
+        this.mOld = Collections.unmodifiableList(builder.getOld());
+        this.mRoutes = Collections.unmodifiableList(builder.getRoutes());
     }
 
     public List<Route> getRoutes() {
@@ -88,7 +90,6 @@ public final class Station {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(mStopName, mStopShortName, mDirections, mFirstPassageTime, mGeneralAlerts, mLastPassageTime, mActual, mOld, mRoutes);
     }
 
@@ -111,13 +112,13 @@ public final class Station {
 
         private String mStopName;
         private String mStopShortName;
-        private List<String> mDirections;
+        private List<String> mDirections = new ArrayList<>();
         private long mFirstPassageTime;
-        private List<String> mGeneralAlerts;
+        private List<String> mGeneralAlerts = new ArrayList<>();
         private long mLastPassageTime;
-        private List<Departure> mActual;
-        private List<Departure> mOld;
-        private List<Route> mRoutes;
+        private List<Departure> mActual = new ArrayList<>();
+        private List<Departure> mOld = new ArrayList<>();
+        private List<Route> mRoutes = new ArrayList<>();
 
         public String getStopName() {
             return mStopName;
@@ -133,7 +134,9 @@ public final class Station {
         }
 
         public Builder setRoutes(List<Route> routes) {
-            mRoutes = routes;
+            this.mRoutes.clear();
+            if (routes != null)
+                this.mRoutes.addAll(routes);
             return this;
         }
 
@@ -151,7 +154,9 @@ public final class Station {
         }
 
         public Builder setDirections(List<String> directions) {
-            this.mDirections = directions;
+            this.mDirections.clear();
+            if (directions != null)
+                this.mDirections.addAll(directions);
             return this;
         }
 
@@ -169,7 +174,9 @@ public final class Station {
         }
 
         public Builder setGeneralAlerts(List<String> generalAlerts) {
-            mGeneralAlerts = generalAlerts;
+            this.mGeneralAlerts.clear();
+            if (generalAlerts != null)
+                this.mGeneralAlerts.addAll(generalAlerts);
             return this;
         }
 
@@ -187,7 +194,9 @@ public final class Station {
         }
 
         public Builder setActual(List<Departure> actual) {
-            mActual = actual;
+            this.mActual.clear();
+            if (actual != null)
+                this.mActual.addAll(actual);
             return this;
         }
 
@@ -196,12 +205,39 @@ public final class Station {
         }
 
         public Builder setOld(List<Departure> old) {
-            mOld = old;
+            this.mOld.clear();
+            if (old != null)
+                this.mOld.addAll(old);
             return this;
         }
 
         public Station build() {
             return new Station(this);
+        }
+
+        public Builder addDirection(final String direction) {
+            this.mDirections.add(direction);
+            return this;
+        }
+
+        public Builder addActual(final Departure departure) {
+            this.mActual.add(departure);
+            return this;
+        }
+
+        public Builder addOld(final Departure departure) {
+            this.mOld.add(departure);
+            return this;
+        }
+
+        public Builder addGeneralAlert(final String alert) {
+            this.mGeneralAlerts.add(alert);
+            return this;
+        }
+
+        public Builder addRoute(final Route route) {
+            this.mRoutes.add(route);
+            return this;
         }
     }
 
@@ -291,7 +327,7 @@ public final class Station {
                 } else if (name.equals(NAME_STOP_NAME) && in.peek() == JsonToken.STRING) {
                     builder.setStopName(in.nextString());
                 } else {
-                    Logger.d("Not handled Name: " + name);
+                    Logger.reportUnknownName(this, name, in.peek());
                     in.skipValue();
                 }
             }

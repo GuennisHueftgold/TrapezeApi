@@ -17,6 +17,17 @@ public class RouteTest {
 
     private final static TypeAdapter<Route> adapter = new Route.Converter(new Gson());
 
+    public final static Route.Builder createSample(int idx) {
+        //TODO add permutation
+        return new Route.Builder()
+                .setRouteType(Route.ROUTE_TYPE_BUS)
+                .setDirections(Collections.emptyList())
+                .setId("id_" + idx)
+                .setName("name_" + idx)
+                .setShortName("shortName_" + idx)
+                .setAuthority("authority_" + idx);
+    }
+
     @Test
     public void typeadapter_read_full_information() throws Exception {
         Route input = new Route.Builder()
