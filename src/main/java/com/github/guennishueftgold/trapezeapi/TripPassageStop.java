@@ -1,7 +1,5 @@
 package com.github.guennishueftgold.trapezeapi;
 
-
-import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
@@ -26,13 +24,13 @@ public class TripPassageStop {
     private final int mStopSeqNum;
 
     private TripPassageStop(Builder builder) {
-        this.mActualTime = builder.mActualTime;
-        this.mStopSeqNum = builder.mStopSeqNum;
-        this.mStatus = builder.mStatus;
-        this.mName = builder.mName;
-        this.mShortName = builder.mShortName;
-        this.mPlannedTime = builder.mPlannedTime;
-        this.mId = builder.mId;
+        this.mActualTime = builder.getActualTime();
+        this.mStopSeqNum = builder.getStopSeqNum();
+        this.mStatus = builder.getStatus();
+        this.mName = builder.getName();
+        this.mShortName = builder.getShortName();
+        this.mPlannedTime = builder.getPlannedTime();
+        this.mId = builder.getId();
     }
 
     public LocalTime getPlannedTime() {
@@ -215,21 +213,21 @@ public class TripPassageStop {
             out.beginObject();
             out.name(STOP_SEQ_NUM).value(value.getStopSeqNum());
             out.name(ACTUAL_TIME);
-            if (value.mActualTime == null)
+            if (value.getActualTime() == null)
                 out.nullValue();
             else
-                out.value(value.mActualTime.toString());
+                out.value(value.getActualTime().toString());
             out.name(PLANNED_TIME);
-            if (value.mPlannedTime == null)
+            if (value.getPlannedTime() == null)
                 out.nullValue();
             else
-                out.value(value.mPlannedTime.toString());
+                out.value(value.getPlannedTime().toString());
             out.name(STATUS);
-            statusTypeAdapter.write(out, value.mStatus);
+            statusTypeAdapter.write(out, value.getStatus());
             out.name(STOP).beginObject();
-            out.name(ID).value(value.mId);
-            out.name(NAME).value(value.mName);
-            out.name(SHORT_NAME).value(value.mShortName);
+            out.name(ID).value(value.getId());
+            out.name(NAME).value(value.getName());
+            out.name(SHORT_NAME).value(value.getShortName());
             out.endObject();
             out.endObject();
         }
@@ -238,8 +236,6 @@ public class TripPassageStop {
         public TripPassageStop read(JsonReader in) throws IOException {
             if (in.peek() == JsonToken.NULL) {
                 return null;
-            } else if (in.peek() != JsonToken.BEGIN_OBJECT) {
-                throw new JsonParseException("Expected begin object");
             }
             in.beginObject();
             TripPassageStop.Builder tripPassageStop = new TripPassageStop.Builder();
