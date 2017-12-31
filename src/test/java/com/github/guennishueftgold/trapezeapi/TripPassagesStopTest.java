@@ -1,12 +1,14 @@
 package com.github.guennishueftgold.trapezeapi;
 
 import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonToken;
 import org.joda.time.LocalTime;
 import org.junit.Test;
 
 import java.io.IOException;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class TripPassagesStopTest {
 
@@ -74,5 +76,31 @@ public class TripPassagesStopTest {
                 .setId("unknown_id")
                 .build();
         assertNotEquals(tripPassageStop1, tripPassageStop2);
+        tripPassageStop2 = createSample(1)
+                .setName("other_name")
+                .build();
+        assertNotEquals(tripPassageStop1, tripPassageStop2);
+        tripPassageStop2 = createSample(1)
+                .setShortName("other_short_name")
+                .build();
+        assertNotEquals(tripPassageStop1, tripPassageStop2);
+        tripPassageStop2 = createSample(1)
+                .setPlannedTime(PLANNED_TIME.minusMillis(1000))
+                .build();
+        assertNotEquals(tripPassageStop1, tripPassageStop2);
+        tripPassageStop2 = createSample(1)
+                .setActualTime(ACTUAL_TIME.minusMillis(1000))
+                .build();
+        assertNotEquals(tripPassageStop1, tripPassageStop2);
+    }
+
+    @Test
+    public void TypeAdapter_skip_unknown_name() throws IOException {
+        Logger logger = mock(Logger.class);
+        Logger.setInstance(logger);
+        final TripPassageStop tripPassageStop = adapter.fromJson("{\"unknown_tag\":null,\"stop\":{\"unknown_tag2\":null}}");
+        assertNotNull(tripPassageStop);
+        verify(logger, times(1)).unknownName(adapter, "unknown_tag", JsonToken.NULL);
+        verify(logger, times(1)).unknownName(adapter, "unknown_tag2", JsonToken.NULL);
     }
 }
