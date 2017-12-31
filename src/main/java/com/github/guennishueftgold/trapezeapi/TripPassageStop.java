@@ -7,8 +7,9 @@ import com.google.gson.stream.JsonWriter;
 import org.joda.time.LocalTime;
 
 import java.io.IOException;
+import java.util.Objects;
 
-public class TripPassageStop {
+public final class TripPassageStop {
 
     public final static int STATUS_PREDICTED = 1,
             STATUS_DEPARTED = 2,
@@ -38,34 +39,23 @@ public class TripPassageStop {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         TripPassageStop that = (TripPassageStop) o;
-
-        if (mStatus != that.mStatus) return false;
-        if (mStopSeqNum != that.mStopSeqNum) return false;
-        if (mPlannedTime != null ? !mPlannedTime.equals(that.mPlannedTime) : that.mPlannedTime != null)
-            return false;
-        if (mActualTime != null ? !mActualTime.equals(that.mActualTime) : that.mActualTime != null)
-            return false;
-        if (mId != null ? !mId.equals(that.mId) : that.mId != null) return false;
-        if (mShortName != null ? !mShortName.equals(that.mShortName) : that.mShortName != null)
-            return false;
-        return mName != null ? mName.equals(that.mName) : that.mName == null;
+        return mStatus == that.mStatus &&
+                mStopSeqNum == that.mStopSeqNum &&
+                Objects.equals(mPlannedTime, that.mPlannedTime) &&
+                Objects.equals(mActualTime, that.mActualTime) &&
+                Objects.equals(mId, that.mId) &&
+                Objects.equals(mShortName, that.mShortName) &&
+                Objects.equals(mName, that.mName);
     }
 
     @Override
     public int hashCode() {
-        int result = mPlannedTime != null ? mPlannedTime.hashCode() : 0;
-        result = 31 * result + (mActualTime != null ? mActualTime.hashCode() : 0);
-        result = 31 * result + mStatus;
-        result = 31 * result + (mId != null ? mId.hashCode() : 0);
-        result = 31 * result + (mShortName != null ? mShortName.hashCode() : 0);
-        result = 31 * result + (mName != null ? mName.hashCode() : 0);
-        result = 31 * result + mStopSeqNum;
-        return result;
+
+        return Objects.hash(mPlannedTime, mActualTime, mStatus, mId, mShortName, mName, mStopSeqNum);
     }
 
     public LocalTime getActualTime() {
@@ -189,7 +179,7 @@ public class TripPassageStop {
 
     public final static class Converter extends TypeAdapter<TripPassageStop> {
 
-        private final static String STOP_SEQ_NUM = "stop_seq_num",
+        final static String STOP_SEQ_NUM = "stop_seq_num",
                 SHORT_NAME = "shortName",
                 NAME = "name",
                 ID = "id",
@@ -255,7 +245,7 @@ public class TripPassageStop {
                 } else if (name.equals(STOP) && in.peek() == JsonToken.BEGIN_OBJECT) {
                     this.readStop(tripPassageStop, in);
                 } else {
-                    Logger.d("Not handled Name: " + name);
+                    Logger.reportUnknownName(this, name, in.peek());
                     in.skipValue();
                 }
             }
@@ -275,8 +265,8 @@ public class TripPassageStop {
                 } else if (name.equals(NAME) && in.peek() == JsonToken.STRING) {
                     tripPassageStop.setName(in.nextString());
                 } else {
+                    Logger.reportUnknownName(this, name, in.peek());
                     in.skipValue();
-                    Logger.d("Not handled Name :" + name);
                 }
             }
             in.endObject();

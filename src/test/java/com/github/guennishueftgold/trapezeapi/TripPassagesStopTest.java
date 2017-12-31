@@ -4,6 +4,8 @@ import com.google.gson.TypeAdapter;
 import org.joda.time.LocalTime;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class TripPassagesStopTest {
@@ -37,5 +39,11 @@ public class TripPassagesStopTest {
     @Test
     public void typeAdapter_check_write_null() {
         assertEquals(adapter.toJson(null), "null");
+    }
+
+    @Test
+    public void TypeAdapter_stop_seq_num_should_be_readable_as_string() throws IOException {
+        TripPassageStop tripPassageStop = adapter.fromJson("{\"" + TripPassageStop.Converter.STOP_SEQ_NUM + "\":\"2\"}");
+        assertEquals(tripPassageStop.getStopSeqNum(), 2);
     }
 }
