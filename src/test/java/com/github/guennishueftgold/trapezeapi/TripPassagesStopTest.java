@@ -57,10 +57,22 @@ public class TripPassagesStopTest {
 
     @Test
     public void TripPassageStop_equal_should_not_be_true() {
-        TripPassageStop tripPassageStop1 = createSample(1).build();
+        final TripPassageStop tripPassageStop1 = createSample(1).build();
         TripPassageStop tripPassageStop2 = createSample(2).build();
         assertNotEquals(tripPassageStop1, null);
         assertNotEquals(tripPassageStop1, new Object());
+        assertNotEquals(tripPassageStop1, tripPassageStop2);
+        tripPassageStop2 = createSample(1)
+                .setStopSeqNum(10)
+                .build();
+        assertNotEquals(tripPassageStop1, tripPassageStop2);
+        tripPassageStop2 = createSample(1)
+                .setStatus(-10)
+                .build();
+        assertNotEquals(tripPassageStop1, tripPassageStop2);
+        tripPassageStop2 = createSample(1)
+                .setId("unknown_id")
+                .build();
         assertNotEquals(tripPassageStop1, tripPassageStop2);
     }
 }
