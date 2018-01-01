@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.guennishueftgold.trapeze.api</groupId>
@@ -114,9 +115,9 @@
     </reporting>
     <distributionManagement>
         <repository>
-            <id>bintray-GuennisHueftgold-TrapezeApi</id>
-            <name>GuennisHueftgold-TrapezeApi</name>
-            <url>https://api.bintray.com/maven/guennishueftgold/TrapezeApi/TrapezeApi/</url>
+            <id>bintray-guennishueftgold-TrapezeApi</id>
+            <name>guennishueftgold-TrapezeApi</name>
+            <url>https://api.bintray.com/maven/guennishueftgold/TrapezeApi/TrapezeApi/;publish=1</url>
         </repository>
     </distributionManagement>
 </project>
