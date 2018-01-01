@@ -4,7 +4,7 @@
 
     <groupId>com.github.guennishueftgold.trapeze.api</groupId>
     <artifactId>trapezeapi</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
