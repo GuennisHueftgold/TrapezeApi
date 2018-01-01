@@ -4,7 +4,7 @@
 
     <groupId>com.github.guennishueftgold.trapeze.api</groupId>
     <artifactId>trapezeapi</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
 
     <dependencies>
         <dependency>
@@ -56,7 +56,7 @@
         <url>http://github.com/GuennisHueftgold/TrapezeApi</url>
         <connection>scm:git:git://github.com/GuennisHueftgold/TrapezeApi.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/GuennisHueftgold/TrapezeApi.git</developerConnection>
-        <tag>trapezeapi-1.0.0</tag>
+        <tag>trapezeapi-1.0.1</tag>
     </scm>
     <build>
         <plugins>
