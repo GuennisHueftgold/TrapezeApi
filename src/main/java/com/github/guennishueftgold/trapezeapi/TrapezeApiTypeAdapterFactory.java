@@ -39,6 +39,8 @@ class TrapezeApiTypeAdapterFactory implements TypeAdapterFactory {
             return (TypeAdapter<T>) new VehiclePathInfo.Converter(gson);
         } else if (type.getRawType() == PathSegment.class) {
             return (TypeAdapter<T>) new PathSegment.Converter();
+        } else if (type.getRawType() == Settings.class) {
+            return (TypeAdapter<T>) new Settings.Converter();
         } else {
             return null;
         }

@@ -108,4 +108,7 @@ public interface TrapezeApiService {
 
     @GET(PATH_PATH_INFO_BY_ROUTE_ID)
     Call<VehiclePathInfo> getPathInfoByRouteId(@Query("id") final String routeId);
+
+    @GET("settings")
+    Call<Settings> getSettings();
 }
