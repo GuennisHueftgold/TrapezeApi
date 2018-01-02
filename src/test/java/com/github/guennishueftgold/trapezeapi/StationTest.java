@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class StationTest {
 
     private final static Gson gson = new GsonBuilder()
-            .registerTypeAdapterFactory(new KvgApiTypeAdapterFactory())
+            .registerTypeAdapterFactory(new TrapezeApiTypeAdapterFactory())
             .create();
     private final static TypeAdapter<Station> adapter = new Station.Converter(gson);
 

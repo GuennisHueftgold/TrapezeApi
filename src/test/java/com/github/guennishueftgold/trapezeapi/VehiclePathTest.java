@@ -14,7 +14,7 @@ import static org.mockito.Mockito.*;
 public class VehiclePathTest {
 
     private final Gson gson = new GsonBuilder()
-            .registerTypeAdapterFactory(new KvgApiTypeAdapterFactory())
+            .registerTypeAdapterFactory(new TrapezeApiTypeAdapterFactory())
             .create();
     private final TypeAdapter<VehiclePath> adapter = new VehiclePath.Converter(gson);
 

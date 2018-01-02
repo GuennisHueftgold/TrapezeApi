@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class StopsByCharacterResultTest {
 
     private final Gson gson = new GsonBuilder()
-            .registerTypeAdapterFactory(new KvgApiTypeAdapterFactory())
+            .registerTypeAdapterFactory(new TrapezeApiTypeAdapterFactory())
             .create();
     private final TypeAdapter<StopsByCharacterResult> adapter = new StopsByCharacterResult.Converter(gson);
 

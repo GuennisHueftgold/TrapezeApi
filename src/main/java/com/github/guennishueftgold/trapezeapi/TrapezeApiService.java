@@ -6,7 +6,7 @@ import retrofit2.http.*;
 
 import java.util.List;
 
-public interface KvgApiService {
+public interface TrapezeApiService {
     String PATH_STATION_LOCATIONS = "geoserviceDispatcher/services/stopinfo/stops";
     String PATH_PATH_INFO_BY_TRIP_ID = "geoserviceDispatcher/services/pathinfo/trip";
     String PATH_PATH_INFO_BY_ROUTE_ID = "geoserviceDispatcher/services/pathinfo/route";

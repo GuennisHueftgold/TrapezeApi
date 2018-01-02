@@ -21,7 +21,7 @@ final class CacheManipulatorInterceptor implements Interceptor {
         final Response response = chain.proceed(request);
         if (request.method().equalsIgnoreCase("GET")) {
             final String encodedPath = request.url().encodedPath();
-            if (encodedPath.endsWith(KvgApiService.PATH_PATH_INFO_BY_TRIP_ID)) {
+            if (encodedPath.endsWith(TrapezeApiService.PATH_PATH_INFO_BY_TRIP_ID)) {
                 final CacheControl cacheControl =
                         new CacheControl.Builder()
                                 .maxAge(1, TimeUnit.HOURS)
@@ -32,7 +32,7 @@ final class CacheManipulatorInterceptor implements Interceptor {
                         .header(NAME_CACHE_CONTROL, cacheControl.toString())
                         .build();
             }
-            if (encodedPath.endsWith(KvgApiService.PATH_STATION_LOCATIONS)) {
+            if (encodedPath.endsWith(TrapezeApiService.PATH_STATION_LOCATIONS)) {
                 final CacheControl cacheControl =
                         new CacheControl.Builder()
                                 .maxAge(1, TimeUnit.HOURS)

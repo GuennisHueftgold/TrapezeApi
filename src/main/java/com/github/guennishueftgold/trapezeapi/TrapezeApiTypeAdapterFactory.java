@@ -6,7 +6,7 @@ import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
 import org.joda.time.LocalTime;
 
-class KvgApiTypeAdapterFactory implements TypeAdapterFactory {
+class TrapezeApiTypeAdapterFactory implements TypeAdapterFactory {
 
 
     @Override
