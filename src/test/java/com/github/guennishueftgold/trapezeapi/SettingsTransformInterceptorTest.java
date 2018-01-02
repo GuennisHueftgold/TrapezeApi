@@ -11,17 +11,23 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class SettingsTransformInterceptorTest {
+    final static String TEST_VALUE = "{\"name\":\"value\"}";
+    final static String TEST_VALUE_ORIGINAL = "INITIAL_VALUES =" + TEST_VALUE;
+
+    static final MockResponse createCorrectResponse() {
+        final MockResponse mockResponse =
+                new MockResponse();
+        mockResponse.setResponseCode(200);
+        mockResponse.setBody(TEST_VALUE_ORIGINAL);
+        mockResponse.setHeader("Content-Type", SettingsTransformInterceptor.CONTENT_TYPE_JAVASCRIPT.toString());
+        return mockResponse;
+    }
+
     @Test
     public void should_parse_correctly() throws Exception {
         MockWebServer mockWebServer = new MockWebServer();
         mockWebServer.start();
-        final String TEST_VALUE = "{\"name\":\"value\"}";
-        final MockResponse mockResponse =
-                new MockResponse();
-        mockResponse.setResponseCode(200);
-        mockResponse.setBody("INITIAL_VALUES =" + TEST_VALUE);
-        mockResponse.setHeader("Content-Type", SettingsTransformInterceptor.CONTENT_TYPE_JAVASCRIPT.toString());
-        mockWebServer.enqueue(mockResponse);
+        mockWebServer.enqueue(createCorrectResponse());
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .addInterceptor(new SettingsTransformInterceptor()).build();
@@ -49,4 +55,39 @@ public class SettingsTransformInterceptorTest {
         assertEquals(USELESS_BODY, response.body().string());
         assertEquals(response.code(), 404);
     }
+
+    @Test
+    public void should_skip_none_get_requests() throws Exception {
+        MockWebServer mockWebServer = new MockWebServer();
+        mockWebServer.start();
+        mockWebServer.enqueue(createCorrectResponse());
+
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                .addInterceptor(new SettingsTransformInterceptor()).build();
+        final Request request = new Request.Builder()
+                .url(mockWebServer.url("/settings"))
+                .method("delete", null)
+                .build();
+        final Response response = okHttpClient.newCall(request).execute();
+        mockWebServer.shutdown();
+        assertEquals(TEST_VALUE_ORIGINAL, response.body().string());
+    }
+
+    @Test
+    public void should_skip_none_settings_requests() throws Exception {
+        MockWebServer mockWebServer = new MockWebServer();
+        mockWebServer.start();
+        mockWebServer.enqueue(createCorrectResponse());
+
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                .addInterceptor(new SettingsTransformInterceptor()).build();
+        final Request request = new Request.Builder()
+                .url(mockWebServer.url("/settings2"))
+                .build();
+        final Response response = okHttpClient.newCall(request).execute();
+        mockWebServer.shutdown();
+        assertEquals(TEST_VALUE_ORIGINAL, response.body().string());
+    }
+
+
 }
