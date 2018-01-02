@@ -80,14 +80,113 @@ public class SettingsTest {
 
     @Test
     public void Settings_equals_should_be_false() {
-        final Settings settings1 = createSample(0)
-                .build();
-        assertNotEquals(settings1, null);
-        assertNotEquals(settings1, new Object());
-        for (int i = 1; i < 80; i++) {
-            final Settings settings2 = createSample(i)
-                    .build();
-            assertNotEquals(settings1, settings2);
+        Settings.Builder settings1 = createSample(0);
+        assertNotEquals(settings1
+                .build(), null);
+        assertNotEquals(settings1
+                .build(), new Object());
+        for (int i = 0; i < 24; i++) {
+            settings1 = new Settings.Builder();
+            Settings.Builder settings2 = new Settings.Builder();
+            switch (i) {
+                case 0:
+                    settings1.setTimesliderEnabled(true);
+                    settings2.setTimesliderEnabled(false);
+                    break;
+                case 1:
+                    settings1.setSuppressCountdownTimeIncrement(true);
+                    settings2.setSuppressCountdownTimeIncrement(false);
+                    break;
+                case 2:
+                    settings1.setShowScheduleColumn(true);
+                    settings2.setShowScheduleColumn(false);
+                    break;
+                case 3:
+                    settings1.setShowPassageTypeColumn(true);
+                    settings2.setShowPassageTypeColumn(false);
+                    break;
+                case 4:
+                    settings1.setGeolocationEnabled(true);
+                    settings2.setGeolocationEnabled(false);
+                    break;
+                case 5:
+                    settings1.setMapEnabled(true);
+                    settings2.setMapEnabled(false);
+                    break;
+                case 6:
+                    settings1.setMapShowControls(true);
+                    settings2.setMapShowControls(false);
+                    break;
+                case 7:
+                    settings1.setMapShowPatterns(true);
+                    settings2.setMapShowPatterns(false);
+                    break;
+                case 8:
+                    settings1.setMapShowStops(true);
+                    settings2.setMapShowStops(false);
+                    break;
+                case 9:
+                    settings1.setSearchByRoutesEnabled(true);
+                    settings2.setSearchByRoutesEnabled(false);
+                    break;
+                case 10:
+                    settings1.setSearchByStoppointsEnabled(true);
+                    settings2.setSearchByStoppointsEnabled(false);
+                    break;
+                case 11:
+                    settings1.setShowAboutDepartureText(true);
+                    settings2.setShowAboutDepartureText(false);
+                    break;
+                case 12:
+                    settings1.setShowActualColumn(true);
+                    settings2.setShowActualColumn(false);
+                    break;
+                case 13:
+                    settings1.setShowDepartingText(true);
+                    settings2.setShowDepartingText(false);
+                    break;
+                case 14:
+                    settings1.setShowDepArrText(true);
+                    settings2.setShowDepArrText(false);
+                    break;
+                case 15:
+                    settings1.setShowMixedColumn(true);
+                    settings2.setShowMixedColumn(false);
+                    break;
+                case 16:
+                    settings1.setInitialLatitude(1);
+                    settings2.setInitialLatitude(2);
+                    break;
+                case 17:
+                    settings1.setInitialLongitude(1);
+                    settings2.setInitialLongitude(2);
+                    break;
+                case 18:
+                    settings1.setMaxZoom(1);
+                    settings2.setMaxZoom(2);
+                    break;
+                case 19:
+                    settings1.setMinZoom(1);
+                    settings2.setMinZoom(2);
+                    break;
+                case 20:
+                    settings1.setInitialZoom(1);
+                    settings2.setInitialZoom(2);
+                    break;
+                case 21:
+                    settings1.setDefaultTimePreview(1);
+                    settings2.setDefaultTimePreview(2);
+                    break;
+                case 22:
+                    settings1.setMapShowVehicles(true);
+                    settings2.setMapShowVehicles(false);
+                    break;
+                case 23:
+                    settings1.setMobileEnabled(true);
+                    settings2.setMobileEnabled(false);
+                    break;
+            }
+            assertNotEquals(settings1.build(), settings2.build());
         }
     }
 
