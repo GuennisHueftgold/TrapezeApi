@@ -8,6 +8,8 @@ import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.Assert.assertEquals;
 
 public class SettingsTransformInterceptorTest {
@@ -19,6 +21,7 @@ public class SettingsTransformInterceptorTest {
                 new MockResponse();
         mockResponse.setResponseCode(200);
         mockResponse.setBody(TEST_VALUE_ORIGINAL);
+        mockResponse.setBodyDelay(100, TimeUnit.MILLISECONDS);
         mockResponse.setHeader("Content-Type", SettingsTransformInterceptor.CONTENT_TYPE_JAVASCRIPT.toString());
         return mockResponse;
     }
@@ -32,8 +35,8 @@ public class SettingsTransformInterceptorTest {
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .addInterceptor(new SettingsTransformInterceptor()).build();
         final Response response = okHttpClient.newCall(new Request.Builder().url(mockWebServer.url("/settings")).build()).execute();
-        mockWebServer.shutdown();
         assertEquals(TEST_VALUE, response.body().string());
+        mockWebServer.shutdown();
     }
 
     @Test
@@ -51,9 +54,9 @@ public class SettingsTransformInterceptorTest {
                 .addInterceptor(new SettingsTransformInterceptor()).build();
         Response response = okHttpClient.newCall(new Request.Builder().url(mockWebServer.url("/settings")).build()).execute();
         RecordedRequest request = mockWebServer.takeRequest();
-        mockWebServer.shutdown();
         assertEquals(USELESS_BODY, response.body().string());
         assertEquals(response.code(), 404);
+        mockWebServer.shutdown();
     }
 
     @Test
@@ -69,8 +72,8 @@ public class SettingsTransformInterceptorTest {
                 .method("delete", null)
                 .build();
         final Response response = okHttpClient.newCall(request).execute();
-        mockWebServer.shutdown();
         assertEquals(TEST_VALUE_ORIGINAL, response.body().string());
+        mockWebServer.shutdown();
     }
 
     @Test
@@ -85,8 +88,8 @@ public class SettingsTransformInterceptorTest {
                 .url(mockWebServer.url("/settings2"))
                 .build();
         final Response response = okHttpClient.newCall(request).execute();
-        mockWebServer.shutdown();
         assertEquals(TEST_VALUE_ORIGINAL, response.body().string());
+        mockWebServer.shutdown();
     }
 
 
