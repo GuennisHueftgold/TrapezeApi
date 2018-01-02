@@ -3,11 +3,8 @@ package com.github.guennishueftgold.trapezeapi;
 import okhttp3.*;
 import okio.BufferedSource;
 import okio.ByteString;
-import okio.GzipSource;
-import okio.Okio;
 
 import java.io.IOException;
-import java.util.Objects;
 
 final class SettingsTransformInterceptor implements Interceptor {
     final static MediaType CONTENT_TYPE_JAVASCRIPT = MediaType.parse("text/javascript");
@@ -28,12 +25,7 @@ final class SettingsTransformInterceptor implements Interceptor {
             return response;
         final MediaType contentType = response.body().contentType();
         if (CONTENT_TYPE_JAVASCRIPT.equals(contentType)) {
-            BufferedSource source;
-            if (Objects.equals(response.header(HEADER_CONTENT_ENCODING, null), "gzip")) {
-                source = Okio.buffer(new GzipSource(response.body().source()));
-            } else {
-                source = response.body().source();
-            }
+            final BufferedSource source = response.body().source();
             final long start = source.indexOf(START_MARKER);
             source.skip(start);
             return response

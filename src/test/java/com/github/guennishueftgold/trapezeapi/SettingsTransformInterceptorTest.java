@@ -6,6 +6,9 @@ import okhttp3.Response;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
+import okio.Buffer;
+import okio.ByteString;
+import okio.GzipSink;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -31,6 +34,29 @@ public class SettingsTransformInterceptorTest {
         MockWebServer mockWebServer = new MockWebServer();
         mockWebServer.start();
         mockWebServer.enqueue(createCorrectResponse());
+
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                .addInterceptor(new SettingsTransformInterceptor()).build();
+        final Response response = okHttpClient.newCall(new Request.Builder().url(mockWebServer.url("/settings")).build()).execute();
+        assertEquals(TEST_VALUE, response.body().string());
+        mockWebServer.shutdown();
+    }
+
+    @Test
+    public void should_parse_gziped_correctly() throws Exception {
+        MockWebServer mockWebServer = new MockWebServer();
+        mockWebServer.start();
+        final MockResponse mockResponse = createCorrectResponse();
+        mockResponse.setHeader(SettingsTransformInterceptor.HEADER_CONTENT_ENCODING, "gzip");
+        Buffer input = new Buffer();
+        input.write(ByteString.encodeUtf8(TEST_VALUE_ORIGINAL));
+        Buffer output = new Buffer();
+        GzipSink gzipSink = new GzipSink(output);
+        gzipSink.write(input, input.size());
+        gzipSink.flush();
+        gzipSink.close();
+        mockResponse.setBody(output);
+        mockWebServer.enqueue(mockResponse);
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .addInterceptor(new SettingsTransformInterceptor()).build();
@@ -91,6 +117,28 @@ public class SettingsTransformInterceptorTest {
         assertEquals(TEST_VALUE_ORIGINAL, response.body().string());
         mockWebServer.shutdown();
     }
+
+    @Test
+    public void should_skip_json_content_requests() throws Exception {
+        MockWebServer mockWebServer = new MockWebServer();
+        mockWebServer.start();
+        MockResponse mockResponse = createCorrectResponse();
+        mockResponse.setBody(TEST_VALUE);
+        mockResponse.setHeader(SettingsTransformInterceptor.HEADER_CONTENT_TYPE, SettingsTransformInterceptor.CONTENT_TYPE_JSON.toString());
+        mockWebServer.enqueue(mockResponse);
+
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                .addInterceptor(new SettingsTransformInterceptor()).build();
+        final Request request = new Request.Builder()
+                .url(mockWebServer.url("/settings"))
+                .build();
+        final Response response = okHttpClient.newCall(request).execute();
+        assertEquals(TEST_VALUE, response.body().string());
+        assertEquals(response.header(SettingsTransformInterceptor.HEADER_CONTENT_TYPE, null),
+                SettingsTransformInterceptor.CONTENT_TYPE_JSON.toString());
+        mockWebServer.shutdown();
+    }
+
 
 
 }
