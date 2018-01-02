@@ -5,8 +5,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class SettingsTest {
@@ -67,6 +66,44 @@ public class SettingsTest {
         final Settings settings = adapter.fromJson("{\"unknown_tag\":null}");
         assertNotNull(settings);
         verify(logger, times(1)).unknownName(adapter, "unknown_tag", JsonToken.NULL);
+    }
+
+    @Test
+    public void Settings_equals_should_be_true() {
+        final Settings settings1 = createSample(0)
+                .build();
+        final Settings settings2 = createSample(0)
+                .build();
+        assertEquals(settings1, settings2);
+        assertEquals(settings1, settings2);
+    }
+
+    @Test
+    public void Settings_equals_should_be_false() {
+        final Settings settings1 = createSample(0)
+                .build();
+        final Settings settings2 = createSample(1)
+                .build();
+        final Settings settings3 = createSample(2).build();
+        assertNotEquals(settings1, settings3);
+        assertNotEquals(settings2, settings3);
+        assertNotEquals(settings1, null);
+        assertNotEquals(settings1, new Object());
+    }
+
+    @Test
+    public void Settings_hashCode_should_be_equal() {
+        final Settings settings1 = createSample(10).build();
+        final Settings settings2 = createSample(10).build();
+        assertEquals(settings1.hashCode(), settings2.hashCode());
+    }
+
+    @Test
+    public void Settings_hashCode_should_not_be_equal() {
+        final Settings settings1 = createSample(10).build();
+        final Settings settings2 = createSample(9)
+                .build();
+        assertNotEquals(settings1.hashCode(), settings2.hashCode());
     }
 
 }
