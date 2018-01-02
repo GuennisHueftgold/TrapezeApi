@@ -17,7 +17,7 @@ public class TripPassagesTest {
     private final static LocalTime TEST_TIME_PLANED = LocalTime.fromMillisOfDay(1000L);
     private final static LocalTime TEST_TIME_ACTUAL = LocalTime.fromMillisOfDay(2000L);
     private final Gson gson = new GsonBuilder()
-            .registerTypeAdapterFactory(new KvgApiTypeAdapterFactory())
+            .registerTypeAdapterFactory(new TrapezeApiTypeAdapterFactory())
             .create();
     private final TypeAdapter<TripPassages> adapter = new TripPassages.Converter(gson);
 

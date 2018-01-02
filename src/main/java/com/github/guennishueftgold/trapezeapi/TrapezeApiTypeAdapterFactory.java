@@ -6,7 +6,7 @@ import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
 import org.joda.time.LocalTime;
 
-class KvgApiTypeAdapterFactory implements TypeAdapterFactory {
+class TrapezeApiTypeAdapterFactory implements TypeAdapterFactory {
 
 
     @Override
@@ -39,6 +39,8 @@ class KvgApiTypeAdapterFactory implements TypeAdapterFactory {
             return (TypeAdapter<T>) new VehiclePathInfo.Converter(gson);
         } else if (type.getRawType() == PathSegment.class) {
             return (TypeAdapter<T>) new PathSegment.Converter();
+        } else if (type.getRawType() == Settings.class) {
+            return (TypeAdapter<T>) new Settings.Converter();
         } else {
             return null;
         }
