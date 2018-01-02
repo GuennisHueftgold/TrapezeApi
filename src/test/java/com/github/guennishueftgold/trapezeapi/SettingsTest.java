@@ -18,7 +18,6 @@ public class SettingsTest {
                 .setSuppressCountdownTimeIncrement(idx % 3 == 0)
                 .setShowScheduleColumn(idx % 4 == 0)
                 .setShowPassageTypeColumn(idx % 5 == 0)
-                .setDefaultTimePreview((idx % 40) + 2)
                 .setGeolocationEnabled(idx % 6 == 0)
                 .setMapEnabled(idx % 7 == 0)
                 .setMapShowControls(idx % 8 == 0)
@@ -37,7 +36,8 @@ public class SettingsTest {
                 .setInitialLongitude(idx / 19)
                 .setMaxZoom((idx / 19) + 5)
                 .setMinZoom((idx / 19))
-                .setInitialZoom((idx / 19));
+                .setInitialZoom((idx / 19))
+                .setDefaultTimePreview((idx / 19) + 5);
     }
 
     @Test
