@@ -74,7 +74,7 @@ public class SettingsTest {
                 .build();
         final Settings settings2 = createSample(0)
                 .build();
-        assertEquals(settings1, settings2);
+        assertEquals(settings1, settings1);
         assertEquals(settings1, settings2);
     }
 
@@ -82,13 +82,13 @@ public class SettingsTest {
     public void Settings_equals_should_be_false() {
         final Settings settings1 = createSample(0)
                 .build();
-        final Settings settings2 = createSample(1)
-                .build();
-        final Settings settings3 = createSample(2).build();
-        assertNotEquals(settings1, settings3);
-        assertNotEquals(settings2, settings3);
         assertNotEquals(settings1, null);
         assertNotEquals(settings1, new Object());
+        for (int i = 1; i < 50; i++) {
+            final Settings settings2 = createSample(i)
+                    .build();
+            assertNotEquals(settings1, settings2);
+        }
     }
 
     @Test
