@@ -6,6 +6,7 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public final class Settings {
     private final int mDefaultTimePreview;
@@ -191,31 +192,30 @@ public final class Settings {
 
     @Override
     public int hashCode() {
-        int result = mDefaultTimePreview;
-        result = 31 * result + (mGeolocationEnabled ? 1 : 0);
-        result = 31 * result + (int) (mInitialLatitude ^ (mInitialLatitude >>> 32));
-        result = 31 * result + (int) (mInitialLongitude ^ (mInitialLongitude >>> 32));
-        result = 31 * result + mInitialZoom;
-        result = 31 * result + (mMapEnabled ? 1 : 0);
-        result = 31 * result + (mMapShowControls ? 1 : 0);
-        result = 31 * result + (mMapShowStops ? 1 : 0);
-        result = 31 * result + (mMapShowPatterns ? 1 : 0);
-        result = 31 * result + (mMapShowVehicles ? 1 : 0);
-        result = 31 * result + mMaxZoom;
-        result = 31 * result + mMinZoom;
-        result = 31 * result + (mMobileEnabled ? 1 : 0);
-        result = 31 * result + (mSearchByRoutesEnabled ? 1 : 0);
-        result = 31 * result + (mSearchByStoppointsEnabled ? 1 : 0);
-        result = 31 * result + (mShowAboutDepartureText ? 1 : 0);
-        result = 31 * result + (mShowActualColumn ? 1 : 0);
-        result = 31 * result + (mShowDepartingText ? 1 : 0);
-        result = 31 * result + (mShowDepArrText ? 1 : 0);
-        result = 31 * result + (mShowMixedColumn ? 1 : 0);
-        result = 31 * result + (mShowPassageTypeColumn ? 1 : 0);
-        result = 31 * result + (mShowScheduleColumn ? 1 : 0);
-        result = 31 * result + (mSuppressCountdownTimeIncrement ? 1 : 0);
-        result = 31 * result + (mTimesliderEnabled ? 1 : 0);
-        return result;
+        return Objects.hash(mDefaultTimePreview,
+                mGeolocationEnabled,
+                mInitialLatitude,
+                mInitialLongitude,
+                mInitialZoom,
+                mMapEnabled,
+                mMapShowControls,
+                mMapShowStops,
+                mMapShowPatterns,
+                mMapShowVehicles,
+                mMaxZoom,
+                mMinZoom,
+                mMobileEnabled,
+                mSearchByRoutesEnabled,
+                mSearchByStoppointsEnabled,
+                mShowAboutDepartureText,
+                mShowActualColumn,
+                mShowDepartingText,
+                mShowDepArrText,
+                mShowMixedColumn,
+                mShowPassageTypeColumn,
+                mShowScheduleColumn,
+                mSuppressCountdownTimeIncrement,
+                mTimesliderEnabled);
     }
 
     @Override

@@ -20,16 +20,11 @@ public class SettingsTest {
                 .setShowPassageTypeColumn(idx % 5 == 0)
                 .setDefaultTimePreview((idx % 40) + 2)
                 .setGeolocationEnabled(idx % 6 == 0)
-                .setInitialLatitude(-idx * 20)
-                .setInitialLongitude(idx * 20)
-                .setInitialZoom(idx % 20)
                 .setMapEnabled(idx % 7 == 0)
                 .setMapShowControls(idx % 8 == 0)
                 .setMapShowPatterns(idx % 9 == 0)
                 .setMapShowStops(idx % 10 == 0)
                 .setMapShowVehicles(idx % 11 == 0)
-                .setMaxZoom(idx % 20)
-                .setMinZoom(idx % 14)
                 .setMobileEnabled(idx % 12 == 0)
                 .setSearchByRoutesEnabled(idx % 13 == 0)
                 .setSearchByStoppointsEnabled(idx % 14 == 0)
@@ -37,12 +32,17 @@ public class SettingsTest {
                 .setShowActualColumn(idx % 16 == 0)
                 .setShowDepartingText(idx % 17 == 0)
                 .setShowDepArrText(idx % 18 == 0)
-                .setShowMixedColumn(idx % 19 == 0);
+                .setShowMixedColumn(idx % 19 == 0)
+                .setInitialLatitude(-(idx / 19))
+                .setInitialLongitude(idx / 19)
+                .setMaxZoom((idx / 19) + 5)
+                .setMinZoom((idx / 19))
+                .setInitialZoom((idx / 19));
     }
 
     @Test
     public void typeadapter_read_full_information() throws Exception {
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 80; i++) {
             final Settings input = createSample(i).build();
             final Settings output = adapter.fromJson(adapter.toJson(input));
             assertEquals(input, output);
@@ -84,7 +84,7 @@ public class SettingsTest {
                 .build();
         assertNotEquals(settings1, null);
         assertNotEquals(settings1, new Object());
-        for (int i = 1; i < 50; i++) {
+        for (int i = 1; i < 80; i++) {
             final Settings settings2 = createSample(i)
                     .build();
             assertNotEquals(settings1, settings2);
