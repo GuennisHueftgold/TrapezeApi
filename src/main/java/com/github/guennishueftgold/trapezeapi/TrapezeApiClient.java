@@ -25,14 +25,6 @@ public final class TrapezeApiClient {
         this(baseUrl, null, false);
     }
 
-    public TrapezeApiClient(String baseUrl) {
-        this(HttpUrl.parse(baseUrl));
-    }
-
-    public TrapezeApiClient(String baseUrl, File cacheDir, boolean debug) {
-        this(HttpUrl.parse(baseUrl), cacheDir, debug);
-    }
-
     public TrapezeApiClient(HttpUrl baseUrl, File cacheDir, boolean debug) {
         if (baseUrl == null) {
             throw new RuntimeException("BaseUrl must not be null");
