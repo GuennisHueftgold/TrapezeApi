@@ -93,7 +93,7 @@ public final class ShortStationInfo {
         }
     }
 
-    public static class Converter extends TypeAdapter<ShortStationInfo> {
+    static class Converter extends TypeAdapter<ShortStationInfo> {
         private final static String NAME_ID = "id", NAME_NAME = "name", NAME_NUMBER = "number";
 
         @Override

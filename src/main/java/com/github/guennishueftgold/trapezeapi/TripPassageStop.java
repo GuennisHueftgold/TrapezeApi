@@ -177,7 +177,7 @@ public final class TripPassageStop {
         }
     }
 
-    public final static class Converter extends TypeAdapter<TripPassageStop> {
+    final static class Converter extends TypeAdapter<TripPassageStop> {
 
         final static String STOP_SEQ_NUM = "stop_seq_num",
                 SHORT_NAME = "shortName",

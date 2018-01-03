@@ -8,6 +8,9 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Server provided Settings
+ */
 public final class Settings {
     private final int mDefaultTimePreview;
     private final boolean mGeolocationEnabled;
@@ -77,14 +80,27 @@ public final class Settings {
         return mInitialLongitude;
     }
 
+    /**
+     * Get the initial zoom to be used
+     *
+     * @return initial zoom value
+     */
     public int getInitialZoom() {
         return mInitialZoom;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isMapEnabled() {
         return mMapEnabled;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isMapShowControls() {
         return mMapShowControls;
     }
@@ -248,6 +264,9 @@ public final class Settings {
                 '}';
     }
 
+    /**
+     * Builder used to construct {@link Settings}
+     */
     public final static class Builder {
 
         private int mDefaultTimePreview;

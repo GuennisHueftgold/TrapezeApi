@@ -13,6 +13,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Provides information about a Station
+ */
 public final class Station {
     private final String mStopName;
     private final String mStopShortName;
@@ -36,14 +39,27 @@ public final class Station {
         this.mRoutes = Collections.unmodifiableList(builder.getRoutes());
     }
 
+    /**
+     * Gets the list of current routes serviced by the station
+     *
+     * @return a list of {@link Route}s
+     */
     public List<Route> getRoutes() {
         return mRoutes;
     }
 
+    /**
+     * Gets the stop name of the station
+     * @return the stop name
+     */
     public String getStopName() {
         return mStopName;
     }
 
+    /**
+     * Get the stations short name
+     * @return the short name
+     */
     public String getStopShortName() {
         return mStopShortName;
     }
