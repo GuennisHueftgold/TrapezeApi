@@ -3,6 +3,7 @@ package com.github.guennishueftgold.trapezeapi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import okhttp3.Cache;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -10,31 +11,41 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.File;
 
 
-public final class TrapezeApi {
+public final class TrapezeApiClient {
 
     public final static double COORDINATES_CONVERTION_CONSTANT = 3600000d;
     private final static long CACHE_SIZE = 1024 * 1024 * 20;
-    private final static String API_BASE_URL = "http://www.kvg-kiel.de/internetservice/";
-    private static TrapezeApi mInstance;
     private final OkHttpClient mOkHttpClient;
     private final Retrofit mRetrofit;
     private final Gson mGson;
     private final Cache mCache;
+    private final HttpUrl mBaseUrl;
 
-    public TrapezeApi() {
-        this(null, false);
+    public TrapezeApiClient(HttpUrl baseUrl) {
+        this(baseUrl, null, false);
     }
 
-    public TrapezeApi(File cacheDir, boolean debug) {
-        this.mCache = new Cache(cacheDir, TrapezeApi.CACHE_SIZE);
+    public TrapezeApiClient(String baseUrl) {
+        this(HttpUrl.parse(baseUrl));
+    }
+
+    public TrapezeApiClient(String baseUrl, File cacheDir, boolean debug) {
+        this(HttpUrl.parse(baseUrl), cacheDir, debug);
+    }
+
+    public TrapezeApiClient(HttpUrl baseUrl, File cacheDir, boolean debug) {
+        if (baseUrl == null) {
+            throw new RuntimeException("BaseUrl must not be null");
+        }
+        this.mBaseUrl = baseUrl;
         final OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder()
-                .cache(this.mCache)
-                .addNetworkInterceptor(new CacheManipulatorInterceptor());
-        if (debug) {
-            /*
-            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
-            okHttpClientBuilder.addNetworkInterceptor(logging);*/
+                .addNetworkInterceptor(new CacheManipulatorInterceptor())
+                .addNetworkInterceptor(new SettingsTransformInterceptor(this));
+        if (cacheDir != null) {
+            this.mCache = new Cache(cacheDir, TrapezeApiClient.CACHE_SIZE);
+            okHttpClientBuilder.cache(this.mCache);
+        } else {
+            this.mCache = null;
         }
         this.mOkHttpClient = okHttpClientBuilder.build();
         this.mGson = new GsonBuilder()
@@ -42,20 +53,13 @@ public final class TrapezeApi {
                 .create();
         this.mRetrofit = new Retrofit.Builder()
                 .client(this.mOkHttpClient)
-                .baseUrl(TrapezeApi.API_BASE_URL)
+                .baseUrl(this.mBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create(this.mGson))
                 .build();
     }
 
-    public static TrapezeApi getInstance() {
-        return TrapezeApi.mInstance;
-    }
-
-    public final static void init(File cacheDir, boolean debug) {
-        if (TrapezeApi.mInstance != null) {
-            return;
-        }
-        TrapezeApi.mInstance = new TrapezeApi(cacheDir, debug);
+    public HttpUrl getBaseUrl() {
+        return this.mBaseUrl;
     }
 
     public TrapezeApiService getService() {

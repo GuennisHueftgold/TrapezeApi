@@ -36,7 +36,7 @@ public class SettingsTransformInterceptorTest {
         mockWebServer.enqueue(createCorrectResponse());
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .addInterceptor(new SettingsTransformInterceptor()).build();
+                .addInterceptor(new SettingsTransformInterceptor(mockWebServer.url(""))).build();
         final Response response = okHttpClient.newCall(new Request.Builder().url(mockWebServer.url("/settings")).build()).execute();
         assertEquals(TEST_VALUE, response.body().string());
         mockWebServer.shutdown();
@@ -59,7 +59,7 @@ public class SettingsTransformInterceptorTest {
         mockWebServer.enqueue(mockResponse);
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .addInterceptor(new SettingsTransformInterceptor()).build();
+                .addInterceptor(new SettingsTransformInterceptor(mockWebServer.url(""))).build();
         final Response response = okHttpClient.newCall(new Request.Builder().url(mockWebServer.url("/settings")).build()).execute();
         assertEquals(TEST_VALUE, response.body().string());
         mockWebServer.shutdown();
@@ -77,7 +77,7 @@ public class SettingsTransformInterceptorTest {
         mockWebServer.enqueue(mockResponse);
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .addInterceptor(new SettingsTransformInterceptor()).build();
+                .addInterceptor(new SettingsTransformInterceptor(mockWebServer.url(""))).build();
         Response response = okHttpClient.newCall(new Request.Builder().url(mockWebServer.url("/settings")).build()).execute();
         RecordedRequest request = mockWebServer.takeRequest();
         assertEquals(USELESS_BODY, response.body().string());
@@ -92,7 +92,7 @@ public class SettingsTransformInterceptorTest {
         mockWebServer.enqueue(createCorrectResponse());
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .addInterceptor(new SettingsTransformInterceptor()).build();
+                .addInterceptor(new SettingsTransformInterceptor(mockWebServer.url(""))).build();
         final Request request = new Request.Builder()
                 .url(mockWebServer.url("/settings"))
                 .method("delete", null)
@@ -109,7 +109,7 @@ public class SettingsTransformInterceptorTest {
         mockWebServer.enqueue(createCorrectResponse());
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .addInterceptor(new SettingsTransformInterceptor()).build();
+                .addInterceptor(new SettingsTransformInterceptor(mockWebServer.url(""))).build();
         final Request request = new Request.Builder()
                 .url(mockWebServer.url("/settings2"))
                 .build();
@@ -128,7 +128,7 @@ public class SettingsTransformInterceptorTest {
         mockWebServer.enqueue(mockResponse);
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .addInterceptor(new SettingsTransformInterceptor()).build();
+                .addInterceptor(new SettingsTransformInterceptor(mockWebServer.url(""))).build();
         final Request request = new Request.Builder()
                 .url(mockWebServer.url("/settings"))
                 .build();
