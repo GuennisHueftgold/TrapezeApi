@@ -11,6 +11,11 @@ import org.joda.time.LocalTime;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Departure information
+ *
+ * @since 1.0.0
+ */
 public final class Departure {
     private final int mActualRelativeTime;
     private final String mDirection;
@@ -103,10 +108,20 @@ public final class Departure {
         return mPatternText;
     }
 
+    /**
+     * gets the planned time
+     * @since 1.0.0
+     * @return the planned time
+     */
     public LocalTime getPlannedTime() {
         return mPlannedTime;
     }
 
+    /**
+     * gets the route id
+     * @since 1.0.0
+     * @return the route id
+     */
     public String getRouteId() {
         return mRouteId;
     }
@@ -115,15 +130,28 @@ public final class Departure {
         return mStatus;
     }
 
+    /**
+     * gets the trip id
+     * @since 1.0.0
+     * @return the trip id
+     */
     public String getTripId() {
         return mTripId;
     }
 
+    /**
+     * gets the vehicle id
+     * @since 1.0.0
+     * @return the vehicle id
+     */
     public String getVehicleId() {
         return mVehicleId;
     }
 
-
+    /**
+     * Builder for {@link Departure}
+     * @since 1.0.0
+     */
     public final static class Builder {
         private int mActualRelativeTime;
         private String mDirection;
@@ -218,19 +246,41 @@ public final class Departure {
             return this;
         }
 
+        /**
+         * @see Departure#getTripId()
+         * @since 1.0.0
+         * @return the trip id
+         */
         public String getTripId() {
             return mTripId;
         }
 
+        /**
+         * @see Departure#getTripId()
+         * @since 1.0.0
+         * @param tripId the trip id
+         * @return the builder
+         */
         public Builder setTripId(String tripId) {
             mTripId = tripId;
             return this;
         }
 
+        /**
+         * @see Departure#getVehicleId()
+         * @since 1.0.0
+         * @return the vehicle id
+         */
         public String getVehicleId() {
             return mVehicleId;
         }
 
+        /**
+         * @see Departure#getVehicleId()
+         * @since 1.0.0
+         * @param vehicleId the vehicle id
+         * @return the builder
+         */
         public Builder setVehicleId(String vehicleId) {
             mVehicleId = vehicleId;
             return this;
