@@ -15,11 +15,11 @@ public final class TrapezeApiClient {
 
     public final static double COORDINATES_CONVERTION_CONSTANT = 3600000d;
     private final static long CACHE_SIZE = 1024 * 1024 * 20;
-    private final OkHttpClient mOkHttpClient;
-    private final Retrofit mRetrofit;
-    private final Gson mGson;
-    private final Cache mCache;
-    private final HttpUrl mBaseUrl;
+    protected final OkHttpClient mOkHttpClient;
+    protected final Retrofit mRetrofit;
+    protected final Gson mGson;
+    protected final Cache mCache;
+    protected final HttpUrl mBaseUrl;
 
     public TrapezeApiClient(HttpUrl baseUrl) {
         this(baseUrl, null, false);
