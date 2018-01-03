@@ -65,27 +65,40 @@ public interface TrapezeApiService {
     Call<TripPassages> getTripPassages(@Field("tripId") String tripId, @Field("mode") String mode);
 
     /**
-     * @return
+     * get all stops
+     * @since 1.0.0
+     * @return the stops
      */
     @FormUrlEncoded
     @POST("services/lookup/stopsByCharacter?character=")
     Call<StopsByCharacterResult> getAllStops();
 
+    /**
+     * Get the stops for the provided route id
+     *
+     * @param routeId the route id
+     * @return the route stops
+     * @since 1.0.0
+     */
     @FormUrlEncoded
     @POST("services/routeInfo/routeStops")
     Call<StopsByCharacterResult> getRouteStops(@Field("routeId") String routeId);
 
     /**
-     * @param character
-     * @return
+     * Searches for stops by first character
+     * @since 1.0.0
+     * @param character the character to lookup
+     * @return the search result
      */
     @FormUrlEncoded
     @POST("services/lookup/stopsByCharacter")
     Call<StopsByCharacterResult> getStopsByCharacter(@Query("character") String character);
 
     /**
-     * @param search
-     * @return
+     * Searches for stops by full name
+     * @since 1.0.0
+     * @param search the search term to look up
+     * @return the search result
      */
     @FormUrlEncoded
     @POST("services/lookup/fulltext")
@@ -109,6 +122,11 @@ public interface TrapezeApiService {
     @GET(PATH_PATH_INFO_BY_ROUTE_ID)
     Call<VehiclePathInfo> getPathInfoByRouteId(@Query("id") final String routeId);
 
+    /**
+     * Gets the server provided settings
+     * @since 1.2.0
+     * @return A call providing the settings
+     */
     @GET("settings")
     Call<Settings> getSettings();
 }
