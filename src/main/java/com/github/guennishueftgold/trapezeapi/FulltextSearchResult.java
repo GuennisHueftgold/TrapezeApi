@@ -16,8 +16,8 @@ public final class FulltextSearchResult {
     private final String mName;
 
     private FulltextSearchResult(Builder builder) {
-        this.mShortName = builder.mShortName;
-        this.mName = builder.mName;
+        this.mShortName = builder.getShortName();
+        this.mName = builder.getName();
     }
 
     /**
