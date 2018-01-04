@@ -18,6 +18,25 @@ public class StationTest {
         return createSample(idx, 4, 5, 6, 7, 8);
     }
 
+    public final static Station.Builder createSample(int idx, int actual, int old, int alerts, int routes, int directions) {
+        final Station.Builder builder = new Station.Builder()
+                .setStopName("stop_name_" + idx)
+                .setStopShortName("stop_short_name_" + idx)
+                .setFirstPassageTime(idx)
+                .setLastPassageTime(idx * 2);
+        for (int i = 0; i < actual; i++)
+            builder.addActual(DepartureTest.createSample(i).build());
+        for (int i = 0; i < old; i++)
+            builder.addOld(DepartureTest.createSample(i).build());
+        for (int i = 0; i < alerts; i++)
+            builder.addGeneralAlert("alert_" + i);
+        for (int i = 0; i < routes; i++)
+            builder.addRoute(RouteTest.createSample(i).build());
+        for (int i = 0; i < directions; i++)
+            builder.addDirection("direction_" + i);
+        return builder;
+    }
+
     @Test
     public void typeadapter_check_read_null() throws Exception {
         assertNull(adapter.fromJson("null"));
@@ -31,23 +50,6 @@ public class StationTest {
     @Test
     public void typeaadapter_skip_unknown_tag() throws Exception {
         assertNotNull(adapter.fromJson("{\"unknown_tag\":2}"));
-    }
-
-    public final static Station.Builder createSample(int idx, int actual, int old, int alerts, int routes, int directions) {
-        final Station.Builder builder = new Station.Builder()
-                .setStopName("stop_name_" + idx)
-                .setStopShortName("stop_short_name_" + idx);
-        for (int i = 0; i < actual; i++)
-            builder.addActual(DepartureTest.createSample(i).build());
-        for (int i = 0; i < old; i++)
-            builder.addOld(DepartureTest.createSample(i).build());
-        for (int i = 0; i < alerts; i++)
-            builder.addGeneralAlert("alert_" + i);
-        for (int i = 0; i < routes; i++)
-            builder.addRoute(RouteTest.createSample(i).build());
-        for (int i = 0; i < directions; i++)
-            builder.addDirection("direction_" + i);
-        return builder;
     }
 
     @Test

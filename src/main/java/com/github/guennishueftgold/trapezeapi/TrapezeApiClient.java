@@ -10,7 +10,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.File;
 
-
+/**
+ * The main entry point for interaction with the api
+ */
 public final class TrapezeApiClient {
 
     public final static double COORDINATES_CONVERTION_CONSTANT = 3600000d;
@@ -21,10 +23,23 @@ public final class TrapezeApiClient {
     protected final Cache mCache;
     protected final HttpUrl mBaseUrl;
 
+    /**
+     * Constructs a {@link TrapezeApiClient} instance
+     *
+     * @param baseUrl the base url for the api endpoint
+     * @since 1.2.0
+     */
     public TrapezeApiClient(HttpUrl baseUrl) {
         this(baseUrl, null, false);
     }
 
+    /**
+     * Constructs a {@link TrapezeApiClient} instance
+     * @since 1.2.0
+     * @param baseUrl the base url for the api endpoint
+     * @param cacheDir the cacheDir to be used
+     * @param debug should print debug information
+     */
     public TrapezeApiClient(HttpUrl baseUrl, File cacheDir, boolean debug) {
         if (baseUrl == null) {
             throw new RuntimeException("BaseUrl must not be null");
@@ -50,10 +65,21 @@ public final class TrapezeApiClient {
                 .build();
     }
 
+    /**
+     * The base url being used by the Api Client
+     * @apiNote this method should never be null, as the {@link TrapezeApiClient} cannot be constructed without a valid url
+     * @since 1.2.0
+     * @return the base url
+     */
     public HttpUrl getBaseUrl() {
         return this.mBaseUrl;
     }
 
+    /**
+     * The Endpoints Service provided by the Api Client
+     * @since 1.0.0
+     * @return the endpoint service
+     */
     public TrapezeApiService getService() {
         return this.mRetrofit.create(TrapezeApiService.class);
     }

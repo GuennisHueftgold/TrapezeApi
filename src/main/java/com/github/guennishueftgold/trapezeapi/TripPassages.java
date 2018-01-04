@@ -132,7 +132,7 @@ public class TripPassages {
         }
     }
 
-    public final static class Converter extends TypeAdapter<TripPassages> {
+    final static class Converter extends TypeAdapter<TripPassages> {
 
         private final static String
                 ROUTE_NAME = "routeName",

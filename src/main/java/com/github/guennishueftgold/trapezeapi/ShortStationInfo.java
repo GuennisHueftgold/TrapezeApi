@@ -93,7 +93,7 @@ public final class ShortStationInfo {
         }
     }
 
-    public static class Converter extends TypeAdapter<ShortStationInfo> {
+    static class Converter extends TypeAdapter<ShortStationInfo> {
         private final static String NAME_ID = "id", NAME_NAME = "name", NAME_NUMBER = "number";
 
         @Override
@@ -130,7 +130,7 @@ public final class ShortStationInfo {
                 } else if (NAME_NUMBER.equalsIgnoreCase(name) && in.peek() == JsonToken.STRING) {
                     builder.setStopShortName(in.nextString());
                 } else {
-                    Logger.d("Unknown Name: %s", name);
+                    Logger.reportUnknownName(this, name, in.peek());
                     in.skipValue();
                 }
             }

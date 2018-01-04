@@ -12,9 +12,11 @@ public interface TrapezeApiService {
     String PATH_PATH_INFO_BY_ROUTE_ID = "geoserviceDispatcher/services/pathinfo/route";
 
     /**
-     * @param stop
-     * @param mode
-     * @return
+     * Gets the stop
+     * @since 1.0.0
+     * @param stop the stop
+     * @param mode the mode
+     * @return the stop information
      */
     @FormUrlEncoded
     @POST("services/passageInfo/stopPassages/stop")
@@ -22,12 +24,14 @@ public interface TrapezeApiService {
                              @Field("mode") String mode);
 
     /**
-     * @param stop
-     * @param mode
-     * @param routeId
-     * @param authority
-     * @param direction
-     * @return
+     * Gets the stop with route
+     * @since 1.0.0
+     * @param stop the stop to look up
+     * @param mode the mode
+     * @param routeId the route id
+     * @param authority the authority
+     * @param direction the direction
+     * @return get stop passages
      */
     @FormUrlEncoded
     @POST("services/passageInfo/stopPassages/stop")
@@ -38,54 +42,73 @@ public interface TrapezeApiService {
                                       @Field("direction") String direction);
 
     /**
-     * @param query
-     * @return
+     * Looks up stops for the query
+     * @since 1.0.0
+     * @param query autocomplete query
+     * @return the lookup result
      */
     @FormUrlEncoded
     @POST("services/lookup/autocomplete/json")
     Call<List<AutocompleteSearchResult>> getAutocomplete(@Field("query") String query);
 
     /**
-     * @param tripId
-     * @param vehicleId
-     * @param mode
-     * @return
+     * Retrieves the trip passages
+     * @since 1.0.0
+     * @param tripId the trip id
+     * @param vehicleId the vehicle id
+     * @param mode the mode
+     * @return the passages of the trip
      */
     @FormUrlEncoded
     @POST("services/tripInfo/tripPassages")
     Call<TripPassages> getTripPassages(@Field("tripId") String tripId, @Field("vehicleId") String vehicleId, @Field("mode") String mode);
 
     /**
-     * @param tripId
-     * @param mode
-     * @return
+     * Retrieves the trip passages
+     * @since 1.0.0
+     * @param tripId the trip id
+     * @param mode the mode
+     * @return the passages of the trip
      */
     @FormUrlEncoded
     @POST("services/tripInfo/tripPassages")
     Call<TripPassages> getTripPassages(@Field("tripId") String tripId, @Field("mode") String mode);
 
     /**
-     * @return
+     * get all stops
+     * @since 1.0.0
+     * @return the stops
      */
     @FormUrlEncoded
     @POST("services/lookup/stopsByCharacter?character=")
     Call<StopsByCharacterResult> getAllStops();
 
+    /**
+     * Get the stops for the provided route id
+     *
+     * @param routeId the route id
+     * @return the route stops
+     * @since 1.0.0
+     */
     @FormUrlEncoded
     @POST("services/routeInfo/routeStops")
     Call<StopsByCharacterResult> getRouteStops(@Field("routeId") String routeId);
 
     /**
-     * @param character
-     * @return
+     * Searches for stops by first character
+     * @since 1.0.0
+     * @param character the character to lookup
+     * @return the search result
      */
     @FormUrlEncoded
     @POST("services/lookup/stopsByCharacter")
     Call<StopsByCharacterResult> getStopsByCharacter(@Query("character") String character);
 
     /**
-     * @param search
-     * @return
+     * Searches for stops by full name
+     * @since 1.0.0
+     * @param search the search term to look up
+     * @return the search result
      */
     @FormUrlEncoded
     @POST("services/lookup/fulltext")
@@ -109,6 +132,11 @@ public interface TrapezeApiService {
     @GET(PATH_PATH_INFO_BY_ROUTE_ID)
     Call<VehiclePathInfo> getPathInfoByRouteId(@Query("id") final String routeId);
 
+    /**
+     * Gets the server provided settings
+     * @since 1.2.0
+     * @return A call providing the settings
+     */
     @GET("settings")
     Call<Settings> getSettings();
 }

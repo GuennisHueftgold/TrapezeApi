@@ -9,7 +9,12 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Objects;
 
-public class PathSegment {
+/**
+ * Path Segment
+ *
+ * @since 1.0.0
+ */
+public final class PathSegment {
     private final double mLength;
     private final long mFromLongitude;
     private final long mToLongitude;
@@ -17,7 +22,7 @@ public class PathSegment {
     private final long mToLatitude;
     private final int mAngle;
 
-    public PathSegment(Builder builder) {
+    private PathSegment(Builder builder) {
         this.mFromLatitude = builder.mFromLatitude;
         this.mToLatitude = builder.mToLatitude;
         this.mToLongitude = builder.mToLongitude;
@@ -26,26 +31,56 @@ public class PathSegment {
         this.mLength = builder.mLength;
     }
 
+    /**
+     * Gets the length
+     * @since 1.0.0
+     * @return the length
+     */
     public double getLength() {
         return mLength;
     }
 
+    /**
+     * Gets the longitude from where the segment started
+     * @since 1.0.0
+     * @return the longitude
+     */
     public long getFromLongitude() {
         return mFromLongitude;
     }
 
+    /**
+     * Gets the longitude to where the segment ended
+     * @since 1.0.0
+     * @return the longitude
+     */
     public long getToLongitude() {
         return mToLongitude;
     }
 
+    /**
+     * Gets the latitude from where the segment started
+     * @since 1.0.0
+     * @return the latitude
+     */
     public long getFromLatitude() {
         return mFromLatitude;
     }
 
+    /**
+     * Gets the latitude to where the segment ended
+     * @since 1.0.0
+     * @return the latitude
+     */
     public long getToLatitude() {
         return mToLatitude;
     }
 
+    /**
+     * The angle the segment is heading
+     * @since 1.0.0
+     * @return the angle
+     */
     public int getAngle() {
         return mAngle;
     }
@@ -68,6 +103,10 @@ public class PathSegment {
         return Objects.hash(mLength, mFromLongitude, mToLongitude, mFromLatitude, mToLatitude, mAngle);
     }
 
+    /**
+     * The Builder for {@link PathSegment}
+     * @since 1.0.0
+     */
     public static final class Builder {
         private double mLength;
         private long mFromLongitude;
@@ -76,60 +115,143 @@ public class PathSegment {
         private long mToLatitude;
         private int mAngle;
 
+        /**
+         * Gets the length
+         * @see PathSegment#getLength()
+         * @since 1.0.0
+         * @return the length
+         */
         public double getLength() {
             return mLength;
         }
 
+        /**
+         * Sets the length
+         * @see PathSegment#getLength()
+         * @since 1.0.0
+         * @param length the length of the segment
+         * @return the Builder instance
+         */
         public Builder setLength(double length) {
             mLength = length;
             return this;
         }
 
+        /**
+         * Gets the longitude
+         * @see PathSegment#getFromLongitude()
+         * @since 1.0.0
+         * @return the longitude
+         */
         public long getFromLongitude() {
             return mFromLongitude;
         }
 
+        /**
+         * Sets the longitude
+         * @see PathSegment#getFromLongitude()
+         * @since 1.0.0
+         * @param fromLongitude the longitude
+         * @return the builder instance
+         */
         public Builder setFromLongitude(long fromLongitude) {
             mFromLongitude = fromLongitude;
             return this;
         }
 
+        /**
+         * Gets the longitude
+         * @see PathSegment#getToLongitude()
+         * @since 1.0.0
+         * @return the longitude
+         */
         public long getToLongitude() {
             return mToLongitude;
         }
 
+        /**
+         * Sets the longitude
+         * @see PathSegment#getToLongitude()
+         * @since 1.0.0
+         * @param toLongitude the Longitude
+         * @return the Builder instance
+         */
         public Builder setToLongitude(long toLongitude) {
             mToLongitude = toLongitude;
             return this;
         }
 
+        /**
+         * Gets the latitude
+         * @see PathSegment#getFromLatitude()
+         * @since 1.0.0
+         * @return the latitude
+         */
         public long getFromLatitude() {
             return mFromLatitude;
         }
 
+        /**
+         * Sets the latitude
+         * @see PathSegment#getFromLatitude()
+         * @since 1.0.0
+         * @param fromLatitude the latitude
+         * @return the Builder instance
+         */
         public Builder setFromLatitude(long fromLatitude) {
             mFromLatitude = fromLatitude;
             return this;
         }
 
+        /**
+         * Gets the Latitude
+         * @see PathSegment#getToLatitude()
+         * @since 1.0.0
+         * @return the latitude
+         */
         public long getToLatitude() {
             return mToLatitude;
         }
 
+        /**
+         * Sets the Latitude
+         * @see PathSegment#getToLatitude()
+         * @since 1.0.0
+         * @param toLatitude the latitude
+         * @return the Builder instance
+         */
         public Builder setToLatitude(long toLatitude) {
             mToLatitude = toLatitude;
             return this;
         }
 
+        /**
+         * Gets the angle
+         * @see PathSegment#getAngle()
+         * @since 1.0.0
+         * @return the angle
+         */
         public int getAngle() {
             return mAngle;
         }
 
+        /**
+         * Sets the angle
+         * @see PathSegment#getAngle()
+         * @since 1.0.0
+         * @param angle the angle
+         * @return the Builder instance
+         */
         public Builder setAngle(int angle) {
             mAngle = angle;
             return this;
         }
 
+        /**
+         * Creates a immutable PathSegment instance
+         * @since 1.0.0
+         * @return a immutable instance of data present in the Builder
+         */
         public PathSegment build() {
             return new PathSegment(this);
         }
@@ -196,7 +318,7 @@ public class PathSegment {
                         builder.setToLatitude(in.nextLong());
                         break;
                     default:
-                        Logger.d("Unknown name: %s", name);
+                        Logger.reportUnknownName(this, name, in.peek());
                         in.skipValue();
                         break;
                 }

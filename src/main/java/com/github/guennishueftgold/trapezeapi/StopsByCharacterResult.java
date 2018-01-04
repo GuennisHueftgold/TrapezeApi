@@ -69,7 +69,7 @@ public final class StopsByCharacterResult {
         }
     }
 
-    public static class Converter extends TypeAdapter<StopsByCharacterResult> {
+    static class Converter extends TypeAdapter<StopsByCharacterResult> {
 
         private final static String NAME_STOPS = "stops";
         private final TypeAdapter<List<ShortStationInfo>> mListConverter;
