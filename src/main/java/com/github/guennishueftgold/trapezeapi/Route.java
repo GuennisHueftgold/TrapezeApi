@@ -261,7 +261,7 @@ public final class Route {
                         default:
                             builder.setRouteType(ROUTE_TYPE_UNKNOWN);
                             in.skipValue();
-                            Logger.d("Unknown Route Type: " + routeType);
+                            Logger.reportUnknownValue(this, routeType);
                             break;
                     }
                 } else if (name.equals(NAME_SHORT_NAME) && in.peek() == JsonToken.STRING) {

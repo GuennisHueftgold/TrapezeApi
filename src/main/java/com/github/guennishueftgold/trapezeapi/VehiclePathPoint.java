@@ -135,7 +135,7 @@ public final class VehiclePathPoint implements LatLngInterface {
                         builder.setSequence(Integer.parseInt(in.nextString()));
                         break;
                     default:
-                        Logger.d("Unknown tag %s", name);
+                        Logger.reportUnknownName(this, name, in.peek());
                         in.skipValue();
                         break;
                 }

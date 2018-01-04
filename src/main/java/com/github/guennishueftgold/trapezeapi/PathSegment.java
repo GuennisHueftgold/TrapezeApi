@@ -196,7 +196,7 @@ public class PathSegment {
                         builder.setToLatitude(in.nextLong());
                         break;
                     default:
-                        Logger.d("Unknown name: %s", name);
+                        Logger.reportUnknownName(this, name, in.peek());
                         in.skipValue();
                         break;
                 }

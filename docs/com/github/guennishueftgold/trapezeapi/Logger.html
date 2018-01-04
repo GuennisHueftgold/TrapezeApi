@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":6,"i6":6};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":6,"i5":6};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -114,6 +114,9 @@ var activeTableTab = "activeTableTab";
                 <br>
                 <pre>public abstract class <span class="typeNameLabel">Logger</span>
 extends java.lang.Object</pre>
+                <div class="block">Logger that can be used to debug the used <code>TypeAdapter</code>s being used by the
+                    library
+                </div>
             </li>
         </ul>
     </div>
@@ -163,13 +166,6 @@ extends java.lang.Object</pre>
                                 <th class="colLast" scope="col">Method and Description</th>
                             </tr>
                             <tr id="i0" class="altColor">
-                                <td class="colFirst"><code>static void</code></td>
-                                <td class="colLast"><code><span class="memberNameLink"><a
-                                        href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html#d-java.lang.String-java.lang.Object...-">d</a></span>(java.lang.String&nbsp;tag,
-                                    java.lang.Object...&nbsp;args)</code>&nbsp;
-                                </td>
-                            </tr>
-                            <tr id="i1" class="rowColor">
                                 <td class="colFirst"><code>static <a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html"
                                         title="class in com.github.guennishueftgold.trapezeapi">Logger</a></code></td>
@@ -177,22 +173,26 @@ extends java.lang.Object</pre>
                                         href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html#getInstance--">getInstance</a></span>()</code>&nbsp;
                                 </td>
                             </tr>
-                            <tr id="i2" class="altColor">
+                            <tr id="i1" class="rowColor">
                                 <td class="colFirst"><code>static void</code></td>
                                 <td class="colLast"><code><span class="memberNameLink"><a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html#reportUnknownName-com.google.gson.TypeAdapter-java.lang.String-com.google.gson.stream.JsonToken-">reportUnknownName</a></span>(com.google.gson.TypeAdapter&nbsp;typeAdapter,
                                     java.lang.String&nbsp;name,
-                                    com.google.gson.stream.JsonToken&nbsp;jsonToken)</code>&nbsp;
+                                    com.google.gson.stream.JsonToken&nbsp;jsonToken)</code>
+                                    <div class="block">Report a unknown name inside a
+                                        <code>TypeAdapter.read(JsonReader)</code></div>
                                 </td>
                             </tr>
-                            <tr id="i3" class="rowColor">
+                            <tr id="i2" class="altColor">
                                 <td class="colFirst"><code>static void</code></td>
                                 <td class="colLast"><code><span class="memberNameLink"><a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html#reportUnknownValue-com.google.gson.TypeAdapter-java.lang.String-">reportUnknownValue</a></span>(com.google.gson.TypeAdapter&nbsp;typeAdapter,
-                                    java.lang.String&nbsp;value)</code>&nbsp;
+                                    java.lang.String&nbsp;value)</code>
+                                    <div class="block">Report a unknown vallue inside a <code>TypeAdapter.read(JsonReader)</code>
+                                    </div>
                                 </td>
                             </tr>
-                            <tr id="i4" class="altColor">
+                            <tr id="i3" class="rowColor">
                                 <td class="colFirst"><code>static void</code></td>
                                 <td class="colLast"><code><span class="memberNameLink"><a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html#setInstance-com.github.guennishueftgold.trapezeapi.Logger-">setInstance</a></span>(<a
@@ -200,19 +200,21 @@ extends java.lang.Object</pre>
                                         title="class in com.github.guennishueftgold.trapezeapi">Logger</a>&nbsp;logger)</code>&nbsp;
                                 </td>
                             </tr>
-                            <tr id="i5" class="rowColor">
+                            <tr id="i4" class="altColor">
                                 <td class="colFirst"><code>abstract void</code></td>
                                 <td class="colLast"><code><span class="memberNameLink"><a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html#unknownName-com.google.gson.TypeAdapter-java.lang.String-com.google.gson.stream.JsonToken-">unknownName</a></span>(com.google.gson.TypeAdapter&nbsp;typeAdapter,
                                     java.lang.String&nbsp;name,
-                                    com.google.gson.stream.JsonToken&nbsp;jsonToken)</code>&nbsp;
+                                    com.google.gson.stream.JsonToken&nbsp;jsonToken)</code>
+                                    <div class="block">Implement this to log the reported missing name</div>
                                 </td>
                             </tr>
-                            <tr id="i6" class="altColor">
+                            <tr id="i5" class="rowColor">
                                 <td class="colFirst"><code>abstract void</code></td>
                                 <td class="colLast"><code><span class="memberNameLink"><a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html#unknownValue-com.google.gson.TypeAdapter-java.lang.String-">unknownValue</a></span>(com.google.gson.TypeAdapter&nbsp;typeAdapter,
-                                    java.lang.String&nbsp;value)</code>&nbsp;
+                                    java.lang.String&nbsp;value)</code>
+                                    <div class="block">Implement this to log the reported missing value</div>
                                 </td>
                             </tr>
                         </table>
@@ -286,16 +288,14 @@ extends java.lang.Object</pre>
                                 <pre>public static&nbsp;void&nbsp;reportUnknownName(com.google.gson.TypeAdapter&nbsp;typeAdapter,
                                      java.lang.String&nbsp;name,
                                      com.google.gson.stream.JsonToken&nbsp;jsonToken)</pre>
-                            </li>
-                        </ul>
-                        <a name="d-java.lang.String-java.lang.Object...-">
-                            <!--   -->
-                        </a>
-                        <ul class="blockList">
-                            <li class="blockList">
-                                <h4>d</h4>
-                                <pre>public static&nbsp;void&nbsp;d(java.lang.String&nbsp;tag,
-                     java.lang.Object...&nbsp;args)</pre>
+                                <div class="block">Report a unknown name inside a
+                                    <code>TypeAdapter.read(JsonReader)</code></div>
+                                <dl>
+                                    <dt><span class="paramLabel">Parameters:</span></dt>
+                                    <dd><code>typeAdapter</code> - the typeadapter</dd>
+                                    <dd><code>name</code> - the name that is unknown</dd>
+                                    <dd><code>jsonToken</code> - the jsontoken of the unknown name</dd>
+                                </dl>
                             </li>
                         </ul>
                         <a name="reportUnknownValue-com.google.gson.TypeAdapter-java.lang.String-">
@@ -306,6 +306,13 @@ extends java.lang.Object</pre>
                                 <h4>reportUnknownValue</h4>
                                 <pre>public static&nbsp;void&nbsp;reportUnknownValue(com.google.gson.TypeAdapter&nbsp;typeAdapter,
                                       java.lang.String&nbsp;value)</pre>
+                                <div class="block">Report a unknown vallue inside a
+                                    <code>TypeAdapter.read(JsonReader)</code></div>
+                                <dl>
+                                    <dt><span class="paramLabel">Parameters:</span></dt>
+                                    <dd><code>typeAdapter</code> - the typeadapter</dd>
+                                    <dd><code>value</code> - the value</dd>
+                                </dl>
                             </li>
                         </ul>
                         <a name="unknownName-com.google.gson.TypeAdapter-java.lang.String-com.google.gson.stream.JsonToken-">
@@ -317,6 +324,19 @@ extends java.lang.Object</pre>
                                 <pre>public abstract&nbsp;void&nbsp;unknownName(com.google.gson.TypeAdapter&nbsp;typeAdapter,
                                  java.lang.String&nbsp;name,
                                  com.google.gson.stream.JsonToken&nbsp;jsonToken)</pre>
+                                <div class="block">Implement this to log the reported missing name</div>
+                                <dl>
+                                    <dt><span class="paramLabel">Parameters:</span></dt>
+                                    <dd><code>typeAdapter</code> - the typeadapter</dd>
+                                    <dd><code>name</code> - the name</dd>
+                                    <dd><code>jsonToken</code> - the jsontoken</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.0.0</dd>
+                                    <dt><span class="seeLabel">See Also:</span></dt>
+                                    <dd>
+                                        <a href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html#reportUnknownName-com.google.gson.TypeAdapter-java.lang.String-com.google.gson.stream.JsonToken-"><code>reportUnknownName(TypeAdapter,
+                                            String, JsonToken)</code></a></dd>
+                                </dl>
                             </li>
                         </ul>
                         <a name="unknownValue-com.google.gson.TypeAdapter-java.lang.String-">
@@ -327,6 +347,17 @@ extends java.lang.Object</pre>
                                 <h4>unknownValue</h4>
                                 <pre>public abstract&nbsp;void&nbsp;unknownValue(com.google.gson.TypeAdapter&nbsp;typeAdapter,
                                   java.lang.String&nbsp;value)</pre>
+                                <div class="block">Implement this to log the reported missing value</div>
+                                <dl>
+                                    <dt><span class="paramLabel">Parameters:</span></dt>
+                                    <dd><code>typeAdapter</code> - the typeadapter</dd>
+                                    <dd><code>value</code> - the value</dd>
+                                    <dt><span class="seeLabel">See Also:</span></dt>
+                                    <dd>
+                                        <a href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html#reportUnknownValue-com.google.gson.TypeAdapter-java.lang.String-"><code>reportUnknownValue(TypeAdapter,
+                                            String)</code></a>,
+                                        <code>1.0.0</code></dd>
+                                </dl>
                             </li>
                         </ul>
                     </li>
