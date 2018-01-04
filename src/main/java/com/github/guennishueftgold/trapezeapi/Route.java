@@ -13,17 +13,6 @@ import java.util.Objects;
 
 public final class Route {
     public final static int ROUTE_TYPE_BUS = 1;
-
-    /*"alerts": [],
-        "authority": "KVG",
-        "directions": [
-        "Pillauer Straße",
-        "Wik, Kanal"
-        ],
-        "id": "60835712076873989",
-        "name": "11",
-        "routeType": "bus",
-        "shortName": "11"*/
     public final static int ROUTE_TYPE_UNKNOWN = -1;
     private final List<String> mAlerts;
     private final String mAuthority;
@@ -96,10 +85,22 @@ public final class Route {
         return mName;
     }
 
+    /**
+     * Gets the route type.
+     * Can be any of: {@link Route#ROUTE_TYPE_BUS} or {@link Route#ROUTE_TYPE_UNKNOWN}
+     *
+     * @return the route type
+     * @since 1.0.0
+     */
     public int getRouteType() {
         return mRouteType;
     }
 
+    /**
+     * Gets the short name
+     * @since 1.0.0
+     * @return the short name
+     */
     public String getShortName() {
         return mShortName;
     }
@@ -160,19 +161,45 @@ public final class Route {
             return this;
         }
 
+        /**
+         * Gets the route Type
+         * @see Route#getRouteType()
+         * @since 1.0.0
+         * @return the route type
+         */
         public int getRouteType() {
             return mRouteType;
         }
 
+        /**
+         * Sets the route type
+         * @see Route#getRouteType()
+         * @since 1.0.0
+         * @param routeType the route type
+         * @return the builder instance
+         */
         public Builder setRouteType(int routeType) {
             mRouteType = routeType;
             return this;
         }
 
+        /**
+         * Gets the short name
+         * @see Route#getShortName()
+         * @since 1.0.0
+         * @return the short name
+         */
         public String getShortName() {
             return mShortName;
         }
 
+        /**
+         * Sets the shortname
+         * @see Route#getShortName()
+         * @since 1.0.0
+         * @param shortName short name
+         * @return the builder instance
+         */
         public Builder setShortName(String shortName) {
             mShortName = shortName;
             return this;

@@ -117,6 +117,10 @@ extends java.lang.Object</pre>
                 <div class="block">Logger that can be used to debug the used <code>TypeAdapter</code>s being used by the
                     library
                 </div>
+                <dl>
+                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                    <dd>1.0.0</dd>
+                </dl>
             </li>
         </ul>
     </div>
@@ -170,7 +174,12 @@ extends java.lang.Object</pre>
                                         href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html"
                                         title="class in com.github.guennishueftgold.trapezeapi">Logger</a></code></td>
                                 <td class="colLast"><code><span class="memberNameLink"><a
-                                        href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html#getInstance--">getInstance</a></span>()</code>&nbsp;
+                                        href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html#getInstance--">getInstance</a></span>()</code>
+                                    <div class="block">Gets the current <a
+                                            href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html"
+                                            title="class in com.github.guennishueftgold.trapezeapi"><code>Logger</code></a>
+                                        instance
+                                    </div>
                                 </td>
                             </tr>
                             <tr id="i1" class="rowColor">
@@ -197,7 +206,8 @@ extends java.lang.Object</pre>
                                 <td class="colLast"><code><span class="memberNameLink"><a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html#setInstance-com.github.guennishueftgold.trapezeapi.Logger-">setInstance</a></span>(<a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html"
-                                        title="class in com.github.guennishueftgold.trapezeapi">Logger</a>&nbsp;logger)</code>&nbsp;
+                                        title="class in com.github.guennishueftgold.trapezeapi">Logger</a>&nbsp;logger)</code>
+                                    <div class="block">Sets the current Logger instance</div>
                                 </td>
                             </tr>
                             <tr id="i4" class="altColor">
@@ -266,6 +276,17 @@ extends java.lang.Object</pre>
                                 <pre>public static&nbsp;<a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html"
                                         title="class in com.github.guennishueftgold.trapezeapi">Logger</a>&nbsp;getInstance()</pre>
+                                <div class="block">Gets the current <a
+                                        href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html"
+                                        title="class in com.github.guennishueftgold.trapezeapi"><code>Logger</code></a>
+                                    instance
+                                </div>
+                                <dl>
+                                    <dt><span class="returnLabel">Returns:</span></dt>
+                                    <dd>logger instance or null</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.0.0</dd>
+                                </dl>
                             </li>
                         </ul>
                         <a name="setInstance-com.github.guennishueftgold.trapezeapi.Logger-">
@@ -277,6 +298,13 @@ extends java.lang.Object</pre>
                                 <pre>public static&nbsp;void&nbsp;setInstance(<a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html"
                                         title="class in com.github.guennishueftgold.trapezeapi">Logger</a>&nbsp;logger)</pre>
+                                <div class="block">Sets the current Logger instance</div>
+                                <dl>
+                                    <dt><span class="paramLabel">Parameters:</span></dt>
+                                    <dd><code>logger</code> - the logger instance or null</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.0.0</dd>
+                                </dl>
                             </li>
                         </ul>
                         <a name="reportUnknownName-com.google.gson.TypeAdapter-java.lang.String-com.google.gson.stream.JsonToken-">
@@ -295,6 +323,8 @@ extends java.lang.Object</pre>
                                     <dd><code>typeAdapter</code> - the typeadapter</dd>
                                     <dd><code>name</code> - the name that is unknown</dd>
                                     <dd><code>jsonToken</code> - the jsontoken of the unknown name</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.0.0</dd>
                                 </dl>
                             </li>
                         </ul>
@@ -312,6 +342,8 @@ extends java.lang.Object</pre>
                                     <dt><span class="paramLabel">Parameters:</span></dt>
                                     <dd><code>typeAdapter</code> - the typeadapter</dd>
                                     <dd><code>value</code> - the value</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.0.0</dd>
                                 </dl>
                             </li>
                         </ul>
@@ -352,11 +384,12 @@ extends java.lang.Object</pre>
                                     <dt><span class="paramLabel">Parameters:</span></dt>
                                     <dd><code>typeAdapter</code> - the typeadapter</dd>
                                     <dd><code>value</code> - the value</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.0.0</dd>
                                     <dt><span class="seeLabel">See Also:</span></dt>
                                     <dd>
                                         <a href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html#reportUnknownValue-com.google.gson.TypeAdapter-java.lang.String-"><code>reportUnknownValue(TypeAdapter,
-                                            String)</code></a>,
-                                        <code>1.0.0</code></dd>
+                                            String)</code></a></dd>
                                 </dl>
                             </li>
                         </ul>
