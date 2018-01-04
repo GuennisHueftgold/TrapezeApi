@@ -114,6 +114,7 @@ var activeTableTab = "activeTableTab";
                 <br>
                 <pre>public final class <span class="typeNameLabel">TrapezeApiClient</span>
 extends java.lang.Object</pre>
+                <div class="block">The main entry point for interaction with the api</div>
             </li>
         </ul>
     </div>
@@ -186,14 +187,24 @@ extends java.lang.Object</pre>
                             </tr>
                             <tr class="altColor">
                                 <td class="colOne"><code><span class="memberNameLink"><a
-                                        href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiClient.html#TrapezeApiClient-okhttp3.HttpUrl-">TrapezeApiClient</a></span>(okhttp3.HttpUrl&nbsp;baseUrl)</code>&nbsp;
+                                        href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiClient.html#TrapezeApiClient-okhttp3.HttpUrl-">TrapezeApiClient</a></span>(okhttp3.HttpUrl&nbsp;baseUrl)</code>
+                                    <div class="block">Constructs a <a
+                                            href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiClient.html"
+                                            title="class in com.github.guennishueftgold.trapezeapi"><code>TrapezeApiClient</code></a>
+                                        instance
+                                    </div>
                                 </td>
                             </tr>
                             <tr class="rowColor">
                                 <td class="colOne"><code><span class="memberNameLink"><a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiClient.html#TrapezeApiClient-okhttp3.HttpUrl-java.io.File-boolean-">TrapezeApiClient</a></span>(okhttp3.HttpUrl&nbsp;baseUrl,
                                     java.io.File&nbsp;cacheDir,
-                                    boolean&nbsp;debug)</code>&nbsp;
+                                    boolean&nbsp;debug)</code>
+                                    <div class="block">Constructs a <a
+                                            href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiClient.html"
+                                            title="class in com.github.guennishueftgold.trapezeapi"><code>TrapezeApiClient</code></a>
+                                        instance
+                                    </div>
                                 </td>
                             </tr>
                         </table>
@@ -220,7 +231,8 @@ extends java.lang.Object</pre>
                             <tr id="i0" class="altColor">
                                 <td class="colFirst"><code>okhttp3.HttpUrl</code></td>
                                 <td class="colLast"><code><span class="memberNameLink"><a
-                                        href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiClient.html#getBaseUrl--">getBaseUrl</a></span>()</code>&nbsp;
+                                        href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiClient.html#getBaseUrl--">getBaseUrl</a></span>()</code>
+                                    <div class="block">The base url being used by the Api Client</div>
                                 </td>
                             </tr>
                             <tr id="i1" class="rowColor">
@@ -229,7 +241,8 @@ extends java.lang.Object</pre>
                                         title="interface in com.github.guennishueftgold.trapezeapi">TrapezeApiService</a></code>
                                 </td>
                                 <td class="colLast"><code><span class="memberNameLink"><a
-                                        href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiClient.html#getService--">getService</a></span>()</code>&nbsp;
+                                        href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiClient.html#getService--">getService</a></span>()</code>
+                                    <div class="block">The Endpoints Service provided by the Api Client</div>
                                 </td>
                             </tr>
                         </table>
@@ -330,6 +343,17 @@ extends java.lang.Object</pre>
                             <li class="blockList">
                                 <h4>TrapezeApiClient</h4>
                                 <pre>public&nbsp;TrapezeApiClient(okhttp3.HttpUrl&nbsp;baseUrl)</pre>
+                                <div class="block">Constructs a <a
+                                        href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiClient.html"
+                                        title="class in com.github.guennishueftgold.trapezeapi"><code>TrapezeApiClient</code></a>
+                                    instance
+                                </div>
+                                <dl>
+                                    <dt><span class="paramLabel">Parameters:</span></dt>
+                                    <dd><code>baseUrl</code> - the base url for the api endpoint</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.2.0</dd>
+                                </dl>
                             </li>
                         </ul>
                         <a name="TrapezeApiClient-okhttp3.HttpUrl-java.io.File-boolean-">
@@ -341,6 +365,19 @@ extends java.lang.Object</pre>
                                 <pre>public&nbsp;TrapezeApiClient(okhttp3.HttpUrl&nbsp;baseUrl,
                         java.io.File&nbsp;cacheDir,
                         boolean&nbsp;debug)</pre>
+                                <div class="block">Constructs a <a
+                                        href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiClient.html"
+                                        title="class in com.github.guennishueftgold.trapezeapi"><code>TrapezeApiClient</code></a>
+                                    instance
+                                </div>
+                                <dl>
+                                    <dt><span class="paramLabel">Parameters:</span></dt>
+                                    <dd><code>baseUrl</code> - the base url for the api endpoint</dd>
+                                    <dd><code>cacheDir</code> - the cacheDir to be used</dd>
+                                    <dd><code>debug</code> - should print debug information</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.2.0</dd>
+                                </dl>
                             </li>
                         </ul>
                     </li>
@@ -358,6 +395,19 @@ extends java.lang.Object</pre>
                             <li class="blockList">
                                 <h4>getBaseUrl</h4>
                                 <pre>public&nbsp;okhttp3.HttpUrl&nbsp;getBaseUrl()</pre>
+                                <div class="block">The base url being used by the Api Client</div>
+                                <dl>
+                                    <dt><span class="returnLabel">Returns:</span></dt>
+                                    <dd>the base url</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.2.0</dd>
+                                    <dt><span class="simpleTagLabel">API Note:</span></dt>
+                                    <dd>this method should never be null, as the <a
+                                            href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiClient.html"
+                                            title="class in com.github.guennishueftgold.trapezeapi"><code>TrapezeApiClient</code></a>
+                                        cannot be constructed without a valid url
+                                    </dd>
+                                </dl>
                             </li>
                         </ul>
                         <a name="getService--">
@@ -369,6 +419,13 @@ extends java.lang.Object</pre>
                                 <pre>public&nbsp;<a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiService.html"
                                         title="interface in com.github.guennishueftgold.trapezeapi">TrapezeApiService</a>&nbsp;getService()</pre>
+                                <div class="block">The Endpoints Service provided by the Api Client</div>
+                                <dl>
+                                    <dt><span class="returnLabel">Returns:</span></dt>
+                                    <dd>the endpoint service</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.0.0</dd>
+                                </dl>
                             </li>
                         </ul>
                     </li>

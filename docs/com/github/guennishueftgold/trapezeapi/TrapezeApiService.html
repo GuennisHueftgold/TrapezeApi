@@ -179,7 +179,8 @@ var activeTableTab = "activeTableTab";
                                         title="class in com.github.guennishueftgold.trapezeapi">AutocompleteSearchResult</a>&gt;&gt;</code>
                                 </td>
                                 <td class="colLast"><code><span class="memberNameLink"><a
-                                        href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiService.html#getAutocomplete-java.lang.String-">getAutocomplete</a></span>(java.lang.String&nbsp;query)</code>&nbsp;
+                                        href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiService.html#getAutocomplete-java.lang.String-">getAutocomplete</a></span>(java.lang.String&nbsp;query)</code>
+                                    <div class="block">Looks up stops for the query</div>
                                 </td>
                             </tr>
                             <tr id="i2" class="altColor">
@@ -236,7 +237,8 @@ var activeTableTab = "activeTableTab";
                                 </td>
                                 <td class="colLast"><code><span class="memberNameLink"><a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiService.html#getStation-java.lang.String-java.lang.String-">getStation</a></span>(java.lang.String&nbsp;stop,
-                                    java.lang.String&nbsp;mode)</code>&nbsp;
+                                    java.lang.String&nbsp;mode)</code>
+                                    <div class="block">Gets the stop</div>
                                 </td>
                             </tr>
                             <tr id="i8" class="altColor">
@@ -258,7 +260,8 @@ var activeTableTab = "activeTableTab";
                                     java.lang.String&nbsp;mode,
                                     java.lang.String&nbsp;routeId,
                                     java.lang.String&nbsp;authority,
-                                    java.lang.String&nbsp;direction)</code>&nbsp;
+                                    java.lang.String&nbsp;direction)</code>
+                                    <div class="block">Gets the stop with route</div>
                                 </td>
                             </tr>
                             <tr id="i10" class="altColor">
@@ -297,7 +300,8 @@ var activeTableTab = "activeTableTab";
                                 </td>
                                 <td class="colLast"><code><span class="memberNameLink"><a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiService.html#getTripPassages-java.lang.String-java.lang.String-">getTripPassages</a></span>(java.lang.String&nbsp;tripId,
-                                    java.lang.String&nbsp;mode)</code>&nbsp;
+                                    java.lang.String&nbsp;mode)</code>
+                                    <div class="block">Retrieves the trip passages</div>
                                 </td>
                             </tr>
                             <tr id="i14" class="altColor">
@@ -308,7 +312,8 @@ var activeTableTab = "activeTableTab";
                                 <td class="colLast"><code><span class="memberNameLink"><a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiService.html#getTripPassages-java.lang.String-java.lang.String-java.lang.String-">getTripPassages</a></span>(java.lang.String&nbsp;tripId,
                                     java.lang.String&nbsp;vehicleId,
-                                    java.lang.String&nbsp;mode)</code>&nbsp;
+                                    java.lang.String&nbsp;mode)</code>
+                                    <div class="block">Retrieves the trip passages</div>
                                 </td>
                             </tr>
                             <tr id="i15" class="rowColor">
@@ -401,11 +406,15 @@ retrofit2.Call&lt;<a href="../../../../com/github/guennishueftgold/trapezeapi/St
                                                                                                             java.lang.String&nbsp;stop,
                                                                                                             @Field(value="mode")
                                                                                                             java.lang.String&nbsp;mode)</pre>
+                                <div class="block">Gets the stop</div>
                                 <dl>
                                     <dt><span class="paramLabel">Parameters:</span></dt>
-                                    <dd><code>stop</code> -</dd>
-                                    <dd><code>mode</code> -</dd>
+                                    <dd><code>stop</code> - the stop</dd>
+                                    <dd><code>mode</code> - the mode</dd>
                                     <dt><span class="returnLabel">Returns:</span></dt>
+                                    <dd>the stop information</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.0.0</dd>
                                 </dl>
                             </li>
                         </ul>
@@ -428,14 +437,18 @@ retrofit2.Call&lt;<a href="../../../../com/github/guennishueftgold/trapezeapi/St
                                                                                                                      java.lang.String&nbsp;authority,
                                                                                                                      @Field(value="direction")
                                                                                                                      java.lang.String&nbsp;direction)</pre>
+                                <div class="block">Gets the stop with route</div>
                                 <dl>
                                     <dt><span class="paramLabel">Parameters:</span></dt>
-                                    <dd><code>stop</code> -</dd>
-                                    <dd><code>mode</code> -</dd>
-                                    <dd><code>routeId</code> -</dd>
-                                    <dd><code>authority</code> -</dd>
-                                    <dd><code>direction</code> -</dd>
+                                    <dd><code>stop</code> - the stop to look up</dd>
+                                    <dd><code>mode</code> - the mode</dd>
+                                    <dd><code>routeId</code> - the route id</dd>
+                                    <dd><code>authority</code> - the authority</dd>
+                                    <dd><code>direction</code> - the direction</dd>
                                     <dt><span class="returnLabel">Returns:</span></dt>
+                                    <dd>get stop passages</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.0.0</dd>
                                 </dl>
                             </li>
                         </ul>
@@ -450,10 +463,14 @@ retrofit2.Call&lt;<a href="../../../../com/github/guennishueftgold/trapezeapi/St
 retrofit2.Call&lt;java.util.List&lt;<a href="../../../../com/github/guennishueftgold/trapezeapi/AutocompleteSearchResult.html"
                                        title="class in com.github.guennishueftgold.trapezeapi">AutocompleteSearchResult</a>&gt;&gt;&nbsp;getAutocomplete(@Field(value="query")
                                                                                                                                              java.lang.String&nbsp;query)</pre>
+                                <div class="block">Looks up stops for the query</div>
                                 <dl>
                                     <dt><span class="paramLabel">Parameters:</span></dt>
-                                    <dd><code>query</code> -</dd>
+                                    <dd><code>query</code> - autocomplete query</dd>
                                     <dt><span class="returnLabel">Returns:</span></dt>
+                                    <dd>the lookup result</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.0.0</dd>
                                 </dl>
                             </li>
                         </ul>
@@ -472,12 +489,16 @@ retrofit2.Call&lt;<a href="../../../../com/github/guennishueftgold/trapezeapi/Tr
                                                                                                               java.lang.String&nbsp;vehicleId,
                                                                                                               @Field(value="mode")
                                                                                                               java.lang.String&nbsp;mode)</pre>
+                                <div class="block">Retrieves the trip passages</div>
                                 <dl>
                                     <dt><span class="paramLabel">Parameters:</span></dt>
-                                    <dd><code>tripId</code> -</dd>
-                                    <dd><code>vehicleId</code> -</dd>
-                                    <dd><code>mode</code> -</dd>
+                                    <dd><code>tripId</code> - the trip id</dd>
+                                    <dd><code>vehicleId</code> - the vehicle id</dd>
+                                    <dd><code>mode</code> - the mode</dd>
                                     <dt><span class="returnLabel">Returns:</span></dt>
+                                    <dd>the passages of the trip</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.0.0</dd>
                                 </dl>
                             </li>
                         </ul>
@@ -494,11 +515,15 @@ retrofit2.Call&lt;<a href="../../../../com/github/guennishueftgold/trapezeapi/Tr
                                                                                                               java.lang.String&nbsp;tripId,
                                                                                                               @Field(value="mode")
                                                                                                               java.lang.String&nbsp;mode)</pre>
+                                <div class="block">Retrieves the trip passages</div>
                                 <dl>
                                     <dt><span class="paramLabel">Parameters:</span></dt>
-                                    <dd><code>tripId</code> -</dd>
-                                    <dd><code>mode</code> -</dd>
+                                    <dd><code>tripId</code> - the trip id</dd>
+                                    <dd><code>mode</code> - the mode</dd>
                                     <dt><span class="returnLabel">Returns:</span></dt>
+                                    <dd>the passages of the trip</dd>
+                                    <dt><span class="simpleTagLabel">Since:</span></dt>
+                                    <dd>1.0.0</dd>
                                 </dl>
                             </li>
                         </ul>
