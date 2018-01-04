@@ -8,6 +8,7 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 import org.joda.time.LocalTime;
 
+import javax.annotation.concurrent.Immutable;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -16,6 +17,7 @@ import java.util.Objects;
  *
  * @since 1.0.0
  */
+@Immutable
 public final class Departure {
     private final int mActualRelativeTime;
     private final String mDirection;
@@ -110,8 +112,9 @@ public final class Departure {
 
     /**
      * gets the planned time
-     * @since 1.0.0
+     *
      * @return the planned time
+     * @since 1.0.0
      */
     public LocalTime getPlannedTime() {
         return mPlannedTime;
@@ -119,8 +122,9 @@ public final class Departure {
 
     /**
      * gets the route id
-     * @since 1.0.0
+     *
      * @return the route id
+     * @since 1.0.0
      */
     public String getRouteId() {
         return mRouteId;
@@ -132,8 +136,9 @@ public final class Departure {
 
     /**
      * gets the trip id
-     * @since 1.0.0
+     *
      * @return the trip id
+     * @since 1.0.0
      */
     public String getTripId() {
         return mTripId;
@@ -141,8 +146,9 @@ public final class Departure {
 
     /**
      * gets the vehicle id
-     * @since 1.0.0
+     *
      * @return the vehicle id
+     * @since 1.0.0
      */
     public String getVehicleId() {
         return mVehicleId;
@@ -150,6 +156,7 @@ public final class Departure {
 
     /**
      * Builder for {@link Departure}
+     *
      * @since 1.0.0
      */
     public final static class Builder {
@@ -247,19 +254,19 @@ public final class Departure {
         }
 
         /**
+         * @return the trip id
          * @see Departure#getTripId()
          * @since 1.0.0
-         * @return the trip id
          */
         public String getTripId() {
             return mTripId;
         }
 
         /**
-         * @see Departure#getTripId()
-         * @since 1.0.0
          * @param tripId the trip id
          * @return the builder
+         * @see Departure#getTripId()
+         * @since 1.0.0
          */
         public Builder setTripId(String tripId) {
             mTripId = tripId;
@@ -267,19 +274,19 @@ public final class Departure {
         }
 
         /**
+         * @return the vehicle id
          * @see Departure#getVehicleId()
          * @since 1.0.0
-         * @return the vehicle id
          */
         public String getVehicleId() {
             return mVehicleId;
         }
 
         /**
-         * @see Departure#getVehicleId()
-         * @since 1.0.0
          * @param vehicleId the vehicle id
          * @return the builder
+         * @see Departure#getVehicleId()
+         * @since 1.0.0
          */
         public Builder setVehicleId(String vehicleId) {
             mVehicleId = vehicleId;

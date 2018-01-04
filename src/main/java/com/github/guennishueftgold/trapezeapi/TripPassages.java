@@ -7,14 +7,22 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.concurrent.Immutable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-
-public class TripPassages {
+/**
+ * Trip Passages
+ *
+ * @since 1.0.0
+ */
+@Immutable
+public final class TripPassages {
 
     private final List<TripPassageStop> mActual;
     private final String mDirectionText;
@@ -45,18 +53,22 @@ public class TripPassages {
         return Objects.hash(mActual, mDirectionText, mOld, mRouteName);
     }
 
+    @Nonnull
     public List<TripPassageStop> getActual() {
         return mActual;
     }
 
+    @Nullable
     public String getDirectionText() {
         return mDirectionText;
     }
 
+    @Nonnull
     public List<TripPassageStop> getOld() {
         return mOld;
     }
 
+    @Nullable
     public String getRouteName() {
         return mRouteName;
     }
@@ -71,16 +83,18 @@ public class TripPassages {
                 '}';
     }
 
-    public static class Builder {
+    public static final class Builder {
         private List<TripPassageStop> mActual = new ArrayList<>();
         private String mDirectionText;
         private List<TripPassageStop> mOld = new ArrayList<>();
         private String mRouteName;
 
+        @Nonnull
         public List<TripPassageStop> getActual() {
             return mActual;
         }
 
+        @Nonnull
         public Builder setActual(List<TripPassageStop> actual) {
             this.mActual.clear();
             if (actual != null)
@@ -88,24 +102,29 @@ public class TripPassages {
             return this;
         }
 
+        @Nonnull
         public Builder addActual(TripPassageStop actual) {
             this.mActual.add(actual);
             return this;
         }
 
+        @Nullable
         public String getDirectionText() {
             return mDirectionText;
         }
 
+        @Nonnull
         public Builder setDirectionText(String directionText) {
             mDirectionText = directionText;
             return this;
         }
 
+        @Nullable
         public List<TripPassageStop> getOld() {
             return mOld;
         }
 
+        @Nonnull
         public Builder setOld(List<TripPassageStop> old) {
             this.mOld.clear();
             if (old != null)
@@ -113,20 +132,24 @@ public class TripPassages {
             return this;
         }
 
+        @Nonnull
         public Builder addOld(TripPassageStop old) {
             this.mOld.add(old);
             return this;
         }
 
+        @Nullable
         public String getRouteName() {
             return mRouteName;
         }
 
+        @Nonnull
         public Builder setRouteName(String routeName) {
             mRouteName = routeName;
             return this;
         }
 
+        @Nonnull
         public TripPassages build() {
             return new TripPassages(this);
         }

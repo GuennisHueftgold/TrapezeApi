@@ -316,7 +316,8 @@ extends java.lang.Object</pre>
                         <ul class="blockList">
                             <li class="blockList">
                                 <h4>mCache</h4>
-                                <pre>protected final&nbsp;okhttp3.Cache mCache</pre>
+                                <pre>@CheckForNull
+protected final&nbsp;okhttp3.Cache mCache</pre>
                             </li>
                         </ul>
                         <a name="mBaseUrl">
@@ -342,7 +343,8 @@ extends java.lang.Object</pre>
                         <ul class="blockList">
                             <li class="blockList">
                                 <h4>TrapezeApiClient</h4>
-                                <pre>public&nbsp;TrapezeApiClient(okhttp3.HttpUrl&nbsp;baseUrl)</pre>
+                                <pre>public&nbsp;TrapezeApiClient(@Nonnull
+                        okhttp3.HttpUrl&nbsp;baseUrl)</pre>
                                 <div class="block">Constructs a <a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiClient.html"
                                         title="class in com.github.guennishueftgold.trapezeapi"><code>TrapezeApiClient</code></a>
@@ -362,7 +364,9 @@ extends java.lang.Object</pre>
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4>TrapezeApiClient</h4>
-                                <pre>public&nbsp;TrapezeApiClient(okhttp3.HttpUrl&nbsp;baseUrl,
+                                <pre>public&nbsp;TrapezeApiClient(@Nonnull
+                        okhttp3.HttpUrl&nbsp;baseUrl,
+                        @Nullable
                         java.io.File&nbsp;cacheDir,
                         boolean&nbsp;debug)</pre>
                                 <div class="block">Constructs a <a
@@ -394,7 +398,8 @@ extends java.lang.Object</pre>
                         <ul class="blockList">
                             <li class="blockList">
                                 <h4>getBaseUrl</h4>
-                                <pre>public&nbsp;okhttp3.HttpUrl&nbsp;getBaseUrl()</pre>
+                                <pre>@Nonnull
+public&nbsp;okhttp3.HttpUrl&nbsp;getBaseUrl()</pre>
                                 <div class="block">The base url being used by the Api Client</div>
                                 <dl>
                                     <dt><span class="returnLabel">Returns:</span></dt>
@@ -416,9 +421,9 @@ extends java.lang.Object</pre>
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4>getService</h4>
-                                <pre>public&nbsp;<a
-                                        href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiService.html"
-                                        title="interface in com.github.guennishueftgold.trapezeapi">TrapezeApiService</a>&nbsp;getService()</pre>
+                                <pre>@Nonnull
+public&nbsp;<a href="../../../../com/github/guennishueftgold/trapezeapi/TrapezeApiService.html"
+               title="interface in com.github.guennishueftgold.trapezeapi">TrapezeApiService</a>&nbsp;getService()</pre>
                                 <div class="block">The Endpoints Service provided by the Api Client</div>
                                 <dl>
                                     <dt><span class="returnLabel">Returns:</span></dt>

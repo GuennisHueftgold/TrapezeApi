@@ -50,6 +50,7 @@ public final class Station {
 
     /**
      * Gets the stop name of the station
+     *
      * @return the stop name
      */
     public String getStopName() {
@@ -58,6 +59,7 @@ public final class Station {
 
     /**
      * Get the stations short name
+     *
      * @return the short name
      */
     public String getStopShortName() {

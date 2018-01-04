@@ -273,9 +273,9 @@ extends java.lang.Object</pre>
                         <ul class="blockList">
                             <li class="blockList">
                                 <h4>getInstance</h4>
-                                <pre>public static&nbsp;<a
-                                        href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html"
-                                        title="class in com.github.guennishueftgold.trapezeapi">Logger</a>&nbsp;getInstance()</pre>
+                                <pre>@Nullable
+public static&nbsp;<a href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html"
+                      title="class in com.github.guennishueftgold.trapezeapi">Logger</a>&nbsp;getInstance()</pre>
                                 <div class="block">Gets the current <a
                                         href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html"
                                         title="class in com.github.guennishueftgold.trapezeapi"><code>Logger</code></a>
@@ -295,9 +295,9 @@ extends java.lang.Object</pre>
                         <ul class="blockList">
                             <li class="blockList">
                                 <h4>setInstance</h4>
-                                <pre>public static&nbsp;void&nbsp;setInstance(<a
-                                        href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html"
-                                        title="class in com.github.guennishueftgold.trapezeapi">Logger</a>&nbsp;logger)</pre>
+                                <pre>public static&nbsp;void&nbsp;setInstance(@Nullable
+                               <a href="../../../../com/github/guennishueftgold/trapezeapi/Logger.html"
+                                  title="class in com.github.guennishueftgold.trapezeapi">Logger</a>&nbsp;logger)</pre>
                                 <div class="block">Sets the current Logger instance</div>
                                 <dl>
                                     <dt><span class="paramLabel">Parameters:</span></dt>
@@ -313,8 +313,11 @@ extends java.lang.Object</pre>
                         <ul class="blockList">
                             <li class="blockList">
                                 <h4>reportUnknownName</h4>
-                                <pre>public static&nbsp;void&nbsp;reportUnknownName(com.google.gson.TypeAdapter&nbsp;typeAdapter,
+                                <pre>public static&nbsp;void&nbsp;reportUnknownName(@Nonnull
+                                     com.google.gson.TypeAdapter&nbsp;typeAdapter,
+                                     @Nonnull
                                      java.lang.String&nbsp;name,
+                                     @Nonnull
                                      com.google.gson.stream.JsonToken&nbsp;jsonToken)</pre>
                                 <div class="block">Report a unknown name inside a
                                     <code>TypeAdapter.read(JsonReader)</code></div>
@@ -334,7 +337,9 @@ extends java.lang.Object</pre>
                         <ul class="blockList">
                             <li class="blockList">
                                 <h4>reportUnknownValue</h4>
-                                <pre>public static&nbsp;void&nbsp;reportUnknownValue(com.google.gson.TypeAdapter&nbsp;typeAdapter,
+                                <pre>public static&nbsp;void&nbsp;reportUnknownValue(@Nonnull
+                                      com.google.gson.TypeAdapter&nbsp;typeAdapter,
+                                      @Nonnull
                                       java.lang.String&nbsp;value)</pre>
                                 <div class="block">Report a unknown vallue inside a
                                     <code>TypeAdapter.read(JsonReader)</code></div>
@@ -353,8 +358,11 @@ extends java.lang.Object</pre>
                         <ul class="blockList">
                             <li class="blockList">
                                 <h4>unknownName</h4>
-                                <pre>public abstract&nbsp;void&nbsp;unknownName(com.google.gson.TypeAdapter&nbsp;typeAdapter,
+                                <pre>public abstract&nbsp;void&nbsp;unknownName(@Nonnull
+                                 com.google.gson.TypeAdapter&nbsp;typeAdapter,
+                                 @Nonnull
                                  java.lang.String&nbsp;name,
+                                 @Nonnull
                                  com.google.gson.stream.JsonToken&nbsp;jsonToken)</pre>
                                 <div class="block">Implement this to log the reported missing name</div>
                                 <dl>
@@ -377,7 +385,9 @@ extends java.lang.Object</pre>
                         <ul class="blockListLast">
                             <li class="blockList">
                                 <h4>unknownValue</h4>
-                                <pre>public abstract&nbsp;void&nbsp;unknownValue(com.google.gson.TypeAdapter&nbsp;typeAdapter,
+                                <pre>public abstract&nbsp;void&nbsp;unknownValue(@Nonnull
+                                  com.google.gson.TypeAdapter&nbsp;typeAdapter,
+                                  @Nonnull
                                   java.lang.String&nbsp;value)</pre>
                                 <div class="block">Implement this to log the reported missing value</div>
                                 <dl>

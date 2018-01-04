@@ -98,8 +98,9 @@ public final class Route {
 
     /**
      * Gets the short name
-     * @since 1.0.0
+     *
      * @return the short name
+     * @since 1.0.0
      */
     public String getShortName() {
         return mShortName;
@@ -163,9 +164,10 @@ public final class Route {
 
         /**
          * Gets the route Type
+         *
+         * @return the route type
          * @see Route#getRouteType()
          * @since 1.0.0
-         * @return the route type
          */
         public int getRouteType() {
             return mRouteType;
@@ -173,10 +175,11 @@ public final class Route {
 
         /**
          * Sets the route type
-         * @see Route#getRouteType()
-         * @since 1.0.0
+         *
          * @param routeType the route type
          * @return the builder instance
+         * @see Route#getRouteType()
+         * @since 1.0.0
          */
         public Builder setRouteType(int routeType) {
             mRouteType = routeType;
@@ -185,9 +188,10 @@ public final class Route {
 
         /**
          * Gets the short name
+         *
+         * @return the short name
          * @see Route#getShortName()
          * @since 1.0.0
-         * @return the short name
          */
         public String getShortName() {
             return mShortName;
@@ -195,10 +199,11 @@ public final class Route {
 
         /**
          * Sets the shortname
-         * @see Route#getShortName()
-         * @since 1.0.0
+         *
          * @param shortName short name
          * @return the builder instance
+         * @see Route#getShortName()
+         * @since 1.0.0
          */
         public Builder setShortName(String shortName) {
             mShortName = shortName;

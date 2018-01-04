@@ -8,6 +8,9 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.File;
 
 /**
@@ -20,6 +23,7 @@ public final class TrapezeApiClient {
     protected final OkHttpClient mOkHttpClient;
     protected final Retrofit mRetrofit;
     protected final Gson mGson;
+    @CheckForNull
     protected final Cache mCache;
     protected final HttpUrl mBaseUrl;
 
@@ -29,18 +33,19 @@ public final class TrapezeApiClient {
      * @param baseUrl the base url for the api endpoint
      * @since 1.2.0
      */
-    public TrapezeApiClient(HttpUrl baseUrl) {
+    public TrapezeApiClient(@Nonnull HttpUrl baseUrl) {
         this(baseUrl, null, false);
     }
 
     /**
      * Constructs a {@link TrapezeApiClient} instance
-     * @since 1.2.0
-     * @param baseUrl the base url for the api endpoint
+     *
+     * @param baseUrl  the base url for the api endpoint
      * @param cacheDir the cacheDir to be used
-     * @param debug should print debug information
+     * @param debug    should print debug information
+     * @since 1.2.0
      */
-    public TrapezeApiClient(HttpUrl baseUrl, File cacheDir, boolean debug) {
+    public TrapezeApiClient(@Nonnull HttpUrl baseUrl, @Nullable File cacheDir, boolean debug) {
         if (baseUrl == null) {
             throw new RuntimeException("BaseUrl must not be null");
         }
@@ -67,19 +72,23 @@ public final class TrapezeApiClient {
 
     /**
      * The base url being used by the Api Client
+     *
+     * @return the base url
      * @apiNote this method should never be null, as the {@link TrapezeApiClient} cannot be constructed without a valid url
      * @since 1.2.0
-     * @return the base url
      */
+    @Nonnull
     public HttpUrl getBaseUrl() {
         return this.mBaseUrl;
     }
 
     /**
      * The Endpoints Service provided by the Api Client
-     * @since 1.0.0
+     *
      * @return the endpoint service
+     * @since 1.0.0
      */
+    @Nonnull
     public TrapezeApiService getService() {
         return this.mRetrofit.create(TrapezeApiService.class);
     }

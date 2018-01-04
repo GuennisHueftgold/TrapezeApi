@@ -10,6 +10,7 @@ import java.util.Objects;
 
 /**
  * Server provided Settings
+ *
  * @since 1.2.0
  */
 public final class Settings {
@@ -83,6 +84,7 @@ public final class Settings {
 
     /**
      * Get the initial zoom to be used
+     *
      * @return initial zoom value
      */
     public int getInitialZoom() {
@@ -91,6 +93,7 @@ public final class Settings {
 
     /**
      * is map enabled
+     *
      * @return true if map should be enabled
      */
     public boolean isMapEnabled() {
@@ -99,6 +102,7 @@ public final class Settings {
 
     /**
      * map show controls
+     *
      * @return true if map should show controls
      */
     public boolean isMapShowControls() {
@@ -120,6 +124,7 @@ public final class Settings {
 
     /**
      * checks if the map should show the vehicles
+     *
      * @return true if vehicles should be shown
      */
     public boolean isMapShowVehicles() {
@@ -128,6 +133,7 @@ public final class Settings {
 
     /**
      * gets the maximum zoom level for the map
+     *
      * @return maximum zoom level
      */
     public int getMaxZoom() {
@@ -136,6 +142,7 @@ public final class Settings {
 
     /**
      * gets the minimum zoom level for the map
+     *
      * @return minimum zoom level
      */
     public int getMinZoom() {
@@ -144,6 +151,7 @@ public final class Settings {
 
     /**
      * is mobile enabled
+     *
      * @return true if mobile mode should be enabled
      */
     public boolean isMobileEnabled() {
@@ -287,6 +295,7 @@ public final class Settings {
 
     /**
      * Builder used to construct {@link Settings}
+     *
      * @since 1.2.0
      */
     public final static class Builder {
@@ -326,17 +335,17 @@ public final class Settings {
         }
 
         /**
-         * @see Settings#isGeolocationEnabled()
          * @return true if geolocation is enabled
+         * @see Settings#isGeolocationEnabled()
          */
         public boolean isGeolocationEnabled() {
             return mGeolocationEnabled;
         }
 
         /**
-         * @see Settings#isGeolocationEnabled()
          * @param geolocationEnabled should geolaction be enabled
          * @return the Builder
+         * @see Settings#isGeolocationEnabled()
          */
         public Builder setGeolocationEnabled(boolean geolocationEnabled) {
             mGeolocationEnabled = geolocationEnabled;
@@ -344,8 +353,8 @@ public final class Settings {
         }
 
         /**
-         * @see Settings#getInitialLatitude()
          * @return the initial latitude
+         * @see Settings#getInitialLatitude()
          */
         public long getInitialLatitude() {
             return mInitialLatitude;
@@ -376,8 +385,9 @@ public final class Settings {
 
         /**
          * Checks if the map is enabled
-         * @see Settings#isMapEnabled()
+         *
          * @return true if the map should be enabled
+         * @see Settings#isMapEnabled()
          */
         public boolean isMapEnabled() {
             return mMapEnabled;
@@ -385,9 +395,10 @@ public final class Settings {
 
         /**
          * Enables/Disables the map
-         * @see Settings#isMapEnabled()
+         *
          * @param mapEnabled true if map should be enabled
          * @return the Builder
+         * @see Settings#isMapEnabled()
          */
         public Builder setMapEnabled(boolean mapEnabled) {
             mMapEnabled = mapEnabled;

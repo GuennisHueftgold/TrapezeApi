@@ -36,6 +36,7 @@ public class StationLocation implements LatLngInterface {
 
     /**
      * Gets the stops id
+     *
      * @return the id
      */
     public String getId() {
@@ -52,6 +53,7 @@ public class StationLocation implements LatLngInterface {
 
     /**
      * Gets the stops name
+     *
      * @return stop name
      */
     public String getName() {
@@ -60,6 +62,7 @@ public class StationLocation implements LatLngInterface {
 
     /**
      * Gets the Stops short name
+     *
      * @return short name
      */
     public String getShortName() {

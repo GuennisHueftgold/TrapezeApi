@@ -33,8 +33,9 @@ public final class PathSegment {
 
     /**
      * Gets the length
-     * @since 1.0.0
+     *
      * @return the length
+     * @since 1.0.0
      */
     public double getLength() {
         return mLength;
@@ -42,8 +43,9 @@ public final class PathSegment {
 
     /**
      * Gets the longitude from where the segment started
-     * @since 1.0.0
+     *
      * @return the longitude
+     * @since 1.0.0
      */
     public long getFromLongitude() {
         return mFromLongitude;
@@ -51,8 +53,9 @@ public final class PathSegment {
 
     /**
      * Gets the longitude to where the segment ended
-     * @since 1.0.0
+     *
      * @return the longitude
+     * @since 1.0.0
      */
     public long getToLongitude() {
         return mToLongitude;
@@ -60,8 +63,9 @@ public final class PathSegment {
 
     /**
      * Gets the latitude from where the segment started
-     * @since 1.0.0
+     *
      * @return the latitude
+     * @since 1.0.0
      */
     public long getFromLatitude() {
         return mFromLatitude;
@@ -69,8 +73,9 @@ public final class PathSegment {
 
     /**
      * Gets the latitude to where the segment ended
-     * @since 1.0.0
+     *
      * @return the latitude
+     * @since 1.0.0
      */
     public long getToLatitude() {
         return mToLatitude;
@@ -78,8 +83,9 @@ public final class PathSegment {
 
     /**
      * The angle the segment is heading
-     * @since 1.0.0
+     *
      * @return the angle
+     * @since 1.0.0
      */
     public int getAngle() {
         return mAngle;
@@ -105,6 +111,7 @@ public final class PathSegment {
 
     /**
      * The Builder for {@link PathSegment}
+     *
      * @since 1.0.0
      */
     public static final class Builder {
@@ -117,9 +124,10 @@ public final class PathSegment {
 
         /**
          * Gets the length
+         *
+         * @return the length
          * @see PathSegment#getLength()
          * @since 1.0.0
-         * @return the length
          */
         public double getLength() {
             return mLength;
@@ -127,10 +135,11 @@ public final class PathSegment {
 
         /**
          * Sets the length
-         * @see PathSegment#getLength()
-         * @since 1.0.0
+         *
          * @param length the length of the segment
          * @return the Builder instance
+         * @see PathSegment#getLength()
+         * @since 1.0.0
          */
         public Builder setLength(double length) {
             mLength = length;
@@ -139,9 +148,10 @@ public final class PathSegment {
 
         /**
          * Gets the longitude
+         *
+         * @return the longitude
          * @see PathSegment#getFromLongitude()
          * @since 1.0.0
-         * @return the longitude
          */
         public long getFromLongitude() {
             return mFromLongitude;
@@ -149,10 +159,11 @@ public final class PathSegment {
 
         /**
          * Sets the longitude
-         * @see PathSegment#getFromLongitude()
-         * @since 1.0.0
+         *
          * @param fromLongitude the longitude
          * @return the builder instance
+         * @see PathSegment#getFromLongitude()
+         * @since 1.0.0
          */
         public Builder setFromLongitude(long fromLongitude) {
             mFromLongitude = fromLongitude;
@@ -161,9 +172,10 @@ public final class PathSegment {
 
         /**
          * Gets the longitude
+         *
+         * @return the longitude
          * @see PathSegment#getToLongitude()
          * @since 1.0.0
-         * @return the longitude
          */
         public long getToLongitude() {
             return mToLongitude;
@@ -171,10 +183,11 @@ public final class PathSegment {
 
         /**
          * Sets the longitude
-         * @see PathSegment#getToLongitude()
-         * @since 1.0.0
+         *
          * @param toLongitude the Longitude
          * @return the Builder instance
+         * @see PathSegment#getToLongitude()
+         * @since 1.0.0
          */
         public Builder setToLongitude(long toLongitude) {
             mToLongitude = toLongitude;
@@ -183,9 +196,10 @@ public final class PathSegment {
 
         /**
          * Gets the latitude
+         *
+         * @return the latitude
          * @see PathSegment#getFromLatitude()
          * @since 1.0.0
-         * @return the latitude
          */
         public long getFromLatitude() {
             return mFromLatitude;
@@ -193,10 +207,11 @@ public final class PathSegment {
 
         /**
          * Sets the latitude
-         * @see PathSegment#getFromLatitude()
-         * @since 1.0.0
+         *
          * @param fromLatitude the latitude
          * @return the Builder instance
+         * @see PathSegment#getFromLatitude()
+         * @since 1.0.0
          */
         public Builder setFromLatitude(long fromLatitude) {
             mFromLatitude = fromLatitude;
@@ -205,9 +220,10 @@ public final class PathSegment {
 
         /**
          * Gets the Latitude
+         *
+         * @return the latitude
          * @see PathSegment#getToLatitude()
          * @since 1.0.0
-         * @return the latitude
          */
         public long getToLatitude() {
             return mToLatitude;
@@ -215,10 +231,11 @@ public final class PathSegment {
 
         /**
          * Sets the Latitude
-         * @see PathSegment#getToLatitude()
-         * @since 1.0.0
+         *
          * @param toLatitude the latitude
          * @return the Builder instance
+         * @see PathSegment#getToLatitude()
+         * @since 1.0.0
          */
         public Builder setToLatitude(long toLatitude) {
             mToLatitude = toLatitude;
@@ -227,9 +244,10 @@ public final class PathSegment {
 
         /**
          * Gets the angle
+         *
+         * @return the angle
          * @see PathSegment#getAngle()
          * @since 1.0.0
-         * @return the angle
          */
         public int getAngle() {
             return mAngle;
@@ -237,10 +255,11 @@ public final class PathSegment {
 
         /**
          * Sets the angle
-         * @see PathSegment#getAngle()
-         * @since 1.0.0
+         *
          * @param angle the angle
          * @return the Builder instance
+         * @see PathSegment#getAngle()
+         * @since 1.0.0
          */
         public Builder setAngle(int angle) {
             mAngle = angle;
@@ -249,8 +268,9 @@ public final class PathSegment {
 
         /**
          * Creates a immutable PathSegment instance
-         * @since 1.0.0
+         *
          * @return a immutable instance of data present in the Builder
+         * @since 1.0.0
          */
         public PathSegment build() {
             return new PathSegment(this);

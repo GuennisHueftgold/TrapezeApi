@@ -13,10 +13,11 @@ public interface TrapezeApiService {
 
     /**
      * Gets the stop
-     * @since 1.0.0
+     *
      * @param stop the stop
      * @param mode the mode
      * @return the stop information
+     * @since 1.0.0
      */
     @FormUrlEncoded
     @POST("services/passageInfo/stopPassages/stop")
@@ -25,13 +26,14 @@ public interface TrapezeApiService {
 
     /**
      * Gets the stop with route
-     * @since 1.0.0
-     * @param stop the stop to look up
-     * @param mode the mode
-     * @param routeId the route id
+     *
+     * @param stop      the stop to look up
+     * @param mode      the mode
+     * @param routeId   the route id
      * @param authority the authority
      * @param direction the direction
      * @return get stop passages
+     * @since 1.0.0
      */
     @FormUrlEncoded
     @POST("services/passageInfo/stopPassages/stop")
@@ -43,9 +45,10 @@ public interface TrapezeApiService {
 
     /**
      * Looks up stops for the query
-     * @since 1.0.0
+     *
      * @param query autocomplete query
      * @return the lookup result
+     * @since 1.0.0
      */
     @FormUrlEncoded
     @POST("services/lookup/autocomplete/json")
@@ -53,11 +56,12 @@ public interface TrapezeApiService {
 
     /**
      * Retrieves the trip passages
-     * @since 1.0.0
-     * @param tripId the trip id
+     *
+     * @param tripId    the trip id
      * @param vehicleId the vehicle id
-     * @param mode the mode
+     * @param mode      the mode
      * @return the passages of the trip
+     * @since 1.0.0
      */
     @FormUrlEncoded
     @POST("services/tripInfo/tripPassages")
@@ -65,10 +69,11 @@ public interface TrapezeApiService {
 
     /**
      * Retrieves the trip passages
-     * @since 1.0.0
+     *
      * @param tripId the trip id
-     * @param mode the mode
+     * @param mode   the mode
      * @return the passages of the trip
+     * @since 1.0.0
      */
     @FormUrlEncoded
     @POST("services/tripInfo/tripPassages")
@@ -76,8 +81,9 @@ public interface TrapezeApiService {
 
     /**
      * get all stops
-     * @since 1.0.0
+     *
      * @return the stops
+     * @since 1.0.0
      */
     @FormUrlEncoded
     @POST("services/lookup/stopsByCharacter?character=")
@@ -96,9 +102,10 @@ public interface TrapezeApiService {
 
     /**
      * Searches for stops by first character
-     * @since 1.0.0
+     *
      * @param character the character to lookup
      * @return the search result
+     * @since 1.0.0
      */
     @FormUrlEncoded
     @POST("services/lookup/stopsByCharacter")
@@ -106,9 +113,10 @@ public interface TrapezeApiService {
 
     /**
      * Searches for stops by full name
-     * @since 1.0.0
+     *
      * @param search the search term to look up
      * @return the search result
+     * @since 1.0.0
      */
     @FormUrlEncoded
     @POST("services/lookup/fulltext")
@@ -134,8 +142,9 @@ public interface TrapezeApiService {
 
     /**
      * Gets the server provided settings
-     * @since 1.2.0
+     *
      * @return A call providing the settings
+     * @since 1.2.0
      */
     @GET("settings")
     Call<Settings> getSettings();

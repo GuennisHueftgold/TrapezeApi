@@ -10,9 +10,9 @@ public interface LatLngInterface {
     /**
      * Gets the longitude
      *
+     * @return longitude in arc-milisecond
      * @apiNote To convert the value to an value that can be used in e.g. Google Maps
      * divide the value with {@link TrapezeApiClient#COORDINATES_CONVERTION_CONSTANT}
-     * @return longitude in arc-milisecond
      * @since 1.0.0
      */
     long getLongitude();
@@ -20,9 +20,9 @@ public interface LatLngInterface {
     /**
      * Gets the latitude
      *
+     * @return latitude in arc-milisecond
      * @apiNote To convert the value to an value that can be used in e.g. Google Maps
      * divide the value with {@link TrapezeApiClient#COORDINATES_CONVERTION_CONSTANT}
-     * @return latitude in arc-milisecond
      * @since 1.0.0
      */
     long getLatitude();
