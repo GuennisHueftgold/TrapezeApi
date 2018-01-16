@@ -16,10 +16,10 @@ public interface DepartureStatus {
 
     final class Converter extends TypeAdapter<Integer> {
         private final static String
-                NAME_STATUS_DEPARTED = "departed",
-                NAME_STATUS_PLANNED = "planned",
-                NAME_STATUS_PREDICTED = "predicted",
-                NAME_STATUS_STOPPING = "stopping";
+                NAME_STATUS_DEPARTED = "DEPARTED",
+                NAME_STATUS_PLANNED = "PLANNED",
+                NAME_STATUS_PREDICTED = "PREDICTED",
+                NAME_STATUS_STOPPING = "STOPPING";
 
         @Override
         public void write(JsonWriter jsonWriter, Integer integer) throws IOException {
@@ -51,15 +51,15 @@ public interface DepartureStatus {
             if (jsonReader.peek() == JsonToken.NULL) {
                 return STATUS_UNKNOWN;
             }
-            final String value = jsonReader.nextString();
+            final String value = jsonReader.nextString().toUpperCase();
             switch (value) {
-                case "departed":
+                case NAME_STATUS_DEPARTED:
                     return STATUS_DEPARTED;
-                case "predicted":
+                case NAME_STATUS_PREDICTED:
                     return STATUS_PREDICTED;
-                case "stopping":
+                case NAME_STATUS_STOPPING:
                     return STATUS_STOPPING;
-                case "planned":
+                case NAME_STATUS_PLANNED:
                     return STATUS_PLANNED;
                 default:
                     Logger.reportUnknownValue(this, value);
