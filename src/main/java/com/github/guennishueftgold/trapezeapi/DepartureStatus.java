@@ -51,8 +51,8 @@ public interface DepartureStatus {
             if (jsonReader.peek() == JsonToken.NULL) {
                 return STATUS_UNKNOWN;
             }
-            final String value = jsonReader.nextString().toUpperCase();
-            switch (value) {
+            final String value = jsonReader.nextString();
+            switch (value.toUpperCase()) {
                 case NAME_STATUS_DEPARTED:
                     return STATUS_DEPARTED;
                 case NAME_STATUS_PREDICTED:
